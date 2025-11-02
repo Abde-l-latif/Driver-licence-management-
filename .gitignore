@@ -1,0 +1,77 @@
+# Build results
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Tt]emp/
+
+
+secureInfo.cs
+
+# Visual Studio user-specific files
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build output
+*.exe
+*.dll
+*.pdb
+*.cache
+*.log
+*.dbmdl
+
+# Publish folder
+publish/
+*.Publish.xml
+
+# NuGet packages
+*.nupkg
+*.snupkg
+*.nuspec
+# Don't ignore packages folder if it contains source code
+**/packages/*
+!**/packages/build/
+!**/packages/repositories.config
+
+# Debug/release folders
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+
+# Test results
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+
+# Backup and auto-generated files
+*.bak
+*.tmp
+*.temp
+*.log
+*.svclog
+*.tlog
+
+# Resharper / Rider / VSCode
+_ReSharper*/
+*.DotSettings.user
+.idea/
+.vscode/
+
+# Windows specific
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Crash logs
+*.stackdump
+
+# Ignore any local environment files
+.env
+.env.local
