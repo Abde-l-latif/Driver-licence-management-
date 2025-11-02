@@ -136,12 +136,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DvldBusinessTier\DvldBusinessTier.csproj">
-      <Project>{a29ce410-af7a-45df-b35d-4f1d33d149c1}</Project>
-      <Name>DvldBusinessTier</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\group32.png" />
   </ItemGroup>
   <ItemGroup>
@@ -242,6 +236,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\registration.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DvldBusinessTier\DvldBusinessTier.csproj">
+      <Project>{a29ce410-af7a-45df-b35d-4f1d33d149c1}</Project>
+      <Name>DvldBusinessTier</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
