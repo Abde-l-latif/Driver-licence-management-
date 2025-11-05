@@ -25,5 +25,28 @@ namespace DvldProject
             Form fm = new Form3();
             fm.ShowDialog();
         }
+
+        private void signOutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void usersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form fm = new Form6();
+            fm.ShowDialog(); 
+        }
+
+        private void currentUserInfoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form9 fm = new Form9(Global.USER.PersonID, Global.USER.UserID);
+            fm.ShowDialog();
+        }
+
+        private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form8 fm = new Form8(Global.USER.PersonID, Global.USER.UserID);
+            fm.ShowDialog();
+        }
     }
 }

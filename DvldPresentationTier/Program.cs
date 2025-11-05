@@ -17,14 +17,22 @@ namespace DvldProject
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            Form1 loginForm = new Form1();
-            DialogResult result = loginForm.ShowDialog();
 
-            if (result == DialogResult.OK)
+            while(true)
             {
 
-                Application.Run(new Form2());
+                Form1 loginForm = new Form1();
+                DialogResult result = loginForm.ShowDialog();
 
+                if (result != DialogResult.OK)
+                    return;
+
+                if (result == DialogResult.OK)
+                {
+
+                    Application.Run(new Form2());
+
+                }
             }
         }
     }

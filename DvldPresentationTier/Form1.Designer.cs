@@ -38,6 +38,7 @@
             this.textPassword = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.BTNlogin = new System.Windows.Forms.Button();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -126,19 +127,32 @@
             this.BTNlogin.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.BTNlogin.Image = global::DvldProject.Properties.Resources.login;
             this.BTNlogin.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BTNlogin.Location = new System.Drawing.Point(475, 200);
+            this.BTNlogin.Location = new System.Drawing.Point(475, 224);
             this.BTNlogin.Name = "BTNlogin";
             this.BTNlogin.Size = new System.Drawing.Size(108, 32);
-            this.BTNlogin.TabIndex = 3;
+            this.BTNlogin.TabIndex = 4;
             this.BTNlogin.Text = "Login";
             this.BTNlogin.UseVisualStyleBackColor = false;
             this.BTNlogin.Click += new System.EventHandler(this.BTNlogin_Click);
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox1.Location = new System.Drawing.Point(419, 182);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(113, 21);
+            this.checkBox1.TabIndex = 3;
+            this.checkBox1.Text = "Remember me";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(599, 324);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.BTNlogin);
             this.Controls.Add(this.textPassword);
             this.Controls.Add(this.label3);
@@ -150,6 +164,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Login";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -166,6 +181,7 @@
         private System.Windows.Forms.TextBox textPassword;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button BTNlogin;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }
 

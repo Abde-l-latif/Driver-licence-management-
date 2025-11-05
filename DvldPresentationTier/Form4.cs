@@ -21,6 +21,10 @@ namespace DvldProject
 
         private string _imageToDeletePath = null;
 
+        public delegate void storePersonID(int personID);
+
+        public event storePersonID personIDAdded;
+
         public Form4(int PersonID)
         {
             InitializeComponent();
@@ -351,7 +355,10 @@ namespace DvldProject
                 MessageBox.Show("The Operation Has Been Done Successfully", "Information", MessageBoxButtons.OK);
 
                 if(PersonID == -1)
+                {
                     LBpersonID.Text = Person.PersonID.ToString();
+                    personIDAdded?.Invoke(Person.PersonID);
+                }
 
                 foreach (Form frm in Application.OpenForms)
                 {
@@ -360,7 +367,13 @@ namespace DvldProject
                         peopleListForm.FillDataGridWithPeople();
                         break;
                     }
+                    if(frm is Form7 editFromUser)
+                    {
+                        editFromUser.reloadPersonCard();
+                        break;
+                    }
                 }
+                BTNsave.Enabled = false; 
             }
             else
                 MessageBox.Show("Operation has been Failed !!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);

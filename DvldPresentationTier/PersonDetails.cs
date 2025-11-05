@@ -17,9 +17,14 @@ namespace DvldProject
             InitializeComponent();
         }
 
-        public void setProductId(int productID)
+        public void setPersonId(int productID)
         {
             _PersonID = productID;
+        }
+
+        public int getPersonID()
+        {
+            return _PersonID;
         }
 
         private void HandelGenderIcon()
@@ -41,12 +46,27 @@ namespace DvldProject
             }
         }
 
+        private void initializeEmptyPerson()
+        {
+            LBPersonID.Text = "";
+            LBName.Text = "";
+            LBNationaNo.Text = "";
+            LBDate.Text = "";
+            LBPhone.Text = "";
+            LBEmail.Text = "";
+            LBAddress.Text = "";
+            LBGender.Text = "";
+            LBCountry.Text = "";
+            pictureProfile.Image = Resources.user__22_;
+        }
+
         private void fillPersonDetails()
         {
             people person = people.Find(_PersonID);
 
             if(person != null)
             {
+                linkLabel1.Enabled = true;
                 LBPersonID.Text = _PersonID.ToString();
                 LBName.Text = $"{person.FirstName} {person.SecondName} {person.ThirdName} {person.LastName}";
                 LBNationaNo.Text = person.NationalNo;
@@ -65,15 +85,24 @@ namespace DvldProject
                     }
                     pictureProfile.Tag = person.ImagePath;
                 }
+            } else
+            {
+                linkLabel1.Enabled = false;
+                initializeEmptyPerson(); 
             }
 
         }
 
-        private void PersonDetails_Load(object sender, EventArgs e)
+        public void reload()
         {
             fillPersonDetails();
             HandelGenderIcon();
             HandelPofilePicture();
+        }
+
+        private void PersonDetails_Load(object sender, EventArgs e)
+        {
+            reload();
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

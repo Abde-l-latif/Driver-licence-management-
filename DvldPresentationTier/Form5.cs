@@ -9,7 +9,7 @@ namespace DvldProject
         public Form5(int PersonID)
         {
             InitializeComponent();
-            personDetails1.setProductId(PersonID);
+            personDetails1.setPersonId(PersonID);
             StartPosition =  FormStartPosition.CenterParent;
         }
 

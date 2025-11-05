@@ -1,4 +1,4 @@
-﻿using System;
+﻿    using System;
 using System.Windows.Forms;
 
 
@@ -18,6 +18,12 @@ namespace DvldProject
 
         public event TextChangedHandler OnSelectChange;
 
+
+        public void customFilter(string text , string combo)
+        {
+            comboBox1.SelectedIndex = comboBox1.FindString(combo); ;
+            textFilter.Text = text; 
+        }
 
         private void textFilter_KeyPress(object sender, KeyPressEventArgs e)
         {
