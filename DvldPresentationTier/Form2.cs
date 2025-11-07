@@ -48,5 +48,17 @@ namespace DvldProject
             Form8 fm = new Form8(Global.USER.PersonID, Global.USER.UserID);
             fm.ShowDialog();
         }
+
+        private void manageApplicationTypesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form10 fm = new Form10();
+            fm.ShowDialog();
+        }
+
+        private void manageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form12 fm = new Form12();
+            fm.ShowDialog();
+        }
     }
 }

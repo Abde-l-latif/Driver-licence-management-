@@ -26,10 +26,10 @@ namespace DvldProject
                 if(user.isActive == 0)
                     MessageBox.Show("this user is no longer active !!", "Authentication", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 else
-                {
+               {
                     Global.USER = user;
                     this.DialogResult = DialogResult.OK;
-                    this.Close();
+                    this.Close(); 
                 }
             } 
             else

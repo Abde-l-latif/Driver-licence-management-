@@ -41,8 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="dataApplication.cs" />
     <Compile Include="dataPeople.cs" />
     <Compile Include="dataSettings.cs" />
+    <Compile Include="dataTest.cs" />
     <Compile Include="dataUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="secureInfo.cs" />
