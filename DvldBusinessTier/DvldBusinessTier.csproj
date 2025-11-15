@@ -42,7 +42,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="application.cs" />
+	<Compile Include="Driver.cs" />
+    <Compile Include="Licenses.cs" />
     <Compile Include="people.cs" />
+    <Compile Include="TestAppointment.cs" />
     <Compile Include="Tests.cs" />
     <Compile Include="Users.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

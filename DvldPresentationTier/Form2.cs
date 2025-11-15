@@ -1,13 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using DvldBusinessTier; 
+
 
 namespace DvldProject
 {
@@ -58,6 +51,18 @@ namespace DvldProject
         private void manageToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form12 fm = new Form12();
+            fm.ShowDialog();
+        }
+
+        private void localLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            NewLdlApp fm = new NewLdlApp();
+            fm.ShowDialog();
+        }
+
+        private void localDrivingLicenseApplicationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            localDrivingLicenseApp fm = new localDrivingLicenseApp();
             fm.ShowDialog();
         }
     }

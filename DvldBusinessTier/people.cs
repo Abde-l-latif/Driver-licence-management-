@@ -115,6 +115,11 @@ namespace DvldBusinessTier
             return dataPeople.deletePerson(PersonID);
         }
 
+        static public int getPersonIDbyNationalNo(string NationalNo)
+        {
+            return dataPeople.getPersonIDbyNationalNo(NationalNo); 
+        }
+
         public bool Save()
         {
             if(Mode == enMode.addMode)

@@ -27,6 +27,11 @@ namespace DvldProject
             return _PersonID;
         }
 
+        public string getNationalNo()
+        {
+            return LBNationaNo.Text; 
+        }
+
         private void HandelGenderIcon()
         {
             if (LBGender.Text == "Male")

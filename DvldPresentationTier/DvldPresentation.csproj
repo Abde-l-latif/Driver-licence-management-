@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppDetails.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AppDetails.Designer.cs">
+      <DependentUpon>AppDetails.cs</DependentUpon>
+    </Compile>
     <Compile Include="filterPeople.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -87,6 +93,48 @@
     </Compile>
     <Compile Include="Form13.Designer.cs">
       <DependentUpon>Form13.cs</DependentUpon>
+    </Compile>
+    <Compile Include="issueDrivingLicense_firstTime.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="issueDrivingLicense_firstTime.Designer.cs">
+      <DependentUpon>issueDrivingLicense_firstTime.cs</DependentUpon>
+    </Compile>
+    <Compile Include="localDrivingLicenseApp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="localDrivingLicenseApp.Designer.cs">
+      <DependentUpon>localDrivingLicenseApp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NewLdlApp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewLdlApp.Designer.cs">
+      <DependentUpon>NewLdlApp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AppointmentTests.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AppointmentTests.Designer.cs">
+      <DependentUpon>AppointmentTests.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ManageAppointments.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ManageAppointments.Designer.cs">
+      <DependentUpon>ManageAppointments.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ShowLicenseInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ShowLicenseInfo.Designer.cs">
+      <DependentUpon>ShowLicenseInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TakeTestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TakeTestForm.Designer.cs">
+      <DependentUpon>TakeTestForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Form2.cs">
       <SubType>Form</SubType>
@@ -137,6 +185,12 @@
       <DependentUpon>Form9.cs</DependentUpon>
     </Compile>
     <Compile Include="Global.cs" />
+    <Compile Include="LDLapplicationInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LDLapplicationInfo.Designer.cs">
+      <DependentUpon>LDLapplicationInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="PersonDetails.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -151,6 +205,9 @@
     <Compile Include="userInfo.Designer.cs">
       <DependentUpon>userInfo.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AppDetails.resx">
+      <DependentUpon>AppDetails.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="filterPeople.resx">
       <DependentUpon>filterPeople.cs</DependentUpon>
     </EmbeddedResource>
@@ -171,6 +228,27 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form13.resx">
       <DependentUpon>Form13.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="issueDrivingLicense_firstTime.resx">
+      <DependentUpon>issueDrivingLicense_firstTime.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="localDrivingLicenseApp.resx">
+      <DependentUpon>localDrivingLicenseApp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewLdlApp.resx">
+      <DependentUpon>NewLdlApp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AppointmentTests.resx">
+      <DependentUpon>AppointmentTests.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ManageAppointments.resx">
+      <DependentUpon>ManageAppointments.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ShowLicenseInfo.resx">
+      <DependentUpon>ShowLicenseInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TakeTestForm.resx">
+      <DependentUpon>TakeTestForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form2.resx">
       <DependentUpon>Form2.cs</DependentUpon>
@@ -195,6 +273,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form9.resx">
       <DependentUpon>Form9.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LDLapplicationInfo.resx">
+      <DependentUpon>LDLapplicationInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PersonDetails.resx">
       <DependentUpon>PersonDetails.cs</DependentUpon>
@@ -368,6 +449,72 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\auto_correct_config.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\id %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\id.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\local_network.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\papers %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\papers %282%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\papers.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\car.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\eye_open.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\register.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\script_editor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\eye2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\document.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user %28111%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\date_add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\economy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\test_edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\car_alarm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\id3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\id333.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\id_check %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\id_check.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\help.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

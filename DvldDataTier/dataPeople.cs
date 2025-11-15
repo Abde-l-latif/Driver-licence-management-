@@ -114,6 +114,42 @@ namespace DvldDataTier
             return DT; 
         }
 
+        static public int getPersonIDbyNationalNo(string NationalNo)
+        {
+            int personID = -1;
+
+            SqlConnection connection = new SqlConnection(dataSettings.ConnectionString);
+
+            string query = @"select top 1 PersonID  from People where NationalNo = @NationalNo;";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@NationalNo", NationalNo);
+
+            try
+            {
+                connection.Open();
+                object result = command.ExecuteScalar();
+
+
+                if (result != null)
+                {
+                    personID = Convert.ToInt32(result);
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"error detected : {e}");
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return personID; 
+        }
+
         static public DataTable filterPeople(string person , string Filter)
         {
             DataTable DT = new DataTable();
