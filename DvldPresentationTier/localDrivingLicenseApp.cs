@@ -254,5 +254,19 @@ namespace DvldProject
                 MessageBox.Show("You have to select a person before setting an appointment", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void showPersonLicenseHistoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                string NationalNo = dataGridView1.SelectedRows[0].Cells["NationalNo"].Value.ToString();
+                Form fm = new LicenseHistory(NationalNo);
+                fm.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("You have to select a person before setting an appointment", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

@@ -58,7 +58,7 @@ namespace DvldProject
 
         private void pictureAddPerson_Click(object sender, EventArgs e)
         {
-            Form4 fm = new Form4(-1);
+            addNewPerson fm = new addNewPerson(-1);
             fm.ShowDialog();
         }
 
@@ -70,7 +70,7 @@ namespace DvldProject
                 return;
             }
 
-            Form4 fm = new Form4(-1);
+            addNewPerson fm = new addNewPerson(-1);
             fm.ShowDialog();
         }
 
@@ -79,7 +79,7 @@ namespace DvldProject
             if(dataGridView1.SelectedRows.Count > 0 )
             {
                 int PersonID = (int)dataGridView1.SelectedRows[0].Cells["PersonID"].Value;
-                Form4 fm = new Form4(PersonID);
+                addNewPerson fm = new addNewPerson(PersonID);
                 fm.ShowDialog();
             }
             else

@@ -1,6 +1,7 @@
 ﻿using DvldDataTier;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,6 +37,16 @@ namespace DvldBusinessTier
         static public int getDriverIdByPersonID(int personID)
         {
             return dataDriver.getDriverIdByPersonID(personID);
+        }
+
+        static public DataTable getAllDrivers()
+        {
+            return dataDriver.getAllDrivers();
+        }
+
+        static public DataTable getFiltredDrivers(string Text, string Filter)
+        {
+            return dataDriver.getFiltredDrivers(Text, Filter);
         }
     }
             

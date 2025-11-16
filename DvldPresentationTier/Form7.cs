@@ -209,7 +209,7 @@ namespace DvldProject
 
         private void BTNAddPerson_Click(object sender, EventArgs e)
         {
-            Form4 fm = new Form4(-1);
+            addNewPerson fm = new addNewPerson(-1);
             fm.personIDAdded += OnPersonIDAdded;
             fm.ShowDialog();
             

@@ -10,7 +10,7 @@ using System.Drawing;
 
 namespace DvldProject
 {
-    public partial class Form4 : Form
+    public partial class addNewPerson : Form
     {
 
         people Person; 
@@ -25,7 +25,7 @@ namespace DvldProject
 
         public event storePersonID personIDAdded;
 
-        public Form4(int PersonID)
+        public addNewPerson(int PersonID)
         {
             InitializeComponent();
             StartPosition = FormStartPosition.CenterParent;

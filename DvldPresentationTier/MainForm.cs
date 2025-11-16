@@ -4,10 +4,10 @@ using System.Windows.Forms;
 
 namespace DvldProject
 {
-    public partial class Form2 : Form
+    public partial class MainForm : Form
     {
         
-        public Form2()
+        public MainForm()
         {
             InitializeComponent();
             this.WindowState = FormWindowState.Maximized;
@@ -63,6 +63,12 @@ namespace DvldProject
         private void localDrivingLicenseApplicationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             localDrivingLicenseApp fm = new localDrivingLicenseApp();
+            fm.ShowDialog();
+        }
+
+        private void driversToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DriverForm fm = new DriverForm();
             fm.ShowDialog();
         }
     }

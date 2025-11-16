@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -246,6 +247,47 @@ namespace DvldDataTier
                 connection.Close();
             }
 
+        }
+
+        static public DataTable getLocalLicenseHistory(int personID)
+        {
+            DataTable DT = new DataTable();
+
+            SqlConnection connection = new SqlConnection(dataSettings.ConnectionString);
+
+            string Query = @"select LicenseID , ApplicationID , LicenseClasses.ClassName as ClassName, IssueDate , ExpirationDate, IsActive from Licenses
+                           inner join LicenseClasses on LicenseClasses.LicenseClassID = Licenses.LicenseClass
+                           where DriverID = (
+                           select DriverID from Drivers where PersonID = @personID
+                           )";
+
+            SqlCommand command = new SqlCommand(Query, connection);
+
+            command.Parameters.AddWithValue("@personID", personID);
+
+            try
+            {
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    DT.Load(reader);
+                }
+
+                reader.Close();
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"error detected : {e}");
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return DT;
         }
 
     }

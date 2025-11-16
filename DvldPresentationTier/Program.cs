@@ -21,7 +21,7 @@ namespace DvldProject
             while(true)
             {
 
-                Form1 loginForm = new Form1();
+                Login loginForm = new Login();
                 DialogResult result = loginForm.ShowDialog();
 
                 if (result != DialogResult.OK)
@@ -30,7 +30,7 @@ namespace DvldProject
                 if (result == DialogResult.OK)
                 {
 
-                    Application.Run(new Form2());
+                    Application.Run(new MainForm());
 
                 }
             }

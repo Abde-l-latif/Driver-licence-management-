@@ -112,7 +112,7 @@ namespace DvldProject
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Form4 fm = new Form4(_PersonID);
+            addNewPerson fm = new addNewPerson(_PersonID);
             fm.ShowDialog();
         }
     }
