@@ -298,6 +298,35 @@ namespace DvldDataTier
             return @ID != -1 ;
         }
 
+        static public bool Delete_LDL_App(int id)
+        {
+            int effectedRows = 0;
+
+            SqlConnection Connection = new SqlConnection(dataSettings.ConnectionString);
+
+            string Query = "delete from LocalDrivingLicenseApplications where LocalDrivingLicenseApplicationID = @id;";
+
+            SqlCommand Command = new SqlCommand(Query, Connection);
+
+            Command.Parameters.AddWithValue("@id", id);
+
+            try
+            {
+                Connection.Open();
+                effectedRows = Command.ExecuteNonQuery();
+            }
+            catch (Exception E)
+            {
+                Console.WriteLine(E.Message);
+            }
+            finally
+            {
+                Connection.Close();
+            }
+
+            return effectedRows > 0;
+        }
+
 
         /* === License Classes === */
         static public DataTable getAllLicenseClasses()
@@ -602,5 +631,39 @@ namespace DvldDataTier
 
 
         }
+
+        static public byte updateApplicationDate(int ApplicationID, DateTime ApplicationDate)
+        {
+            int effectedRows = 0;
+
+            string query = @"update Applications set ApplicationDate = @ApplicationDate 
+            where ApplicationID = @ApplicationID;";
+
+            SqlConnection Connection = new SqlConnection(dataSettings.ConnectionString);
+
+            SqlCommand Command = new SqlCommand(query, Connection);
+
+            Command.Parameters.AddWithValue("@ApplicationDate", ApplicationDate);
+            Command.Parameters.AddWithValue("@ApplicationID", ApplicationID);
+
+            try
+            {
+                Connection.Open();
+                effectedRows = Command.ExecuteNonQuery();
+            }
+            catch (Exception E)
+            {
+                Console.WriteLine(E.Message);
+            }
+            finally
+            {
+                Connection.Close();
+            }
+
+            return (byte)effectedRows;
+
+
+        }
+
     }
 }

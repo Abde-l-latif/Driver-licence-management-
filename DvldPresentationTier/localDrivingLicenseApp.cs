@@ -17,14 +17,22 @@ namespace DvldProject
 
         enum enTest
         {
-            visionTest = 1 , writtenTest = 2 , carTest = 3
+            visionTest = 1, writtenTest = 2, carTest = 3
+        }
+
+        enum enStatus
+        {
+            New = 1, Cancelled, Completed
         }
 
         enum enReason { FirstTime = 1, Renew, Replacement, Damaged, ReplacementForLost }
 
         enReason reason;
 
-        enTest TestType; 
+        enTest TestType;
+
+        enStatus Status;
+
         public localDrivingLicenseApp()
         {
             InitializeComponent();
@@ -54,7 +62,7 @@ namespace DvldProject
 
         private void Form14_Load(object sender, EventArgs e)
         {
-            reload(); 
+            reload();
         }
 
         private void Form14_Click(object sender, EventArgs e)
@@ -65,7 +73,7 @@ namespace DvldProject
 
         private void BTNclose_Click(object sender, EventArgs e)
         {
-            this.Close(); 
+            this.Close();
         }
 
         private void pictureAddPerson_Click(object sender, EventArgs e)
@@ -78,14 +86,14 @@ namespace DvldProject
                 if (frm is localDrivingLicenseApp ldlManage)
                 {
                     ldlManage.reload();
-                    return; 
+                    return;
                 }
             }
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(comboBox1.SelectedItem.ToString() != "none")
+            if (comboBox1.SelectedItem.ToString() != "none")
             {
                 textBox1.KeyPress -= textBox1_KeyPress;
                 if (comboBox1.SelectedItem.ToString() == "LDLAppId")
@@ -97,7 +105,7 @@ namespace DvldProject
             }
             else
             {
-                textBox1.Text = ""; 
+                textBox1.Text = "";
                 textBox1.Enabled = false;
                 textBox1.Visible = false;
                 reload();
@@ -118,17 +126,17 @@ namespace DvldProject
 
         private void scheduleVisionTestToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(dataGridView1.SelectedRows.Count > 0)
+            if (dataGridView1.SelectedRows.Count > 0)
             {
                 TestType = enTest.visionTest;
                 int LDLid = (int)dataGridView1.SelectedRows[0].Cells[0].Value;
                 string NationalNo = dataGridView1.SelectedRows[0].Cells["NationalNo"].Value.ToString();
-                AppointmentTests fm = new AppointmentTests(LDLid , NationalNo , (int)TestType);
+                AppointmentTests fm = new AppointmentTests(LDLid, NationalNo, (int)TestType);
                 fm.ShowDialog();
             }
             else
             {
-                MessageBox.Show("You have to select a person before setting an appointment", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); 
+                MessageBox.Show("You have to select a person before setting an appointment", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -149,60 +157,86 @@ namespace DvldProject
             }
         }
 
+        private void initializeStatus(string status)
+        {
+            if (status == "Completed")
+            {
+                contextMenuStrip1.Items["scheduleTests"].Enabled = false;
+                contextMenuStrip1.Items["issueDrivingLicenseFirstTimeToolStripMenuItem"].Enabled = false;
+                contextMenuStrip1.Items["cancelApplicationToolStripMenuItem"].Enabled = false;
+                contextMenuStrip1.Items["deleteApplicationToolStripMenuItem"].Enabled = false;
+                contextMenuStrip1.Items["showLicenseToolStripMenuItem"].Enabled = true;
+                contextMenuStrip1.Items["editApplicationToolStripMenuItem"].Enabled = false;
+
+            }
+            if (status == "Cancelled")
+            {
+                contextMenuStrip1.Items["cancelApplicationToolStripMenuItem"].Enabled = false;
+                contextMenuStrip1.Items["scheduleTests"].Enabled = false;
+                contextMenuStrip1.Items["editApplicationToolStripMenuItem"].Enabled = false;
+            }
+        }
+
+        private void initializeTestUI(int passedTest)
+        {
+            switch (passedTest)
+            {
+                case 0:
+                    {
+                        scheduleTests.DropDownItems[0].Enabled = true;
+                        scheduleTests.DropDownItems[1].Enabled = false;
+                        scheduleTests.DropDownItems[2].Enabled = false;
+                        break;
+                    }
+                case 1:
+                    {
+                        scheduleTests.DropDownItems[0].Enabled = false;
+                        scheduleTests.DropDownItems[1].Enabled = true;
+                        scheduleTests.DropDownItems[2].Enabled = false;
+                        break;
+                    }
+                case 2:
+                    {
+                        scheduleTests.DropDownItems[0].Enabled = false;
+                        scheduleTests.DropDownItems[1].Enabled = false;
+                        scheduleTests.DropDownItems[2].Enabled = true;
+                        break;
+                    }
+                case 3:
+                    {
+                        scheduleTests.DropDownItems[0].Enabled = false;
+                        scheduleTests.DropDownItems[1].Enabled = false;
+                        scheduleTests.DropDownItems[2].Enabled = false;
+                        contextMenuStrip1.Items["issueDrivingLicenseFirstTimeToolStripMenuItem"].Enabled = true;
+                        break;
+                    }
+            }
+        }
+
+        private void initializeContextMenu()
+        {
+            contextMenuStrip1.Items["scheduleTests"].Enabled = true;
+            contextMenuStrip1.Items["cancelApplicationToolStripMenuItem"].Enabled = true;
+            contextMenuStrip1.Items["deleteApplicationToolStripMenuItem"].Enabled = true;
+            contextMenuStrip1.Items["showLicenseToolStripMenuItem"].Enabled = false;
+            contextMenuStrip1.Items["issueDrivingLicenseFirstTimeToolStripMenuItem"].Enabled = false;
+            contextMenuStrip1.Items["editApplicationToolStripMenuItem"].Enabled = true;
+
+        }
+
+
         private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {
             if (dataGridView1.SelectedRows.Count > 0)
             {
-                contextMenuStrip1.Items["scheduleTests"].Enabled = true;
-                contextMenuStrip1.Items["showLicenseToolStripMenuItem"].Enabled = false;
+                initializeContextMenu();
 
                 string Status = dataGridView1.SelectedRows[0].Cells[6].Value.ToString();
-
-                contextMenuStrip1.Items["issueDrivingLicenseFirstTimeToolStripMenuItem"].Enabled = false;
-
                 int passedTest = (int)dataGridView1.SelectedRows[0].Cells[5].Value;
 
-                switch(passedTest)
-                {
-                    case 0:
-                        {
-                            scheduleTests.DropDownItems[0].Enabled = true;
-                            scheduleTests.DropDownItems[1].Enabled = false;
-                            scheduleTests.DropDownItems[2].Enabled = false;
-                            break; 
-                        }
-                    case 1:
-                        {
-                            scheduleTests.DropDownItems[0].Enabled = false;
-                            scheduleTests.DropDownItems[1].Enabled = true;
-                            scheduleTests.DropDownItems[2].Enabled = false;
-                            break;
-                        }
-                    case 2:
-                        {
-                            scheduleTests.DropDownItems[0].Enabled = false;
-                            scheduleTests.DropDownItems[1].Enabled = false;
-                            scheduleTests.DropDownItems[2].Enabled = true;
-                            break;
-                        }
-                    case 3:
-                        {
-                            scheduleTests.DropDownItems[0].Enabled = false;
-                            scheduleTests.DropDownItems[1].Enabled = false;
-                            scheduleTests.DropDownItems[2].Enabled = false;
-                            contextMenuStrip1.Items["issueDrivingLicenseFirstTimeToolStripMenuItem"].Enabled = true; 
-                            break;
-                        }
-                }
+                initializeTestUI(passedTest);
 
-                if (Status == "Completed")
-                {
-                    contextMenuStrip1.Items["scheduleTests"].Enabled = false; 
-                    contextMenuStrip1.Items["issueDrivingLicenseFirstTimeToolStripMenuItem"].Enabled = false;
-                    contextMenuStrip1.Items["showLicenseToolStripMenuItem"].Enabled = true;
-
-                }
-
+                initializeStatus(Status);
             }
         }
 
@@ -230,7 +264,7 @@ namespace DvldProject
                 reason = enReason.FirstTime;
                 int LDLid = (int)dataGridView1.SelectedRows[0].Cells[0].Value;
                 string NationalNo = dataGridView1.SelectedRows[0].Cells["NationalNo"].Value.ToString();
-                Form fm = new issueDrivingLicense_firstTime(LDLid , NationalNo , (int)reason);
+                Form fm = new issueDrivingLicense_firstTime(LDLid, NationalNo, (int)reason);
                 fm.ShowDialog();
 
             }
@@ -247,7 +281,7 @@ namespace DvldProject
                 int LDLid = (int)dataGridView1.SelectedRows[0].Cells[0].Value;
                 int AppID = application.getAppIdByLDLid(LDLid);
                 Form fm = new ShowLicenseInfo(AppID);
-                fm.ShowDialog(); 
+                fm.ShowDialog();
             }
             else
             {
@@ -262,6 +296,89 @@ namespace DvldProject
                 string NationalNo = dataGridView1.SelectedRows[0].Cells["NationalNo"].Value.ToString();
                 Form fm = new LicenseHistory(NationalNo);
                 fm.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("You have to select a person before setting an appointment", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void cancelApplicationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Status = enStatus.Cancelled;
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+
+                int LdlAppID = (int)dataGridView1.SelectedRows[0].Cells[0].Value;
+                int AppID = application.getAppIdByLDLid(LdlAppID);
+
+                application App = new application(AppID);
+
+                if (App.Save((int)Status))
+                {
+                    MessageBox.Show("Application has been cancelled successfully", "Cancelled", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    FillDataGrid();
+                }
+                else
+                    MessageBox.Show("Cancelled Operation failed!!", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+            else
+            {
+                MessageBox.Show("You have to select a person before setting an appointment", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void deleteApplicationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                int LdlAppID = (int)dataGridView1.SelectedRows[0].Cells[0].Value;
+
+                if (application.DeleteLdlApp(LdlAppID))
+                {
+                    MessageBox.Show("Application has been deleted successfully", "Cancelled", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    FillDataGrid();
+                }
+                else
+                {
+                    MessageBox.Show("this person has Appointments you can't delete it ", "warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("You have to select a person before setting an appointment", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void showApplicationDetailsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                int LdlAppID = (int)dataGridView1.SelectedRows[0].Cells[0].Value;
+                string NationalNo = dataGridView1.SelectedRows[0].Cells["NationalNo"].Value.ToString();
+                int appID = application.getAppIdByLDLid(LdlAppID);
+                int PersonID = people.getPersonIDbyNationalNo(NationalNo);
+                ShowAppDetails fm = new ShowAppDetails(appID , PersonID);
+                fm.ShowDialog(); 
+
+            }
+            else
+            {
+                MessageBox.Show("You have to select a person before setting an appointment", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void editApplicationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                int LdlAppID = (int)dataGridView1.SelectedRows[0].Cells[0].Value;
+                int appID = application.getAppIdByLDLid(LdlAppID);
+                UpdateApplication fm = new UpdateApplication(appID);
+                fm.ShowDialog(); 
             }
             else
             {

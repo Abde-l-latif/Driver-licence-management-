@@ -1,6 +1,6 @@
 ﻿namespace DvldProject
 {
-    partial class Form11
+    partial class UpdateAppTypeForm
     {
         /// <summary>
         /// Required designer variable.
@@ -48,11 +48,11 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft YaHei UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.label1.Location = new System.Drawing.Point(46, 9);
+            this.label1.Location = new System.Drawing.Point(51, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(293, 28);
+            this.label1.Size = new System.Drawing.Size(284, 28);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Manage Application Types";
+            this.label1.Text = "Update Application Types";
             // 
             // label2
             // 
@@ -167,7 +167,7 @@
             this.pictureBox2.TabIndex = 21;
             this.pictureBox2.TabStop = false;
             // 
-            // Form11
+            // UpdateAppTypeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -184,7 +184,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
-            this.Name = "Form11";
+            this.Name = "UpdateAppTypeForm";
             this.Text = "Update app type";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();

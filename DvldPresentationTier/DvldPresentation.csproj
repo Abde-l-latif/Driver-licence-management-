@@ -76,29 +76,38 @@
     <Compile Include="Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form10.cs">
+    <Compile Include="ManageAppTypeForm.Designer.cs">
+      <DependentUpon>ManageAppTypeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateApplication.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form10.Designer.cs">
-      <DependentUpon>Form10.cs</DependentUpon>
+    <Compile Include="UpdateApplication.Designer.cs">
+      <DependentUpon>UpdateApplication.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form11.cs">
+    <Compile Include="UpdateAppTypeForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form11.Designer.cs">
-      <DependentUpon>Form11.cs</DependentUpon>
+    <Compile Include="UpdateAppTypeForm.Designer.cs">
+      <DependentUpon>UpdateAppTypeForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form12.cs">
+    <Compile Include="ManageTestType.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form12.Designer.cs">
-      <DependentUpon>Form12.cs</DependentUpon>
+    <Compile Include="ManageTestType.Designer.cs">
+      <DependentUpon>ManageTestType.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form13.cs">
+    <Compile Include="ShowAppDetails.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form13.Designer.cs">
-      <DependentUpon>Form13.cs</DependentUpon>
+    <Compile Include="ShowAppDetails.Designer.cs">
+      <DependentUpon>ShowAppDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateTestTypeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdateTestTypeForm.Designer.cs">
+      <DependentUpon>UpdateTestTypeForm.cs</DependentUpon>
     </Compile>
     <Compile Include="issueDrivingLicense_firstTime.cs">
       <SubType>Form</SubType>
@@ -232,17 +241,23 @@
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form10.resx">
-      <DependentUpon>Form10.cs</DependentUpon>
+    <EmbeddedResource Include="ManageAppTypeForm.resx">
+      <DependentUpon>ManageAppTypeForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form11.resx">
-      <DependentUpon>Form11.cs</DependentUpon>
+    <EmbeddedResource Include="UpdateApplication.resx">
+      <DependentUpon>UpdateApplication.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form12.resx">
-      <DependentUpon>Form12.cs</DependentUpon>
+    <EmbeddedResource Include="UpdateAppTypeForm.resx">
+      <DependentUpon>UpdateAppTypeForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form13.resx">
-      <DependentUpon>Form13.cs</DependentUpon>
+    <EmbeddedResource Include="ManageTestType.resx">
+      <DependentUpon>ManageTestType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ShowAppDetails.resx">
+      <DependentUpon>ShowAppDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdateTestTypeForm.resx">
+      <DependentUpon>UpdateTestTypeForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="issueDrivingLicense_firstTime.resx">
       <DependentUpon>issueDrivingLicense_firstTime.cs</DependentUpon>
@@ -306,6 +321,9 @@
     <EmbeddedResource Include="userInfo.resx">
       <DependentUpon>userInfo.cs</DependentUpon>
     </EmbeddedResource>
+    <Compile Include="ManageAppTypeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -542,6 +560,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\driver_check11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\delete %281%29.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

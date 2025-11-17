@@ -1,6 +1,6 @@
 ﻿namespace DvldProject
 {
-    partial class Form12
+    partial class ManageTestType
     {
         /// <summary>
         /// Required designer variable.

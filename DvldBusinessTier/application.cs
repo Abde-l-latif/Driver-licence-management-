@@ -13,6 +13,7 @@ namespace DvldBusinessTier
         enum enMode { addMode , updateMode }
 
         private enMode Mode;
+
         public int ApplicationID { get; set; }
 
         public int ApplicantPersonID { get; set; }
@@ -115,6 +116,16 @@ namespace DvldBusinessTier
         static public bool isPersonAppalreadyExists(string ClassName, string NationalNo)
         {
             return dataApplication.isPersonAppalreadyExists(ClassName, NationalNo);
+        }
+
+        static public bool DeleteLdlApp(int id)
+        {
+            return dataApplication.Delete_LDL_App(id);
+        }
+
+        static public bool UpdateApplicationDate(int id , DateTime ApplicationDate)
+        {
+            return dataApplication.updateApplicationDate(id , ApplicationDate) > 0 ? true : false;
         }
 
         public bool Save(int applicationStatus = 1)

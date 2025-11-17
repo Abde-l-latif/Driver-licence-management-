@@ -4,10 +4,10 @@ using System.Windows.Forms;
 
 namespace DvldProject
 {
-    public partial class Form11 : Form
+    public partial class UpdateAppTypeForm : Form
     {
         private int ID;
-        public Form11(int id , string title , string fee)
+        public UpdateAppTypeForm(int id , string title , string fee)
         {
             InitializeComponent();
             ID = id;
@@ -30,7 +30,7 @@ namespace DvldProject
 
                 foreach(Form fm in Application.OpenForms)
                 {
-                    if(fm is Form10 appTypes)
+                    if(fm is ManageAppTypeForm appTypes)
                     {
                         appTypes.reloadDataGrid();
                     }

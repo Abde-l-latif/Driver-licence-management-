@@ -1,20 +1,22 @@
-﻿using System;
-using DvldBusinessTier;
+﻿using DvldBusinessTier;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DvldProject
 {
-    public partial class Form10 : Form
+    public partial class ManageTestType : Form
     {
-        public Form10()
+        public ManageTestType()
         {
             InitializeComponent();
-            StartPosition = FormStartPosition.CenterParent;
-        }
-
-        private void BTNclose_Click(object sender, EventArgs e)
-        {
-            this.Close();
+            StartPosition = FormStartPosition.CenterParent; 
         }
 
         private void initializeDataGrid()
@@ -28,22 +30,27 @@ namespace DvldProject
 
         private void getAllAppTypes()
         {
-            dataGridView1.DataSource = application.getApplicationTypes();
+            dataGridView1.DataSource = Tests.getAllTestTypes();
         }
 
         public void reloadDataGrid()
         {
             initializeDataGrid();
             getAllAppTypes();
+            LBrecords.Text = dataGridView1.Rows.Count.ToString() + " Records";
         }
 
-        private void Form10_Load(object sender, EventArgs e)
+        private void BTNclose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void Form12_Load(object sender, EventArgs e)
         {
             reloadDataGrid();
-            LbRecord.Text = dataGridView1.Rows.Count.ToString() + " Records"; 
         }
 
-        private void Form10_Click(object sender, EventArgs e)
+        private void Form12_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count > 0)
                 dataGridView1.ClearSelection();
@@ -55,15 +62,15 @@ namespace DvldProject
             {
                 int ID = (int)dataGridView1.SelectedRows[0].Cells[0].Value;
                 string title = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
-                string fee = dataGridView1.SelectedRows[0].Cells[2].Value.ToString();
-                Form11 fm = new Form11(ID , title , fee);
+                string description = dataGridView1.SelectedRows[0].Cells[2].Value.ToString();
+                string fee = dataGridView1.SelectedRows[0].Cells[3].Value.ToString();
+                UpdateTestTypeForm fm = new UpdateTestTypeForm(ID, title, description, fee);
                 fm.ShowDialog();
             }
             else
             {
                 MessageBox.Show("you have to select a type!!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-          
         }
     }
 }

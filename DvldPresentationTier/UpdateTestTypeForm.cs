@@ -3,10 +3,10 @@ using System.Windows.Forms;
 
 namespace DvldProject
 {
-    public partial class Form13 : Form
+    public partial class UpdateTestTypeForm : Form
     {
         private int ID;
-        public Form13(int ID, string title, string description, string fee)
+        public UpdateTestTypeForm(int ID, string title, string description, string fee)
         {
             InitializeComponent();
             this.ID = ID;
@@ -30,7 +30,7 @@ namespace DvldProject
 
                 foreach (Form fm in Application.OpenForms)
                 {
-                    if (fm is Form12 appTypes)
+                    if (fm is ManageTestType appTypes)
                     {
                         appTypes.reloadDataGrid();
                     }

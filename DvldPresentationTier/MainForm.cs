@@ -44,13 +44,13 @@ namespace DvldProject
 
         private void manageApplicationTypesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form10 fm = new Form10();
+            ManageAppTypeForm fm = new ManageAppTypeForm();
             fm.ShowDialog();
         }
 
         private void manageToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form12 fm = new Form12();
+            ManageTestType fm = new ManageTestType();
             fm.ShowDialog();
         }
 

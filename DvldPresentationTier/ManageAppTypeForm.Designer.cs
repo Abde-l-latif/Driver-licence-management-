@@ -1,6 +1,6 @@
 ﻿namespace DvldProject
 {
-    partial class Form10
+    partial class ManageAppTypeForm
     {
         /// <summary>
         /// Required designer variable.
@@ -31,11 +31,11 @@
             this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.LbRecord = new System.Windows.Forms.Label();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.updateApplicationTypeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.LbRecord = new System.Windows.Forms.Label();
             this.BTNclose = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.updateApplicationTypeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -61,6 +61,21 @@
             this.dataGridView1.Size = new System.Drawing.Size(567, 189);
             this.dataGridView1.TabIndex = 18;
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.updateApplicationTypeToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(204, 26);
+            // 
+            // updateApplicationTypeToolStripMenuItem
+            // 
+            this.updateApplicationTypeToolStripMenuItem.Image = global::DvldProject.Properties.Resources.registration;
+            this.updateApplicationTypeToolStripMenuItem.Name = "updateApplicationTypeToolStripMenuItem";
+            this.updateApplicationTypeToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
+            this.updateApplicationTypeToolStripMenuItem.Text = "Update Application Type";
+            this.updateApplicationTypeToolStripMenuItem.Click += new System.EventHandler(this.updateApplicationTypeToolStripMenuItem_Click);
+            // 
             // LbRecord
             // 
             this.LbRecord.AutoSize = true;
@@ -71,13 +86,6 @@
             this.LbRecord.Size = new System.Drawing.Size(56, 17);
             this.LbRecord.TabIndex = 19;
             this.LbRecord.Text = "Records";
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.updateApplicationTypeToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(204, 26);
             // 
             // BTNclose
             // 
@@ -107,15 +115,7 @@
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 
-            // updateApplicationTypeToolStripMenuItem
-            // 
-            this.updateApplicationTypeToolStripMenuItem.Image = global::DvldProject.Properties.Resources.registration;
-            this.updateApplicationTypeToolStripMenuItem.Name = "updateApplicationTypeToolStripMenuItem";
-            this.updateApplicationTypeToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
-            this.updateApplicationTypeToolStripMenuItem.Text = "Update Application Type";
-            this.updateApplicationTypeToolStripMenuItem.Click += new System.EventHandler(this.updateApplicationTypeToolStripMenuItem_Click);
-            // 
-            // Form10
+            // ManageAppTypeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -126,10 +126,10 @@
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
-            this.Name = "Form10";
+            this.Name = "ManageAppTypeForm";
             this.Text = "Manage Application Types";
-            this.Load += new System.EventHandler(this.Form10_Load);
-            this.Click += new System.EventHandler(this.Form10_Click);
+            this.Load += new System.EventHandler(this.ManageAppTypeForm_Load);
+            this.Click += new System.EventHandler(this.ManageAppTypeForm_Click);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
