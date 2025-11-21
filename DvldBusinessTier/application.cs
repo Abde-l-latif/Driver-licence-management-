@@ -128,6 +128,21 @@ namespace DvldBusinessTier
             return dataApplication.updateApplicationDate(id , ApplicationDate) > 0 ? true : false;
         }
 
+        static public DataTable getAll_InterDL_ApplicationPeople()
+        {
+            return dataApplication.getAll_InterDL_ApplicationPeople();
+        }
+
+        static public DataTable getFiltredInterDlApp(string text , string Filter)
+        {
+            return dataApplication.getFiltredInterDLapp(text , Filter); 
+        }
+
+        static public int getPersonIDByAppID(int AppID)
+        {
+            return dataApplication.getPersonIDByAppID(AppID);
+        }
+
         public bool Save(int applicationStatus = 1)
         {
 

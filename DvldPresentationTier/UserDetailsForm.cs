@@ -2,10 +2,10 @@
 
 namespace DvldProject
 {
-    public partial class Form9 : Form
+    public partial class UserDetailsForm : Form
     {
     
-        public Form9(int personID , int userID)
+        public UserDetailsForm(int personID , int userID)
         {
             InitializeComponent();
             StartPosition = FormStartPosition.CenterParent;

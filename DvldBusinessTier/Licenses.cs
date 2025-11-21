@@ -78,5 +78,46 @@ namespace DvldBusinessTier
         {
             return dataLicense.getLocalLicenseHistory(PersonID);
         }
+
+        static public DataTable getInterLicenseHistory(int personID)
+        {
+            return dataLicense.getInterLicenseHistory(personID);
+
+        }
+
+        static public int getAppIDByLicenseID(int LicenseID)
+        {
+            return dataLicense.getAppIDByLicenseID(LicenseID);
+        }
+
+        static public bool isinterLicenseExists(int LicenseID, ref DateTime ExpirationDate)
+        {
+            return dataLicense.isinterLicenseExists(LicenseID, ref ExpirationDate);
+        }
+
+        static public bool isLicenseExists(int LicenseID, ref DateTime ExpirationDate)
+        {
+            return dataLicense.isLicenseExists(LicenseID, ref ExpirationDate);
+        }
+
+        static public int insertinterLicense(int AppID, DateTime ExpirationDate, DateTime IssueDate, int CreatedByUserID)
+        {
+            return dataLicense.insertinterLicense(AppID, ExpirationDate, IssueDate, CreatedByUserID);
+        }
+
+        static public bool isinterLicenseActive(int LicenseID)
+        {
+            return dataLicense.isinterLicenseActive(LicenseID);
+        }
+        static public bool isLicenseActive(int LicenseID)
+        {
+            return dataLicense.isLicenseActive(LicenseID);
+        }
+
+        static public int getLicenseClassByLicenseID(int LicenseID)
+        {
+            return dataLicense.getLicenseClassByLicenseID(LicenseID);
+        }
+
     }
 }

@@ -141,7 +141,7 @@ namespace DvldProject
             {
                 int PersonID = (int)dataGridView1.SelectedRows[0].Cells[1].Value; 
                 int UserID = (int)dataGridView1.SelectedRows[0].Cells[0].Value;
-                Form fm = new Form8(PersonID , UserID);
+                Form fm = new ChangePasswordForm(PersonID , UserID);
                 fm.ShowDialog();
             }
             else
@@ -156,7 +156,7 @@ namespace DvldProject
             {
                 int PersonID = (int)dataGridView1.SelectedRows[0].Cells[1].Value;
                 int UserID = (int)dataGridView1.SelectedRows[0].Cells[0].Value;
-                Form fm = new Form9(PersonID, UserID);
+                Form fm = new UserDetailsForm(PersonID, UserID);
                 fm.ShowDialog();
             }
             else

@@ -327,6 +327,85 @@ namespace DvldDataTier
             return effectedRows > 0;
         }
 
+        /* === International Driving License Application === */
+
+        static public DataTable getAll_InterDL_ApplicationPeople()
+        {
+            DataTable dt = new DataTable();
+
+            SqlConnection Connection = new SqlConnection(dataSettings.ConnectionString);
+
+            string Query = @"select InternationalLicenseID as IntLicense , ApplicationID , DriverID , IssuedUsingLocalLicenseID as LocalLicenseID , 
+            IssueDate, ExpirationDate , IsActive from InternationalLicenses;";
+
+            SqlCommand Command = new SqlCommand(Query, Connection);
+
+            try
+            {
+                Connection.Open();
+                SqlDataReader reader = Command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    dt.Load(reader);
+                }
+
+                reader.Close();
+
+            }
+            catch (Exception E)
+            {
+                Console.WriteLine(E.Message);
+            }
+            finally
+            {
+                Connection.Close();
+            }
+
+            return dt;
+
+        }
+
+        static public DataTable getFiltredInterDLapp(string text, string Filter)
+        {
+            DataTable dt = new DataTable();
+
+            SqlConnection Connection = new SqlConnection(dataSettings.ConnectionString);
+
+            string Query = @" select InternationalLicenseID as IntLicense , ApplicationID , DriverID , IssuedUsingLocalLicenseID as LocalLicenseID , 
+            IssueDate, ExpirationDate , IsActive from InternationalLicenses
+            where " + (Filter == "IntLicense" ? "InternationalLicenseID" : Filter == "ApplicationID" ? "ApplicationID" : Filter == "DriverID" ? "DriverID" : Filter == "LocalLicenseID" ?
+            "IssuedUsingLocalLicenseID" : "") + " like @text ;";
+
+            SqlCommand Command = new SqlCommand(Query, Connection);
+
+            Command.Parameters.AddWithValue("@text", text + "%");
+
+
+            try
+            {
+                Connection.Open();
+                SqlDataReader reader = Command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    dt.Load(reader);
+                }
+
+                reader.Close();
+
+            }
+            catch (Exception E)
+            {
+                Console.WriteLine(E.Message);
+            }
+            finally
+            {
+                Connection.Close();
+            }
+
+            return dt;
+        }
 
         /* === License Classes === */
         static public DataTable getAllLicenseClasses()
@@ -663,6 +742,42 @@ namespace DvldDataTier
             return (byte)effectedRows;
 
 
+        }
+
+        static public int getPersonIDByAppID(int AppID)
+        {
+            int Id = -1;
+
+            SqlConnection connection = new SqlConnection(dataSettings.ConnectionString);
+
+            string query = @"select ApplicantPersonID from Applications where ApplicationID = @id;";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@id", AppID);
+
+            try
+            {
+                connection.Open();
+                object result = command.ExecuteScalar();
+
+
+                if (result != null)
+                {
+                    Id = Convert.ToInt32(result);
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"error detected : {e}");
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return Id;
         }
 
     }

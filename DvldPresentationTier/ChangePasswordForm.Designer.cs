@@ -1,6 +1,6 @@
 ﻿namespace DvldProject
 {
-    partial class Form8
+    partial class ChangePasswordForm
     {
         /// <summary>
         /// Required designer variable.

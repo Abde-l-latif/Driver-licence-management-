@@ -11,11 +11,11 @@ using System.Windows.Forms;
 
 namespace DvldProject
 {
-    public partial class Form8 : Form
+    public partial class ChangePasswordForm : Form
     {
         private int PersonID;
         private int UserID; 
-        public Form8(int personID , int userID)
+        public ChangePasswordForm(int personID , int userID)
         {
             InitializeComponent();
             PersonID = personID;

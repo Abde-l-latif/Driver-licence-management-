@@ -32,10 +32,7 @@ namespace DvldProject
             application.GetLDLpersonDetails(this.DLDid, ref ClassName, ref passedTest);
             LBpassedTest.Text = passedTest.ToString() + "/3";
             LBAppliedL.Text = ClassName;
-            if (passedTest == 3)
-                linkLabel1.Enabled = true;
-            else
-                linkLabel1.Enabled = false; 
+            linkLabel1.Enabled = false; 
         }
 
         private void LDLapplicationInfo_Load(object sender, EventArgs e)

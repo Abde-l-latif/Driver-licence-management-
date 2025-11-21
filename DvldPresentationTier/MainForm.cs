@@ -32,13 +32,13 @@ namespace DvldProject
 
         private void currentUserInfoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form9 fm = new Form9(Global.USER.PersonID, Global.USER.UserID);
+            UserDetailsForm fm = new UserDetailsForm(Global.USER.PersonID, Global.USER.UserID);
             fm.ShowDialog();
         }
 
         private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form8 fm = new Form8(Global.USER.PersonID, Global.USER.UserID);
+            ChangePasswordForm fm = new ChangePasswordForm(Global.USER.PersonID, Global.USER.UserID);
             fm.ShowDialog();
         }
 
@@ -70,6 +70,18 @@ namespace DvldProject
         {
             DriverForm fm = new DriverForm();
             fm.ShowDialog();
+        }
+
+        private void internationalDrivingLicenseApplicationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ManageInternationalDrivingLicense fm = new ManageInternationalDrivingLicense();
+            fm.ShowDialog();
+        }
+
+        private void internationalLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            NewInternationalDrivingLicenseApp fm = new NewInternationalDrivingLicenseApp();
+            fm.ShowDialog();    
         }
     }
 }

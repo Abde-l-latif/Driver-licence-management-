@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -181,6 +182,43 @@ namespace DvldDataTier
             return LicenseClassID; 
         }
 
+        static public int getLicenseClassByLicenseID(int LicenseID)
+        {
+            int LicenseClassID = -1;
+
+            string query = "select LicenseClass from Licenses where LicenseID = @LicenseID;";
+
+            SqlConnection connection = new SqlConnection(dataSettings.ConnectionString);
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@LicenseID", LicenseID);
+
+            try
+            {
+                connection.Open();
+                object result = command.ExecuteScalar();
+
+
+                if (result != null)
+                {
+                    LicenseClassID = Convert.ToInt32(result);
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"error detected : {e}");
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return LicenseClassID;
+
+        }
+
         static public void GetLicenseDetails(int ApplicationID , ref int LicenseID , ref int DriverID , ref DateTime IssueDate , ref DateTime ExpirationDate ,
             ref string Notes , ref byte IssueReason , ref bool IsActive , ref string ClassName , ref string FullName , ref string NationalNo , ref byte Gender,
             ref DateTime BirthDate , ref string ImagePath)
@@ -288,6 +326,285 @@ namespace DvldDataTier
             }
 
             return DT;
+        }
+
+        static public DataTable getInterLicenseHistory(int personID)
+        {
+            DataTable DT = new DataTable();
+
+            SqlConnection connection = new SqlConnection(dataSettings.ConnectionString);
+
+            string Query = @"select InternationalLicenseID as internationalID , ApplicationID , IssuedUsingLocalLicenseID as LicenseID ,
+                            IssueDate , ExpirationDate, isActive from InternationalLicenses
+                            where DriverID = (
+                              select DriverID from Drivers where PersonID = @personID
+                              )";
+
+            SqlCommand command = new SqlCommand(Query, connection);
+
+            command.Parameters.AddWithValue("@personID", personID);
+
+            try
+            {
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    DT.Load(reader);
+                }
+
+                reader.Close();
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"error detected : {e}");
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return DT;
+        }
+
+
+        static public int getAppIDByLicenseID(int LicenseID)
+        {
+            int AppID = -1;
+
+            string query = @"select ApplicationID from Licenses where LicenseID = @LicenseID;";
+
+            SqlConnection connection = new SqlConnection(dataSettings.ConnectionString);
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@LicenseID", LicenseID);
+
+            try
+            {
+                connection.Open();
+                object result = command.ExecuteScalar();
+
+
+                if (result != null)
+                {
+                    AppID = Convert.ToInt32(result);
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"error detected : {e}");
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return AppID;
+        }
+
+        static public bool isinterLicenseExists(int LicenseID , ref DateTime ExpirationDate)
+        {
+            bool isExists = false;
+
+            string query = "select ExpirationDate from InternationalLicenses where IssuedUsingLocalLicenseID = @LicenseID;"; 
+
+            SqlConnection connection = new SqlConnection(dataSettings.ConnectionString);
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@LicenseID", LicenseID);
+
+
+            try
+            {
+                connection.Open();
+                object result = command.ExecuteScalar();
+
+
+                if (result != null)
+                {
+                    ExpirationDate = Convert.ToDateTime(result); 
+                    isExists = true;
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"error detected : {e}");
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+
+            return isExists;
+
+        }
+
+        static public bool isLicenseExists(int LicenseID, ref DateTime ExpirationDate)
+        {
+            bool isExists = false;
+
+            string query = "select ExpirationDate from Licenses where LicenseID = @LicenseID;";
+
+            SqlConnection connection = new SqlConnection(dataSettings.ConnectionString);
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@LicenseID", LicenseID);
+
+
+            try
+            {
+                connection.Open();
+                object result = command.ExecuteScalar();
+
+
+                if (result != null)
+                {
+                    ExpirationDate = Convert.ToDateTime(result);
+                    isExists = true;
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"error detected : {e}");
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+
+            return isExists;
+
+        }
+
+        static public int insertinterLicense(int AppID , DateTime ExpirationDate , DateTime IssueDate , int CreatedByUserID)
+        {
+            int @ID = -1; 
+            string query = @"INSERT INTO InternationalLicenses (ApplicationID, DriverID, IssuedUsingLocalLicenseID , IssueDate , ExpirationDate , IsActive , CreatedByUserID)
+                            SELECT ApplicationID, DriverID, LicenseID , @IssueDate , @ExpirationDate , 1, @CreatedByUserID
+                            FROM Licenses
+                            WHERE ApplicationID = @AppID; 
+                            select scope_identity() ;";
+
+
+            SqlConnection connection = new SqlConnection(dataSettings.ConnectionString);
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@ExpirationDate", ExpirationDate);
+            command.Parameters.AddWithValue("@IssueDate", IssueDate);
+            command.Parameters.AddWithValue("@CreatedByUserID", CreatedByUserID);
+            command.Parameters.AddWithValue("@AppID", AppID);
+
+
+            try
+            {
+                connection.Open();
+                object result = command.ExecuteScalar();
+
+
+                if (result != null)
+                {
+                    @ID = Convert.ToInt32(result);
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"error detected : {e}");
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return @ID;
+
+        }
+
+        static public bool isinterLicenseActive(int LicenseID)
+        {
+            bool isActive = false;
+
+            string query = "select IsActive from InternationalLicenses where IssuedUsingLocalLicenseID = @LicenseID;";
+
+            SqlConnection connection = new SqlConnection(dataSettings.ConnectionString);
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@LicenseID", LicenseID);
+
+
+            try
+            {
+                connection.Open();
+                object result = command.ExecuteScalar();
+
+
+                if (result != null)
+                {
+                    isActive = Convert.ToBoolean(result);
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"error detected : {e}");
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+
+            return isActive;
+        }
+
+        static public bool isLicenseActive(int LicenseID)
+        {
+            bool isActive = false;
+
+            string query = "select IsActive from Licenses where LicenseID = @LicenseID;";
+
+            SqlConnection connection = new SqlConnection(dataSettings.ConnectionString);
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@LicenseID", LicenseID);
+
+
+            try
+            {
+                connection.Open();
+                object result = command.ExecuteScalar();
+
+
+                if (result != null)
+                {
+                    isActive = Convert.ToBoolean(result);
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"error detected : {e}");
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+
+            return isActive;
         }
 
     }

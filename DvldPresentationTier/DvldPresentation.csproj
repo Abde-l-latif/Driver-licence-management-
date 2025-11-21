@@ -70,6 +70,18 @@
     <Compile Include="FilterUser.Designer.cs">
       <DependentUpon>FilterUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="interLicenseDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="interLicenseDetails.Designer.cs">
+      <DependentUpon>interLicenseDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LicenseDetailsControle.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LicenseDetailsControle.Designer.cs">
+      <DependentUpon>LicenseDetailsControle.cs</DependentUpon>
+    </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,6 +90,18 @@
     </Compile>
     <Compile Include="ManageAppTypeForm.Designer.cs">
       <DependentUpon>ManageAppTypeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ManageInternationalDrivingLicense.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ManageInternationalDrivingLicense.Designer.cs">
+      <DependentUpon>ManageInternationalDrivingLicense.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NewInternationalDrivingLicenseApp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewInternationalDrivingLicenseApp.Designer.cs">
+      <DependentUpon>NewInternationalDrivingLicenseApp.cs</DependentUpon>
     </Compile>
     <Compile Include="UpdateApplication.cs">
       <SubType>Form</SubType>
@@ -175,11 +199,11 @@
     <Compile Include="addNewPerson.Designer.cs">
       <DependentUpon>addNewPerson.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form5.cs">
+    <Compile Include="PersonDetailsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form5.Designer.cs">
-      <DependentUpon>Form5.cs</DependentUpon>
+    <Compile Include="PersonDetailsForm.Designer.cs">
+      <DependentUpon>PersonDetailsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Form6.cs">
       <SubType>Form</SubType>
@@ -193,17 +217,17 @@
     <Compile Include="Form7.Designer.cs">
       <DependentUpon>Form7.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form8.cs">
+    <Compile Include="ChangePasswordForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form8.Designer.cs">
-      <DependentUpon>Form8.cs</DependentUpon>
+    <Compile Include="ChangePasswordForm.Designer.cs">
+      <DependentUpon>ChangePasswordForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form9.cs">
+    <Compile Include="UserDetailsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form9.Designer.cs">
-      <DependentUpon>Form9.cs</DependentUpon>
+    <Compile Include="UserDetailsForm.Designer.cs">
+      <DependentUpon>UserDetailsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Global.cs" />
     <Compile Include="LDLapplicationInfo.cs">
@@ -238,11 +262,23 @@
     <EmbeddedResource Include="FilterUser.resx">
       <DependentUpon>FilterUser.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="interLicenseDetails.resx">
+      <DependentUpon>interLicenseDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LicenseDetailsControle.resx">
+      <DependentUpon>LicenseDetailsControle.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ManageAppTypeForm.resx">
       <DependentUpon>ManageAppTypeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ManageInternationalDrivingLicense.resx">
+      <DependentUpon>ManageInternationalDrivingLicense.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewInternationalDrivingLicenseApp.resx">
+      <DependentUpon>NewInternationalDrivingLicenseApp.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UpdateApplication.resx">
       <DependentUpon>UpdateApplication.cs</DependentUpon>
@@ -292,8 +328,8 @@
     <EmbeddedResource Include="addNewPerson.resx">
       <DependentUpon>addNewPerson.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form5.resx">
-      <DependentUpon>Form5.cs</DependentUpon>
+    <EmbeddedResource Include="PersonDetailsForm.resx">
+      <DependentUpon>PersonDetailsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form6.resx">
       <DependentUpon>Form6.cs</DependentUpon>
@@ -301,11 +337,11 @@
     <EmbeddedResource Include="Form7.resx">
       <DependentUpon>Form7.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form8.resx">
-      <DependentUpon>Form8.cs</DependentUpon>
+    <EmbeddedResource Include="ChangePasswordForm.resx">
+      <DependentUpon>ChangePasswordForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form9.resx">
-      <DependentUpon>Form9.cs</DependentUpon>
+    <EmbeddedResource Include="UserDetailsForm.resx">
+      <DependentUpon>UserDetailsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LDLapplicationInfo.resx">
       <DependentUpon>LDLapplicationInfo.cs</DependentUpon>
@@ -563,6 +599,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\delete %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\world.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

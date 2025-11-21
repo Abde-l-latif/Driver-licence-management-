@@ -251,8 +251,9 @@
             this.labelStatus.ForeColor = System.Drawing.Color.Black;
             this.labelStatus.Location = new System.Drawing.Point(142, 38);
             this.labelStatus.Name = "labelStatus";
-            this.labelStatus.Size = new System.Drawing.Size(0, 17);
+            this.labelStatus.Size = new System.Drawing.Size(20, 17);
             this.labelStatus.TabIndex = 26;
+            this.labelStatus.Text = "ss";
             // 
             // labelFees
             // 

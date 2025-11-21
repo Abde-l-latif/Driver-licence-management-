@@ -93,7 +93,7 @@ namespace DvldProject
             if (dataGridView1.SelectedRows.Count > 0)
             {
                 int PersonID = (int)dataGridView1.SelectedRows[0].Cells["PersonID"].Value;
-                Form5 fm = new Form5(PersonID);
+                PersonDetailsForm fm = new PersonDetailsForm(PersonID);
                 fm.ShowDialog();
             }
             else

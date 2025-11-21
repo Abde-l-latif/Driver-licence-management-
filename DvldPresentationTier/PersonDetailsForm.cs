@@ -3,10 +3,10 @@ using System.Windows.Forms;
 
 namespace DvldProject
 {
-    public partial class Form5 : Form
+    public partial class PersonDetailsForm : Form
     {
  
-        public Form5(int PersonID)
+        public PersonDetailsForm(int PersonID)
         {
             InitializeComponent();
             personDetails1.setPersonId(PersonID);

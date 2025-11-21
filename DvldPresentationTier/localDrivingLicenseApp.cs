@@ -294,7 +294,7 @@ namespace DvldProject
             if (dataGridView1.SelectedRows.Count > 0)
             {
                 string NationalNo = dataGridView1.SelectedRows[0].Cells["NationalNo"].Value.ToString();
-                Form fm = new LicenseHistory(NationalNo);
+                Form fm = new LicenseHistory(people.getPersonIDbyNationalNo(NationalNo));
                 fm.ShowDialog();
             }
             else

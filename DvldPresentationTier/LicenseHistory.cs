@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using DvldBusinessTier;
 
@@ -17,11 +11,11 @@ namespace DvldProject
         private string textBox = "";
         private string comboBox = "";
         private int PersonID = -1; 
-        public LicenseHistory(string NationalNo)
+        public LicenseHistory(int personID)
         {
             InitializeComponent();
             StartPosition = FormStartPosition.CenterParent;
-            initializeFilterControl(NationalNo);
+            initializeFilterControl(personID);
             initializePersonDetails(PersonID);
             groupBox1.Enabled = false;
             initializeDataGridLocal(PersonID);
@@ -35,11 +29,11 @@ namespace DvldProject
             dataGridView.AllowUserToAddRows = false;
         }
 
-        private void initializeFilterControl(string NationalNo)
+        private void initializeFilterControl(int personID)
         {
             filterPeople1.OnTextChangedInside += textFilter;
             filterPeople1.OnSelectChange += selectText;
-            PersonID = people.getPersonIDbyNationalNo(NationalNo);
+            PersonID = personID;
             filterPeople1.customFilter(PersonID.ToString(), "person ID");
         }
 
@@ -56,6 +50,16 @@ namespace DvldProject
                 initializeDataGrid(dataGridLocal);
                 dataGridLocal.DataSource = Licenses.getLocalLicenseHistory(PersonID);
                 LbRecord.Text = dataGridLocal.Rows.Count.ToString() + " Records"; 
+            }
+        }
+
+        private void initializeDataGridInternational(int PersonID)
+        {
+            if (Driver.isDriverExists(PersonID))
+            {
+                initializeDataGrid(dataGridInternational);
+                dataGridInternational.DataSource = Licenses.getInterLicenseHistory(PersonID);
+                LbRecord.Text = dataGridInternational.Rows.Count.ToString() + " Records";
             }
         }
 
@@ -96,6 +100,14 @@ namespace DvldProject
         private void BTNclose_Click(object sender, EventArgs e)
         {
             this.Close(); 
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabControl1.SelectedIndex == 1)
+                initializeDataGridInternational(PersonID);
+            else if (tabControl1.SelectedIndex == 0)
+                initializeDataGridLocal(PersonID);
         }
     }
 }

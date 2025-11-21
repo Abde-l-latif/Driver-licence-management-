@@ -57,7 +57,7 @@ namespace DvldProject
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Form5 fm = new Form5(PersonID);
+            PersonDetailsForm fm = new PersonDetailsForm(PersonID);
             fm.ShowDialog();
         }
     }
