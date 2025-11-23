@@ -1,16 +1,26 @@
 ﻿using DvldDataTier;
 using System;
-using System.ComponentModel;
 using System.Data;
-using static System.Net.Mime.MediaTypeNames;
+
 
 
 namespace DvldBusinessTier
 {
     public class application
     {   
-        
+        /* ENUMS */
+        public enum enAppTypes { newLocalLicense = 1, renewLicense = 2, replaceLostLicense = 3, replaceDamagedLicense = 4, releaseAndDetainedLicense = 5, 
+            newInternationalLicense = 6, retakeTest = 7}
+
+        public enum enAppStatus { New = 1, Cancelled = 2, Completed = 3 }
+
         enum enMode { addMode , updateMode }
+
+        /* ================== */
+
+        public enAppTypes ApplicationType;
+
+        public enAppStatus Status; 
 
         private enMode Mode;
 
@@ -47,6 +57,13 @@ namespace DvldBusinessTier
         {
             Mode = enMode.updateMode;
             ApplicationID = AppID;
+        }
+
+        public decimal getApplicationFee()
+        {
+            int id = Convert.ToInt32(ApplicationType);
+            PaidFees = dataApplication.getApplicationFee(id);
+            return PaidFees;
         }
 
         static public DataTable getApplicationTypes()

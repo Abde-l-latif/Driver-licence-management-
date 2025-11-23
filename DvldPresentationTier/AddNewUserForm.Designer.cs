@@ -1,6 +1,6 @@
 ﻿namespace DvldProject
 {
-    partial class Form7
+    partial class AddNewUserForm
     {
         /// <summary>
         /// Required designer variable.

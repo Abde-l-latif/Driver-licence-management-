@@ -18,6 +18,7 @@ namespace DvldProject
         public ChangePasswordForm(int personID , int userID)
         {
             InitializeComponent();
+            StartPosition = FormStartPosition.CenterParent;
             PersonID = personID;
             UserID = userID;
         }

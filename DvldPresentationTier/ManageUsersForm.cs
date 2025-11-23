@@ -12,9 +12,9 @@ using System.Windows.Forms;
 
 namespace DvldProject
 {
-    public partial class Form6 : Form
+    public partial class ManageUsersForm : Form
     {
-        public Form6()
+        public ManageUsersForm()
         {
             InitializeComponent();
             StartPosition = FormStartPosition.CenterParent;
@@ -83,7 +83,7 @@ namespace DvldProject
 
         private void pictureAddPerson_Click(object sender, EventArgs e)
         {
-            Form fm = new Form7(-1);
+            Form fm = new AddNewUserForm(-1);
             fm.ShowDialog();
         }
 
@@ -92,7 +92,7 @@ namespace DvldProject
             if(dataGridView1.SelectedRows.Count > 0)
             {
                 int personID = (int)dataGridView1.SelectedRows[0].Cells[1].Value;
-                Form fm = new Form7(personID);
+                Form fm = new AddNewUserForm(personID);
                 fm.ShowDialog(); 
             }
             else
@@ -131,7 +131,7 @@ namespace DvldProject
                 return; 
             }
 
-            Form fm = new Form7(-1);
+            Form fm = new AddNewUserForm(-1);
             fm.ShowDialog();
         }
 

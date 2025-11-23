@@ -103,6 +103,18 @@
     <Compile Include="NewInternationalDrivingLicenseApp.Designer.cs">
       <DependentUpon>NewInternationalDrivingLicenseApp.cs</DependentUpon>
     </Compile>
+    <Compile Include="RenewDrivingLicense.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RenewDrivingLicense.Designer.cs">
+      <DependentUpon>RenewDrivingLicense.cs</DependentUpon>
+    </Compile>
+    <Compile Include="replacementLicenseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="replacementLicenseForm.Designer.cs">
+      <DependentUpon>replacementLicenseForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UpdateApplication.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -187,11 +199,11 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form3.cs">
+    <Compile Include="ManagePeopleForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form3.Designer.cs">
-      <DependentUpon>Form3.cs</DependentUpon>
+    <Compile Include="ManagePeopleForm.Designer.cs">
+      <DependentUpon>ManagePeopleForm.cs</DependentUpon>
     </Compile>
     <Compile Include="addNewPerson.cs">
       <SubType>Form</SubType>
@@ -205,17 +217,17 @@
     <Compile Include="PersonDetailsForm.Designer.cs">
       <DependentUpon>PersonDetailsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form6.cs">
+    <Compile Include="ManageUsersForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form6.Designer.cs">
-      <DependentUpon>Form6.cs</DependentUpon>
+    <Compile Include="ManageUsersForm.Designer.cs">
+      <DependentUpon>ManageUsersForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form7.cs">
+    <Compile Include="AddNewUserForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form7.Designer.cs">
-      <DependentUpon>Form7.cs</DependentUpon>
+    <Compile Include="AddNewUserForm.Designer.cs">
+      <DependentUpon>AddNewUserForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ChangePasswordForm.cs">
       <SubType>Form</SubType>
@@ -280,6 +292,12 @@
     <EmbeddedResource Include="NewInternationalDrivingLicenseApp.resx">
       <DependentUpon>NewInternationalDrivingLicenseApp.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="RenewDrivingLicense.resx">
+      <DependentUpon>RenewDrivingLicense.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="replacementLicenseForm.resx">
+      <DependentUpon>replacementLicenseForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UpdateApplication.resx">
       <DependentUpon>UpdateApplication.cs</DependentUpon>
     </EmbeddedResource>
@@ -322,8 +340,8 @@
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form3.resx">
-      <DependentUpon>Form3.cs</DependentUpon>
+    <EmbeddedResource Include="ManagePeopleForm.resx">
+      <DependentUpon>ManagePeopleForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="addNewPerson.resx">
       <DependentUpon>addNewPerson.cs</DependentUpon>
@@ -331,11 +349,11 @@
     <EmbeddedResource Include="PersonDetailsForm.resx">
       <DependentUpon>PersonDetailsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form6.resx">
-      <DependentUpon>Form6.cs</DependentUpon>
+    <EmbeddedResource Include="ManageUsersForm.resx">
+      <DependentUpon>ManageUsersForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form7.resx">
-      <DependentUpon>Form7.cs</DependentUpon>
+    <EmbeddedResource Include="AddNewUserForm.resx">
+      <DependentUpon>AddNewUserForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ChangePasswordForm.resx">
       <DependentUpon>ChangePasswordForm.cs</DependentUpon>

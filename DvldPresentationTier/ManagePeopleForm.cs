@@ -4,9 +4,9 @@ using DvldBusinessTier;
 
 namespace DvldProject
 {
-    public partial class Form3 : Form
+    public partial class ManagePeopleForm : Form
     {
-        public Form3()
+        public ManagePeopleForm()
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;

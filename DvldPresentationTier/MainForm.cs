@@ -15,7 +15,7 @@ namespace DvldProject
 
         private void peopleToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form fm = new Form3();
+            Form fm = new ManagePeopleForm();
             fm.ShowDialog();
         }
 
@@ -26,7 +26,7 @@ namespace DvldProject
 
         private void usersToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form fm = new Form6();
+            Form fm = new ManageUsersForm();
             fm.ShowDialog(); 
         }
 
@@ -82,6 +82,18 @@ namespace DvldProject
         {
             NewInternationalDrivingLicenseApp fm = new NewInternationalDrivingLicenseApp();
             fm.ShowDialog();    
+        }
+
+        private void renewDrivingLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RenewDrivingLicense fm = new RenewDrivingLicense();
+            fm.ShowDialog();
+        }
+
+        private void replacmentToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            replacementLicenseForm fm = new replacementLicenseForm();
+            fm.ShowDialog();
         }
     }
 }

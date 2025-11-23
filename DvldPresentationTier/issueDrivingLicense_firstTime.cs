@@ -73,7 +73,7 @@ namespace DvldProject
 
             Licenses license = new Licenses(this.appID , DriverId , LicenseClassID , DateTime.Now , textNote.Text, true , reason , Global.USER.UserID);
 
-            if (license.AddLicense())
+            if (license.AddFirstTimeLicense())
             {
                 application app = new application(appID);
                 if(app.Save(3))

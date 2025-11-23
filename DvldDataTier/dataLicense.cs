@@ -145,6 +145,45 @@ namespace DvldDataTier
             return Fees;
         }
 
+        static public decimal getLicenseClassFees(int LicenseID)
+        {
+            decimal Fees = 0;
+
+            string query = @"select ClassFees from Licenses L
+            inner join LicenseClasses C on C.LicenseClassID = L.LicenseClass
+            where LicenseID = @LicenseID ;";
+
+            SqlConnection connection = new SqlConnection(dataSettings.ConnectionString);
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@LicenseID", LicenseID);
+
+            try
+            {
+                connection.Open();
+                object result = command.ExecuteScalar();
+
+
+                if (result != null)
+                {
+                    Fees = Convert.ToDecimal(result);
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"error detected : {e}");
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return Fees;
+        }
+
+
         static public int getLicenseClassIdByLdlID(int LdlID)
         {
             int LicenseClassID = -1;  
@@ -486,6 +525,45 @@ namespace DvldDataTier
 
         }
 
+        static public bool isLicenseExists(int LicenseID)
+        {
+            bool isExists = false;
+
+            string query = "select top 1 found = 1 from Licenses where LicenseID = @LicenseID;";
+
+            SqlConnection connection = new SqlConnection(dataSettings.ConnectionString);
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@LicenseID", LicenseID);
+
+
+            try
+            {
+                connection.Open();
+                object result = command.ExecuteScalar();
+
+
+                if (result != null && int.TryParse(Convert.ToString(result) , out int found))
+                {
+                    isExists = (found == 1);
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"error detected : {e}");
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+
+            return isExists;
+
+        }
+
         static public int insertinterLicense(int AppID , DateTime ExpirationDate , DateTime IssueDate , int CreatedByUserID)
         {
             int @ID = -1; 
@@ -605,6 +683,115 @@ namespace DvldDataTier
 
 
             return isActive;
+        }
+
+        static public bool updateIsActiveOfLicense(int LicenseID , bool value)
+        {
+            int EffectedRows = 0;
+
+            string query = "update Licenses set IsActive = @value where LicenseID = @LicenseID;";
+
+            SqlConnection connection = new SqlConnection(dataSettings.ConnectionString);
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@LicenseID", LicenseID);
+            command.Parameters.AddWithValue("@value", value);
+
+
+            try
+            {
+                connection.Open();
+                int result = command.ExecuteNonQuery();
+                EffectedRows = result;
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"error detected : {e}");
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+
+            return EffectedRows > 0 ;
+        }
+
+
+        static public byte getValiditylengthOfLicense(int LicenseID)
+        {
+            byte years = 0;
+
+            string query = @"select DefaultValidityLength from Licenses L
+            inner join LicenseClasses C on C.LicenseClassID = L.LicenseClass
+            where LicenseID = @LicenseID ;";
+
+            SqlConnection connection = new SqlConnection(dataSettings.ConnectionString);
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@LicenseID", LicenseID);
+
+            try
+            {
+                connection.Open();
+                object result = command.ExecuteScalar();
+
+
+                if (result != null)
+                {
+                    years = Convert.ToByte(result);
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"error detected : {e}");
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return years;
+        }
+
+        static public byte getValiditylengthOfLicenseClass(int LicenseClassID)
+        {
+            byte years = 0;
+
+            string query = @"select DefaultValidityLength from LicenseClasses C where C.LicenseClassID = @LicenseClassID;";
+
+            SqlConnection connection = new SqlConnection(dataSettings.ConnectionString);
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@LicenseClassID", LicenseClassID);
+
+            try
+            {
+                connection.Open();
+                object result = command.ExecuteScalar();
+
+
+                if (result != null)
+                {
+                    years = Convert.ToByte(result);
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"error detected : {e}");
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return years;
         }
 
     }

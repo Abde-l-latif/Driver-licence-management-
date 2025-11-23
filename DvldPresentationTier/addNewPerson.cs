@@ -362,12 +362,12 @@ namespace DvldProject
 
                 foreach (Form frm in Application.OpenForms)
                 {
-                    if (frm is Form3 peopleListForm)
+                    if (frm is ManagePeopleForm peopleListForm)
                     {
                         peopleListForm.FillDataGridWithPeople();
                         break;
                     }
-                    if(frm is Form7 editFromUser)
+                    if(frm is AddNewUserForm editFromUser)
                     {
                         editFromUser.reloadPersonCard();
                         break;

@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace DvldProject
 {
-    public partial class Form7 : Form
+    public partial class AddNewUserForm : Form
     {
 
         string ComboBoxText = "";
@@ -19,7 +19,7 @@ namespace DvldProject
 
         private int personID;
 
-        public Form7(int personID)
+        public AddNewUserForm(int personID)
         {
             InitializeComponent();
             filterPeople1.OnSelectChange += getSelectedFilter;
@@ -71,7 +71,7 @@ namespace DvldProject
         {
             foreach(Form fm in Application.OpenForms)
             {
-                if(fm is Form6 userFormGrid)
+                if(fm is ManageUsersForm userFormGrid)
                 {
                     userFormGrid.fillDataGrid();
                     break;

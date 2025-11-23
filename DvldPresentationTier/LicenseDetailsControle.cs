@@ -16,7 +16,7 @@ namespace DvldProject
     {
         public int ApplicationID;
 
-        enum enReason { FirstTime = 1, Renew, Replacement, Damaged, ReplacementForLost }
+        enum enReason { FirstTime = 1, Renew, ReplaceDamaged, ReplaceLost }
 
         struct sLicense
         {
@@ -60,6 +60,10 @@ namespace DvldProject
         {
             ApplicationID = AppId; 
         }
+        public int GetApplicationID()
+        {
+            return ApplicationID;
+        }
 
         public int getLicenseID()
         {
@@ -95,17 +99,14 @@ namespace DvldProject
                 case enReason.FirstTime:
                     LbIssueReason.Text = "First time";
                     break;
-                case enReason.Replacement:
-                    LbIssueReason.Text = "Replacement";
+                case enReason.ReplaceDamaged:
+                    LbIssueReason.Text = "Replace Damaged";
                     break;
                 case enReason.Renew:
                     LbIssueReason.Text = "Renew";
                     break;
-                case enReason.ReplacementForLost:
-                    LbIssueReason.Text = "Replacement For Lost";
-                    break;
-                case enReason.Damaged:
-                    LbIssueReason.Text = "Damaged";
+                case enReason.ReplaceLost:
+                    LbIssueReason.Text = "Replace Lost";
                     break;
             }
         }
@@ -130,7 +131,7 @@ namespace DvldProject
                 {
                     pictureProfile.Image = Resources.user__22_;
                 }
-                else
+                else 
                 {
                     pictureProfile.Image = Resources.admin_female;
                 }

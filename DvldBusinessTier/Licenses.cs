@@ -11,6 +11,10 @@ namespace DvldBusinessTier
 {
     public class Licenses
     {
+        
+        public enum enReason {FirstTime = 1, Renew = 2, ReplacementforDamaged = 3, ReplacementforLost = 4}
+
+        public enReason Reason;
         public int LicenseID { get; set; }
         public int ApplicationID { get; set; }
         public int DriverID {get; set;}
@@ -39,6 +43,31 @@ namespace DvldBusinessTier
             this.CreatedByUserID = CreatedByUserID;
         }
 
+        public void FillExpirationDateOfLicense()
+        {
+            DateTime Date = IssueDate;
+            byte Years = dataLicense.getValiditylengthOfLicenseClass(this.LicenseClass);
+            this.ExpirationDate = Date.AddYears(Years);
+        }
+
+        static public decimal getLicenseFees(int LicenseID)
+        {
+            return dataLicense.getLicenseClassFees(LicenseID);
+        }
+
+        static public bool unActiveLicense(int LicenseID)
+        {
+            if (dataLicense.updateIsActiveOfLicense(LicenseID, false))
+                return true;
+
+            return false;
+        }
+
+        private void FillPaidFees()
+        {
+            this.PaidFees = dataLicense.getLicenseFees(this.ApplicationID);
+        }
+
         static public int getLicenseClassIdByLdlID(int LdlID)
         {
             return dataLicense.getLicenseClassIdByLdlID(LdlID);
@@ -51,15 +80,21 @@ namespace DvldBusinessTier
             this.ExpirationDate = Date; 
         }
 
-        private void FillPaidFees()
+        static public byte getValiditylengthOfLicense(int LicenseID)
         {
-            this.PaidFees = dataLicense.getLicenseFees(this.ApplicationID);
+            return dataLicense.getValiditylengthOfLicense(LicenseID);
+        }
+
+        public bool AddFirstTimeLicense()
+        {
+            fillExpirationDate();
+            FillPaidFees();
+            this.LicenseID = dataLicense.insertLicense(ApplicationID, DriverID, LicenseClass, IssueDate, ExpirationDate, Notes, PaidFees, IsActive, IssueReason, CreatedByUserID);
+            return (LicenseID != -1);
         }
 
         public bool AddLicense()
         {
-            fillExpirationDate();
-            FillPaidFees();
             this.LicenseID = dataLicense.insertLicense(ApplicationID, DriverID, LicenseClass, IssueDate, ExpirationDate, Notes, PaidFees, IsActive, IssueReason, CreatedByUserID);
             return (LicenseID != -1);
         }
@@ -100,6 +135,11 @@ namespace DvldBusinessTier
             return dataLicense.isLicenseExists(LicenseID, ref ExpirationDate);
         }
 
+        static public bool isLicenseExists(int LicenseID)
+        {
+            return dataLicense.isLicenseExists(LicenseID);
+        }
+
         static public int insertinterLicense(int AppID, DateTime ExpirationDate, DateTime IssueDate, int CreatedByUserID)
         {
             return dataLicense.insertinterLicense(AppID, ExpirationDate, IssueDate, CreatedByUserID);
@@ -119,5 +159,13 @@ namespace DvldBusinessTier
             return dataLicense.getLicenseClassByLicenseID(LicenseID);
         }
 
+        static public bool updateIsActiveOfLicense(int LicenseID, bool value)
+        {
+            if(isLicenseActive(LicenseID))
+            {
+                return dataLicense.updateIsActiveOfLicense(LicenseID, value);  
+            }
+            return true;
+        }
     }
 }
