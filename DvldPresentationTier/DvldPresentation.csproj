@@ -52,6 +52,12 @@
     <Compile Include="AppDetails.Designer.cs">
       <DependentUpon>AppDetails.cs</DependentUpon>
     </Compile>
+    <Compile Include="DetainLicenseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DetainLicenseForm.Designer.cs">
+      <DependentUpon>DetainLicenseForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="DriverForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -91,6 +97,12 @@
     <Compile Include="ManageAppTypeForm.Designer.cs">
       <DependentUpon>ManageAppTypeForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ManageDetainLicenses.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ManageDetainLicenses.Designer.cs">
+      <DependentUpon>ManageDetainLicenses.cs</DependentUpon>
+    </Compile>
     <Compile Include="ManageInternationalDrivingLicense.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -102,6 +114,12 @@
     </Compile>
     <Compile Include="NewInternationalDrivingLicenseApp.Designer.cs">
       <DependentUpon>NewInternationalDrivingLicenseApp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReleaseDetainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReleaseDetainForm.Designer.cs">
+      <DependentUpon>ReleaseDetainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="RenewDrivingLicense.cs">
       <SubType>Form</SubType>
@@ -265,6 +283,9 @@
     <EmbeddedResource Include="AppDetails.resx">
       <DependentUpon>AppDetails.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DetainLicenseForm.resx">
+      <DependentUpon>DetainLicenseForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DriverForm.resx">
       <DependentUpon>DriverForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -286,11 +307,17 @@
     <EmbeddedResource Include="ManageAppTypeForm.resx">
       <DependentUpon>ManageAppTypeForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ManageDetainLicenses.resx">
+      <DependentUpon>ManageDetainLicenses.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ManageInternationalDrivingLicense.resx">
       <DependentUpon>ManageInternationalDrivingLicense.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NewInternationalDrivingLicenseApp.resx">
       <DependentUpon>NewInternationalDrivingLicenseApp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReleaseDetainForm.resx">
+      <DependentUpon>ReleaseDetainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RenewDrivingLicense.resx">
       <DependentUpon>RenewDrivingLicense.cs</DependentUpon>
@@ -620,6 +647,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\world.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hand.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hand_close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hand_close2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

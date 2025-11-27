@@ -63,6 +63,30 @@ namespace DvldBusinessTier
             return false;
         }
 
+        static public bool isLicenseDetained(int LicenseID)
+        {
+            return dataLicense.isLicenseDetained(LicenseID);
+        }
+
+        static public bool getDetainDetails(int LicenseID, ref int DetainID, ref DateTime DetainDate, ref Decimal FineFees)
+        {
+            dataLicense.getDetainDetails(LicenseID, ref DetainID, ref DetainDate, ref FineFees);
+            if (DetainID != -1)
+                return true;
+            return false; 
+        }
+
+        static public DataTable getListDetainedLicenses()
+        {
+            return dataLicense.getListDetainedLicenses(); 
+        }
+
+
+        static public DataTable FillWithFiltredData(string text , string ComboText)
+        {
+            text = text == "yes" ? "1" : text == "no" ? "0" : text;
+            return dataLicense.getFiltredData(text, ComboText);
+        }
         private void FillPaidFees()
         {
             this.PaidFees = dataLicense.getLicenseFees(this.ApplicationID);
@@ -166,6 +190,26 @@ namespace DvldBusinessTier
                 return dataLicense.updateIsActiveOfLicense(LicenseID, value);  
             }
             return true;
+        }
+
+        static public bool DetainLicense(ref int detainID, int LicenseID, string DetainDate, string FineFees, int CreatedByUserID)
+        {
+            bool IsReleased = false;
+            decimal Fees = Convert.ToDecimal(FineFees);
+            DateTime Date = Convert.ToDateTime(DetainDate);
+            detainID = dataLicense.DetainLicense(LicenseID, Date, Fees, CreatedByUserID, IsReleased);
+            if (detainID != -1)
+                return true;
+            return false; 
+        }
+
+        static public bool ReleaseDetainedLicense(int LicenseID ,DateTime ReleaseDate ,  int UserID , int AppID)
+        {
+            bool IsReleased = true;
+            int Effected = dataLicense.ReleaseDetainedLicense(LicenseID, IsReleased, ReleaseDate, UserID, AppID); 
+            if(Effected > 0)
+                return true;
+            return false;
         }
     }
 }

@@ -109,6 +109,8 @@ namespace DvldProject
                     LbIssueReason.Text = "Replace Lost";
                     break;
             }
+
+            LbIsDetained.Text = Licenses.isLicenseDetained(LicenseDetails.LicenseID) ? "Yes" : "No"; 
         }
 
         private void initializeGenderPec()

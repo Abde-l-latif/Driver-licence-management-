@@ -95,5 +95,23 @@ namespace DvldProject
             replacementLicenseForm fm = new replacementLicenseForm();
             fm.ShowDialog();
         }
+
+        private void detainLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DetainLicenseForm fm = new DetainLicenseForm();
+            fm.ShowDialog(); 
+        }
+
+        private void releaseDetainedLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ReleaseDetainForm fm = new ReleaseDetainForm();
+            fm.ShowDialog(); 
+        }
+
+        private void manageDetainedLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ManageDetainLicenses fm = new ManageDetainLicenses();
+            fm.ShowDialog();
+        }
     }
 }
