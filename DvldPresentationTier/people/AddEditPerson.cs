@@ -159,6 +159,8 @@ namespace DvldProject
 
                 string DestinationFolder = "C:/DVLD-People-Images";
 
+                Directory.CreateDirectory(DestinationFolder);
+
                 string newFileName = Guid.NewGuid().ToString() + Path.GetExtension(filePath);
 
                 string DestinationPath = Path.Combine(DestinationFolder, newFileName);
@@ -246,7 +248,7 @@ namespace DvldProject
         {
             string text = textNationalNo.Text;
 
-            if (!System.Text.RegularExpressions.Regex.IsMatch(text, @"^[A-Za-z]{2}\d{3,6}$"))
+            if (!Validation.NationalNumberValidation(text))
             {
                 e.Cancel = true;
                 errorProvider1.SetError(textNationalNo, "it must contain 2 letters followed by 3 to 6 numbers!");
@@ -266,7 +268,7 @@ namespace DvldProject
         {
             string text = textPhone.Text;
 
-            if (!System.Text.RegularExpressions.Regex.IsMatch(text, @"^\d{10}$"))
+            if (!Validation.PhoneNumberValidation(text))
             {
                 e.Cancel = true;
                 errorProvider1.SetError(textPhone, "it must contain 10 numbers!");
@@ -281,7 +283,7 @@ namespace DvldProject
         {
             string text = textAddress.Text;
 
-            if (!System.Text.RegularExpressions.Regex.IsMatch(text, @"^[A-Za-z]{5,}$"))
+            if (!Validation.AddressValidation(text))
             {
                 e.Cancel = true;
                 errorProvider1.SetError(textAddress, "it must contain 5 letters minimum !");
@@ -296,7 +298,7 @@ namespace DvldProject
         {
             string text = textEmail.Text;
 
-            if (!System.Text.RegularExpressions.Regex.IsMatch(text, @"^[^@\s]+@[^@\s]+\.[^@\s]+$") && text != "")
+            if (!Validation.EmailValidition(text))
             {
                 e.Cancel = true;
                 errorProvider1.SetError(textEmail, "Invalid email format!");
