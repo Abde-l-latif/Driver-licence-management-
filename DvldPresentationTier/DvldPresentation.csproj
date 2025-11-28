@@ -64,10 +64,10 @@
     <Compile Include="DriverForm.Designer.cs">
       <DependentUpon>DriverForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="filterPeople.cs">
+    <Compile Include="people\filterPeople.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="filterPeople.Designer.cs">
+    <Compile Include="people\filterPeople.Designer.cs">
       <DependentUpon>filterPeople.cs</DependentUpon>
     </Compile>
     <Compile Include="FilterUser.cs">
@@ -114,6 +114,12 @@
     </Compile>
     <Compile Include="NewInternationalDrivingLicenseApp.Designer.cs">
       <DependentUpon>NewInternationalDrivingLicenseApp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="people\PersonDetails.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="people\PersonDetails.Designer.cs">
+      <DependentUpon>PersonDetails.cs</DependentUpon>
     </Compile>
     <Compile Include="ReleaseDetainForm.cs">
       <SubType>Form</SubType>
@@ -217,22 +223,22 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ManagePeopleForm.cs">
+    <Compile Include="people\ManagePeopleForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ManagePeopleForm.Designer.cs">
+    <Compile Include="people\ManagePeopleForm.Designer.cs">
       <DependentUpon>ManagePeopleForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="addNewPerson.cs">
+    <Compile Include="people\AddEditPerson.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="addNewPerson.Designer.cs">
-      <DependentUpon>addNewPerson.cs</DependentUpon>
+    <Compile Include="people\AddEditPerson.Designer.cs">
+      <DependentUpon>AddEditPerson.cs</DependentUpon>
     </Compile>
-    <Compile Include="PersonDetailsForm.cs">
+    <Compile Include="people\PersonDetailsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PersonDetailsForm.Designer.cs">
+    <Compile Include="people\PersonDetailsForm.Designer.cs">
       <DependentUpon>PersonDetailsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ManageUsersForm.cs">
@@ -266,12 +272,6 @@
     <Compile Include="LDLapplicationInfo.Designer.cs">
       <DependentUpon>LDLapplicationInfo.cs</DependentUpon>
     </Compile>
-    <Compile Include="PersonDetails.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="PersonDetails.Designer.cs">
-      <DependentUpon>PersonDetails.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="userInfo.cs">
@@ -289,7 +289,7 @@
     <EmbeddedResource Include="DriverForm.resx">
       <DependentUpon>DriverForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="filterPeople.resx">
+    <EmbeddedResource Include="people\filterPeople.resx">
       <DependentUpon>filterPeople.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FilterUser.resx">
@@ -315,6 +315,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NewInternationalDrivingLicenseApp.resx">
       <DependentUpon>NewInternationalDrivingLicenseApp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="people\PersonDetails.resx">
+      <DependentUpon>PersonDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReleaseDetainForm.resx">
       <DependentUpon>ReleaseDetainForm.cs</DependentUpon>
@@ -367,13 +370,13 @@
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ManagePeopleForm.resx">
+    <EmbeddedResource Include="people\ManagePeopleForm.resx">
       <DependentUpon>ManagePeopleForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="addNewPerson.resx">
-      <DependentUpon>addNewPerson.cs</DependentUpon>
+    <EmbeddedResource Include="people\AddEditPerson.resx">
+      <DependentUpon>AddEditPerson.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PersonDetailsForm.resx">
+    <EmbeddedResource Include="people\PersonDetailsForm.resx">
       <DependentUpon>PersonDetailsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ManageUsersForm.resx">
@@ -390,9 +393,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="LDLapplicationInfo.resx">
       <DependentUpon>LDLapplicationInfo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PersonDetails.resx">
-      <DependentUpon>PersonDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

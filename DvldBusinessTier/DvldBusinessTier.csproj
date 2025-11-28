@@ -42,7 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="application.cs" />
-	<Compile Include="Driver.cs" />
+    <Compile Include="Countries.cs" />
+    <Compile Include="Driver.cs" />
     <Compile Include="Licenses.cs" />
     <Compile Include="people.cs" />
     <Compile Include="TestAppointment.cs" />

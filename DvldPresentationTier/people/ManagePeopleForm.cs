@@ -6,15 +6,16 @@ namespace DvldProject
 {
     public partial class ManagePeopleForm : Form
     {
+        string Filter = "";
+
         public ManagePeopleForm()
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
+            initializeDataGrid();
             filterPeople1.OnTextChangedInside += MyTextChangedEvent;
             filterPeople1.OnSelectChange += selectChanged;
         }
-
-        string Filter = "";
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
@@ -26,13 +27,17 @@ namespace DvldProject
             this.Close();
         }
 
-        public void FillDataGridWithPeople()
+        private void initializeDataGrid()
         {
-            dataGridView1.DataSource = people.getAllPeople();
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.ReadOnly = true;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1.AllowUserToAddRows = false;
+        }
+
+        public void FillDataGridWithPeople()
+        {
+            dataGridView1.DataSource = people.getAllPeople();
             records.Text = dataGridView1.RowCount.ToString() + " Records";
             dataGridView1.ContextMenuStrip = contextMenuStrip1;
         }
@@ -42,6 +47,7 @@ namespace DvldProject
             FillDataGridWithPeople();
         }
 
+        /* Events */
         private void selectChanged(string text)
         {
             if (text == "none")
@@ -56,11 +62,15 @@ namespace DvldProject
             records.Text = dataGridView1.RowCount.ToString() + " Records";
         }
 
+        /* ========= Events ========= */
+
         private void pictureAddPerson_Click(object sender, EventArgs e)
         {
-            addNewPerson fm = new addNewPerson(-1);
+            AddEditPerson fm = new AddEditPerson(-1);
             fm.ShowDialog();
         }
+
+        /* Context Menu Strip Events */
 
         private void addNewPersonToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -70,7 +80,7 @@ namespace DvldProject
                 return;
             }
 
-            addNewPerson fm = new addNewPerson(-1);
+            AddEditPerson fm = new AddEditPerson(-1);
             fm.ShowDialog();
         }
 
@@ -79,7 +89,7 @@ namespace DvldProject
             if(dataGridView1.SelectedRows.Count > 0 )
             {
                 int PersonID = (int)dataGridView1.SelectedRows[0].Cells["PersonID"].Value;
-                addNewPerson fm = new addNewPerson(PersonID);
+                AddEditPerson fm = new AddEditPerson(PersonID);
                 fm.ShowDialog();
             }
             else
@@ -102,12 +112,6 @@ namespace DvldProject
             }
 
         }
-
-        private void Form3_Click(object sender, EventArgs e)
-        {
-            dataGridView1.ClearSelection();
-        }
-
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count > 0)
@@ -128,5 +132,13 @@ namespace DvldProject
                 MessageBox.Show("You haven't select any Person, select a person to do the operation !!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        /* ============= Context Menu Strip Events ============ */
+
+        private void Form3_Click(object sender, EventArgs e)
+        {
+            dataGridView1.ClearSelection();
+        }
+
     }
 }

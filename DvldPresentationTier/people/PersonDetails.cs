@@ -17,9 +17,9 @@ namespace DvldProject
             InitializeComponent();
         }
 
-        public void setPersonId(int productID)
+        public void setPersonId(int personID)
         {
-            _PersonID = productID;
+            _PersonID = personID;
         }
 
         public int getPersonID()
@@ -75,12 +75,12 @@ namespace DvldProject
                 LBPersonID.Text = _PersonID.ToString();
                 LBName.Text = $"{person.FirstName} {person.SecondName} {person.ThirdName} {person.LastName}";
                 LBNationaNo.Text = person.NationalNo;
-                LBDate.Text = person.DateOfBirth.ToString();
+                LBDate.Text = person.DateOfBirth.ToShortDateString();
                 LBPhone.Text = person.Phone;
                 LBEmail.Text = person.Email;
                 LBAddress.Text = person.Address;
                 LBGender.Text = person.Gender;
-                LBCountry.Text = person.Country;
+                LBCountry.Text = person.Country.CountryName.ToString();
 
                 if (person.ImagePath != "")
                 {
@@ -88,6 +88,7 @@ namespace DvldProject
                     {
                         pictureProfile.Image = Image.FromStream(stream);
                     }
+
                     pictureProfile.Tag = person.ImagePath;
                 }
             } else
@@ -112,7 +113,7 @@ namespace DvldProject
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            addNewPerson fm = new addNewPerson(_PersonID);
+            AddEditPerson fm = new AddEditPerson(_PersonID);
             fm.ShowDialog();
         }
     }

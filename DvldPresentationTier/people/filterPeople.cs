@@ -31,11 +31,14 @@ namespace DvldProject
             {
                 e.Handled = true;
             }
-        }
+        } 
 
         private void comboChange(object sender, EventArgs e)
         {
-            if(comboBox1.SelectedItem.ToString() == "person ID")
+
+            textFilter.KeyPress -= textFilter_KeyPress;
+
+            if (comboBox1.SelectedItem.ToString() == "person ID")
             {
                 textFilter.Visible = true;
                 textFilter.KeyPress += textFilter_KeyPress;
@@ -43,9 +46,9 @@ namespace DvldProject
 
             if(comboBox1.SelectedItem.ToString() != "none")
             {
+                textFilter.Text = "";
                 textFilter.Visible = true;
-                textFilter.KeyPress -= textFilter_KeyPress;
-            } 
+            }
             else if (comboBox1.SelectedItem.ToString() == "none")
             {
                 textFilter.Visible = false;

@@ -20,7 +20,7 @@ namespace DvldBusinessTier
         public string Address { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
-        public string Country { get; set; }
+        public Countries Country { get; set; }
         public string ImagePath { get; set; }
 
         public people()
@@ -36,7 +36,7 @@ namespace DvldBusinessTier
             Address = "";
             Phone = "";
             Email = "";
-            Country = "";
+            Country = new Countries();
             ImagePath = "";
             Mode = enMode.addMode;
         }
@@ -55,7 +55,7 @@ namespace DvldBusinessTier
             this.Address = Address;
             this.Phone = Phone;
             this.Email = Email;
-            this.Country = Country;
+            this.Country = Countries.FindCountryByName(Country);
             this.ImagePath = ImagePath;
             Mode = enMode.updateMode;
         }
@@ -70,10 +70,6 @@ namespace DvldBusinessTier
             return dataPeople.filterPeople(text , Filter);
         }
 
-        static public DataTable getAllCountries()
-        {
-            return dataPeople.getAllCountries();
-        }
 
         static public bool checkNationalNoExists(string text)
         {
@@ -85,6 +81,7 @@ namespace DvldBusinessTier
             string NationalNo = "", FirstName = "", SecondName = "", ThirdName = "", LastName = "";
             DateTime DateOfBirth = DateTime.Now;
             string Gender = "", Address = "", Phone = "", Email = "", Country = "", ImagePath = "";
+
 
             if(dataPeople.FindPersonByID(PersonID ,ref NationalNo ,ref FirstName ,ref SecondName ,ref ThirdName ,ref LastName ,ref DateOfBirth,ref Gender,
             ref Address ,ref Phone , ref Email , ref Country , ref ImagePath))
@@ -98,8 +95,9 @@ namespace DvldBusinessTier
 
         bool _AddPerson()
         {
-           this.PersonID = dataPeople.insertPerson(this.NationalNo , this.FirstName , this.SecondName, this.ThirdName , this.LastName,
-                this.DateOfBirth , this.Gender, this.Address , this.Phone , this.Email , this.Country , this.ImagePath);
+            this.Country = Countries.FindCountryByName(Country.CountryName);
+            this.PersonID = dataPeople.insertPerson(this.NationalNo , this.FirstName , this.SecondName, this.ThirdName , this.LastName,
+                this.DateOfBirth , this.Gender, this.Address , this.Phone , this.Email , this.Country.CountryID , this.ImagePath);
             return (this.PersonID != -1);
         }
 
@@ -107,7 +105,7 @@ namespace DvldBusinessTier
         {
             return dataPeople.UpdatePerson(this.PersonID , this.NationalNo, this.FirstName, this.SecondName, this.ThirdName,
             this.LastName, this.DateOfBirth, this.Gender, this.Address, this.Phone, this.Email,
-            this.Country, this.ImagePath); 
+            this.Country.CountryID, this.ImagePath); 
         }
 
         static public bool DeletePerson(int PersonID)

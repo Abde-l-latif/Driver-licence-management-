@@ -10,7 +10,7 @@ using System.Drawing;
 
 namespace DvldProject
 {
-    public partial class addNewPerson : Form
+    public partial class AddEditPerson : Form
     {
 
         people Person; 
@@ -21,11 +21,12 @@ namespace DvldProject
 
         private string _imageToDeletePath = null;
 
+
         public delegate void storePersonID(int personID);
 
         public event storePersonID personIDAdded;
 
-        public addNewPerson(int PersonID)
+        public AddEditPerson(int PersonID)
         {
             InitializeComponent();
             StartPosition = FormStartPosition.CenterParent;
@@ -36,7 +37,7 @@ namespace DvldProject
         {
             if (person == null)
             {
-                MessageBox.Show("PersonID doesn't exists , operation failed !!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Person doesn't exists , operation failed !!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -55,7 +56,7 @@ namespace DvldProject
             else
                 radioFemale.Checked = true;
 
-            comboCountries.SelectedValue = person.Country;
+            comboCountries.SelectedValue = person.Country.CountryName;
 
             if(person.ImagePath != "")
             {
@@ -76,12 +77,12 @@ namespace DvldProject
 
         private void preCustomUI()
         {
-            if(PersonID == -1)
+            if (PersonID == -1)
             {
                 LBTitle.Text = "Add new person";
                 LBpersonID.Image = Resources.block_list2;
                 LBpersonID.Text = "N/A";
-                Person = new people(); 
+                Person = new people();
             }
             else
             {
@@ -123,21 +124,27 @@ namespace DvldProject
 
         private void FillComboCountries()
         {
-            comboCountries.DataSource = people.getAllCountries();
+            comboCountries.DataSource = Countries.getAllCountries();
             comboCountries.DisplayMember = "CountryName";
             comboCountries.ValueMember = "CountryName";
             comboCountries.SelectedIndex = 0;
         }
 
+        private void setDate()
+        {
+            string MinimumDate = $"{DateTime.Now.Day} / {DateTime.Now.Month} / {DateTime.Now.Year - 100}";
+            string MaximumDate = $"{DateTime.Now.Day} / {DateTime.Now.Month} / {DateTime.Now.Year - 18}";
+            DateTime @MaxDate = DateTime.ParseExact(MaximumDate, "d / M / yyyy", null);
+            DateTime @MinDate = DateTime.ParseExact(MinimumDate, "d / M / yyyy", null);
+            dateTimePicker1.MaxDate = @MaxDate;
+            dateTimePicker1.MinDate = @MinDate;
+        }
+
         private void Form4_Load(object sender, EventArgs e)
         {
-
             FillComboCountries();
             preCustomUI();
-            string date = $"{DateTime.Now.Day} / {DateTime.Now.Month} / {DateTime.Now.Year - 18}";
-            DateTime @MaxDate = DateTime.ParseExact(date, "d / M / yyyy", null); 
-            dateTimePicker1.MaxDate = @MaxDate;
-
+            setDate();
         }
 
         private void linkProfileImage_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -206,7 +213,9 @@ namespace DvldProject
             linkProfileImage.Enabled = true;
         }
 
+
         /*  =======  Validation ======  */
+
         private void textFirstName_Validating(object sender, CancelEventArgs e)
         {
             if(String.IsNullOrEmpty(textFirstName.Text))
@@ -299,6 +308,8 @@ namespace DvldProject
         }
 
 
+
+
         /* ======== Saving  ======== */
 
         private void DeletePictureFromFile()
@@ -308,6 +319,7 @@ namespace DvldProject
                 if (File.Exists(_imageToDeletePath))
                 {
                     File.Delete(_imageToDeletePath);
+                    pictureProfile.Tag = null;
                 }
 
                 _isImageMarkedForDeletion = false;
@@ -336,7 +348,8 @@ namespace DvldProject
                 Person.Gender = "Male";
             else
                 Person.Gender = "Female";
-            Person.Country = comboCountries.Text;
+            Person.Country.CountryName = comboCountries.Text;
+
             if (pictureProfile.Tag != null && !String.IsNullOrEmpty(pictureProfile.Tag.ToString()))
             {
                 Person.ImagePath = pictureProfile.Tag.ToString();
@@ -344,11 +357,12 @@ namespace DvldProject
             else
                 Person.ImagePath = ""; 
         }
+
         private void BTNsave_Click(object sender, EventArgs e)
         {
-            fillPerson();
-
             DeletePictureFromFile();
+
+            fillPerson();
 
             if (Person.Save())
             {

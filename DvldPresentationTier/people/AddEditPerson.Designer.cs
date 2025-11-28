@@ -1,6 +1,6 @@
 ﻿namespace DvldProject
 {
-    partial class addNewPerson
+    partial class AddEditPerson
     {
         /// <summary>
         /// Required designer variable.

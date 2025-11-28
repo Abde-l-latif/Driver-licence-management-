@@ -78,6 +78,62 @@ namespace DvldDataTier
             return Found;
         }
 
+        static public DataTable filterPeople(string text , string Filter)
+        {
+            DataTable DT = new DataTable();
+
+            string GetFilter = Filter == "person ID" ? "PersonID" :
+                               Filter == "national No" ? "NationalNo" :
+                               Filter == "first name" ? "FirstName" :
+                               Filter == "second name" ? "SecondName" :
+                               Filter == "third name" ? "ThirdName" :
+                               Filter == "last name" ? "LastName" :
+                               Filter == "nationality" ? "Countries.CountryName" :
+                               Filter == "gender" ? "Gender" :
+                               Filter == "phone" ? "Phone" :
+                               Filter == "email" ? "Email" : null;
+
+            if(GetFilter == null)
+                return DT;
+
+
+            string Query = $@"select PersonID , NationalNo , FirstName, SecondName , ThirdName , LastName ,
+                            case when Gendor = 0 then 'Male' else 'Female' end as Gender , DateOfBirth ,
+                            Countries.CountryName, Phone , Email from People 
+                            inner join Countries on Countries.CountryID = People.NationalityCountryID 
+                            where {GetFilter} like @text; ";
+
+            SqlConnection connection = new SqlConnection(dataSettings.ConnectionString);
+
+            SqlCommand command = new SqlCommand(Query, connection);
+
+            command.Parameters.AddWithValue("@text", text + "%");
+
+            try
+            {
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    DT.Load(reader);
+                }
+
+                reader.Close();
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"error detected : {e}");
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return DT;
+        }
+
         static public DataTable getAllPeople()
         {
             DataTable DT = new DataTable();
@@ -150,181 +206,6 @@ namespace DvldDataTier
             return personID; 
         }
 
-        static public DataTable filterPeople(string person , string Filter)
-        {
-            DataTable DT = new DataTable();
-
-            string Query = "";
-
-            SqlConnection connection = new SqlConnection(dataSettings.ConnectionString);
-
-            switch(Filter)
-            {
-                case "person ID":
-                    Query = @"select PersonID , NationalNo , FirstName, SecondName , ThirdName , LastName , case when Gendor = 0 then 'Male' else 'Female' end as Gender , DateOfBirth ,
-                    Countries.CountryName, Phone , Email from People 
-                    inner join Countries on Countries.CountryID = People.NationalityCountryID 
-                    where PersonID = @PersonID; ";
-                    break; 
-                case "national No":
-                    Query = @"select PersonID , NationalNo , FirstName, SecondName , ThirdName , LastName , case when Gendor = 0 then 'Male' else 'Female' end as Gender , DateOfBirth ,
-                    Countries.CountryName, Phone , Email from People 
-                    inner join Countries on Countries.CountryID = People.NationalityCountryID 
-                    where NationalNo = @NationalNo; ";
-                    break;
-                case "first name":
-                    Query = @"select PersonID , NationalNo , FirstName, SecondName , ThirdName , LastName , case when Gendor = 0 then 'Male' else 'Female' end as Gender , DateOfBirth ,
-                    Countries.CountryName, Phone , Email from People 
-                    inner join Countries on Countries.CountryID = People.NationalityCountryID 
-                    where FirstName = @FirstName; ";
-                    break;
-                case "second name":
-                    Query = @"select PersonID , NationalNo , FirstName, SecondName , ThirdName , LastName , case when Gendor = 0 then 'Male' else 'Female' end as Gender , DateOfBirth ,
-                    Countries.CountryName, Phone , Email from People 
-                    inner join Countries on Countries.CountryID = People.NationalityCountryID 
-                    where SecondName = @SecondName; ";
-                    break;
-                case "third name":
-                    Query = @"select PersonID , NationalNo , FirstName, SecondName , ThirdName , LastName , case when Gendor = 0 then 'Male' else 'Female' end as Gender , DateOfBirth ,
-                    Countries.CountryName, Phone , Email from People 
-                    inner join Countries on Countries.CountryID = People.NationalityCountryID 
-                    where ThirdName = @ThirdName; ";
-                    break;
-                case "last name":
-                    Query = @"select PersonID , NationalNo , FirstName, SecondName , ThirdName , LastName , case when Gendor = 0 then 'Male' else 'Female' end as Gender , DateOfBirth ,
-                    Countries.CountryName, Phone , Email from People 
-                    inner join Countries on Countries.CountryID = People.NationalityCountryID 
-                    where LastName = @LastName; ";
-                    break;
-                case "nationality":
-                    Query = @"select PersonID , NationalNo , FirstName, SecondName , ThirdName , LastName , case when Gendor = 0 then 'Male' else 'Female' end as Gender , DateOfBirth ,
-                    Countries.CountryName, Phone , Email from People 
-                    inner join Countries on Countries.CountryID = People.NationalityCountryID 
-                    where Countries.CountryName = @Country; ";
-                    break; 
-                case "gender":
-                    Query = @"select * from 
-                    (
-                    select PersonID , NationalNo , FirstName, SecondName , ThirdName , LastName , case when Gendor = 0 then 'Male' else 'Female'
-                    end as Gender , DateOfBirth , Countries.CountryName, Phone , Email from People 
-                    inner join Countries on Countries.CountryID = People.NationalityCountryID 
-                    )t 
-                    where Gender = @Gender;";
-                    break; 
-                case "phone":
-                    Query = @"select PersonID , NationalNo , FirstName, SecondName , ThirdName , LastName , case when Gendor = 0 then 'Male' else 'Female' end as Gender , DateOfBirth ,
-                    Countries.CountryName, Phone , Email from People 
-                    inner join Countries on Countries.CountryID = People.NationalityCountryID 
-                    where Phone = @Phone; ";
-                    break; 
-                case "email":
-                    Query = @"select PersonID , NationalNo , FirstName, SecondName , ThirdName , LastName , case when Gendor = 0 then 'Male' else 'Female' end as Gender , DateOfBirth ,
-                    Countries.CountryName, Phone , Email from People 
-                    inner join Countries on Countries.CountryID = People.NationalityCountryID 
-                    where Email = @Email; ";
-                    break; 
-            }
-            ;
-
-            SqlCommand command = new SqlCommand(Query, connection);
-
-
-            switch (Filter)
-            {
-                case "person ID":
-                    command.Parameters.AddWithValue("@PersonID", person);
-                    break;
-                case "national No":
-                    command.Parameters.AddWithValue("@NationalNo", person);
-                    break;
-                case "first name":
-                    command.Parameters.AddWithValue("@FirstName", person);
-                    break;
-                case "second name":
-                    command.Parameters.AddWithValue("@SecondName", person);
-                    break;
-                case "third name":
-                    command.Parameters.AddWithValue("@ThirdName", person);
-                    break;
-                case "last name":
-                    command.Parameters.AddWithValue("@LastName", person);
-                    break;
-                case "nationality":
-                    command.Parameters.AddWithValue("@Country", person);
-                    break;
-                case "gender":
-                    command.Parameters.AddWithValue("@Gender", person);
-                    break;
-                case "phone":
-                    command.Parameters.AddWithValue("@Phone", person);
-                    break;
-                case "email":
-                    command.Parameters.AddWithValue("@Email", person);
-                    break;
-
-            }
-            ;
-
-
-            try
-            {
-                connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
-
-                if (reader.HasRows)
-                {
-                    DT.Load(reader);
-                }
-
-                reader.Close();
-
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine($"error detected : {e}");
-            }
-            finally
-            {
-                connection.Close();
-            }
-
-            return DT;
-        }
-
-        static public DataTable getAllCountries()
-        {
-            DataTable DT = new DataTable();
-            SqlConnection connection = new SqlConnection(dataSettings.ConnectionString);
-
-            string Query = @"select CountryName from Countries ;";
-
-            SqlCommand command = new SqlCommand(Query, connection);
-
-            try
-            {
-                connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
-
-                if (reader.HasRows)
-                {
-                    DT.Load(reader);
-                }
-
-                reader.Close();
-
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine($"error detected : {e}");
-            }
-            finally
-            {
-                connection.Close();
-            }
-
-            return DT;
-        }
-
         static public bool checkNationalNoExists(string text)
         {
             bool isExists = false;
@@ -360,7 +241,7 @@ namespace DvldDataTier
         }
 
         static public int insertPerson(string NationalNo , string FirstName , string SecondName, string ThirdName , string LastName,
-                DateTime DateOfBirth , string Gender, string Address , string Phone , string Email , string Country , string ImagePath)
+                DateTime DateOfBirth , string Gender, string Address , string Phone , string Email , int Country , string ImagePath)
         {
             int @ID = -1;
 
@@ -370,7 +251,7 @@ namespace DvldDataTier
             string query = @"insert into People (NationalNo, FirstName, SecondName, ThirdName, LastName, DateOfBirth,
             Gendor, Address, Phone, Email, NationalityCountryID, ImagePath) values(@NationalNo , @FirstName , @SecondName
             , @ThirdName , @LastName , @DateOfBirth , @Gender , @Address,
-            @Phone , @Email , (select CountryID from Countries where CountryName = @Country) , @ImagePath);
+            @Phone , @Email , @Country, @ImagePath);
             select SCOPE_IDENTITY()";
 
             SqlCommand command = new SqlCommand(query, connection);
@@ -427,16 +308,26 @@ namespace DvldDataTier
 
         static public bool UpdatePerson(int PersonID , string NationalNo, string FirstName, string SecondName, string ThirdName,
             string LastName, DateTime DateOfBirth, string Gender, string Address, string Phone, string Email,
-            string Country, string ImagePath)
+            int Country, string ImagePath)
         {
 
             int EffectedRows = -1; 
 
             SqlConnection Connection = new SqlConnection(dataSettings.ConnectionString);
 
-            string query = @"update People set NationalNo = @NationalNo , FirstName = @FirstName , SecondName = @SecondName , ThirdName = @ThirdName ,LastName = @LastName
-            , DateOfBirth = @DateOfBirth , Gendor = @Gender , Address = @Address , Phone = @Phone , Email = @Email , NationalityCountryID = 
-            (select top 1 CountryID from Countries where CountryName = @Country) , ImagePath = @ImagePath
+            string query = @"update People 
+                            set NationalNo = @NationalNo ,
+                            FirstName = @FirstName ,
+                            SecondName = @SecondName ,
+                            ThirdName = @ThirdName ,
+                            LastName = @LastName ,
+                            DateOfBirth = @DateOfBirth ,
+                            Gendor = @Gender ,
+                            Address = @Address ,
+                            Phone = @Phone ,
+                            Email = @Email ,
+                            NationalityCountryID = @Country,
+                            ImagePath = @ImagePath
             where PersonID = @PersonID ; ";
 
             SqlCommand command = new SqlCommand(query, Connection);
@@ -489,7 +380,6 @@ namespace DvldDataTier
             return EffectedRows >= 1; 
         }
 
-
         static public bool deletePerson(int PersonID)
         {
             bool Status = false;
@@ -522,5 +412,6 @@ namespace DvldDataTier
 
             return Status;
         }
+
     }
 }
