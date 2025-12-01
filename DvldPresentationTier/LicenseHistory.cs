@@ -73,18 +73,18 @@ namespace DvldProject
             comboBox = text;
         }
 
-        private int getPersonIdFromFilter()
-        {
-            DataTable dt = people.filterPeople(textBox, comboBox);
-            int personID = (int)dt.Rows[0][0];
-            return personID;
-        }
+        //private int getPersonIdFromFilter()
+        //{
+        //    //DataTable dt = people.filterPeople(textBox, comboBox);
+        //    int personID = (int)dt.Rows[0][0];
+        //    return personID;
+        //}
 
-        private void BTNfilterSearch_Click(object sender, EventArgs e)
-        {
-            int PersonID = getPersonIdFromFilter();
-            initializePersonDetails(PersonID);
-        }
+        //private void BTNfilterSearch_Click(object sender, EventArgs e)
+        //{
+        //    int PersonID = getPersonIdFromFilter();
+        //    initializePersonDetails(PersonID);
+        //}
 
         private void OnPersonIDAdded(int personID)
         {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DvldProject.PeopleFolder;
+using System;
 using System.Windows.Forms;
 
 
@@ -13,11 +14,6 @@ namespace DvldProject
             this.WindowState = FormWindowState.Maximized;
         }
 
-        private void peopleToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Form fm = new ManagePeopleForm();
-            fm.ShowDialog();
-        }
 
         private void signOutToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -112,6 +108,18 @@ namespace DvldProject
         {
             ManageDetainLicenses fm = new ManageDetainLicenses();
             fm.ShowDialog();
+        }
+
+        private void managePeopleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form fm = new ManagePeopleForm();
+            fm.ShowDialog();
+        }
+
+        private void findPersonToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form fm = new FindPerson();
+            fm.ShowDialog(); 
         }
     }
 }

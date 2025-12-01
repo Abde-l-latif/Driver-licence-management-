@@ -1,15 +1,17 @@
-﻿using DvldBusinessTier;
+﻿
 using DvldProject.Properties;
 using System;
 using System.IO;
 using System.Windows.Forms;
 using System.Drawing;
+using DvldBusinessTier; 
+
 
 namespace DvldProject
 {
     public partial class PersonDetails : UserControl
     {
-
+        people person; 
         private int _PersonID = -1;
 
         public PersonDetails()
@@ -65,45 +67,74 @@ namespace DvldProject
             pictureProfile.Image = Resources.user__22_;
         }
 
-        private void fillPersonDetails()
+        public void LoadPersonByID(int personID)
         {
-            people person = people.Find(_PersonID);
-
-            if(person != null)
-            {
-                linkLabel1.Enabled = true;
-                LBPersonID.Text = _PersonID.ToString();
-                LBName.Text = $"{person.FirstName} {person.SecondName} {person.ThirdName} {person.LastName}";
-                LBNationaNo.Text = person.NationalNo;
-                LBDate.Text = person.DateOfBirth.ToShortDateString();
-                LBPhone.Text = person.Phone;
-                LBEmail.Text = person.Email;
-                LBAddress.Text = person.Address;
-                LBGender.Text = person.Gender;
-                LBCountry.Text = person.Country.CountryName.ToString();
-
-                if (person.ImagePath != "")
-                {
-                    using (var stream = new MemoryStream(File.ReadAllBytes(person.ImagePath)))
-                    {
-                        pictureProfile.Image = Image.FromStream(stream);
-                    }
-
-                    pictureProfile.Tag = person.ImagePath;
-                }
-            } else
+            _PersonID = personID;
+            person = people.Find(_PersonID);
+            if (person != null)
+                fillPersonDetails();
+            else
             {
                 linkLabel1.Enabled = false;
-                initializeEmptyPerson(); 
+                initializeEmptyPerson();
+            }
+        }
+
+        public void LoadPersonByNationalNo(string NationalNo)
+        {
+            person = people.Find(NationalNo);
+            _PersonID = person.PersonID;
+            if (person != null)
+                fillPersonDetails();
+            else
+            {
+                linkLabel1.Enabled = false;
+                initializeEmptyPerson();
+            }
+        }
+
+        private void LoadPersonDetails()
+        {
+            person = people.Find(_PersonID);
+            if (person != null)
+                fillPersonDetails();
+            else
+            {
+                linkLabel1.Enabled = false;
+                initializeEmptyPerson();
+            }
+        }
+
+        private void fillPersonDetails()
+        {      
+            linkLabel1.Enabled = true;
+            LBPersonID.Text = _PersonID.ToString();
+            LBName.Text = $"{person.FirstName} {person.SecondName} {person.ThirdName} {person.LastName}";
+            LBNationaNo.Text = person.NationalNo;
+            LBDate.Text = person.DateOfBirth.ToShortDateString();
+            LBPhone.Text = person.Phone;
+            LBEmail.Text = person.Email;
+            LBAddress.Text = person.Address;
+            LBGender.Text = person.Gender;
+            LBCountry.Text = person.Country.CountryName.ToString();
+        
+            if (person.ImagePath != "")
+            {
+                using (var stream = new MemoryStream(File.ReadAllBytes(person.ImagePath)))
+                {
+                    pictureProfile.Image = Image.FromStream(stream);
+                }
+        
+                pictureProfile.Tag = person.ImagePath;
             }
 
+            HandelGenderIcon();
+            HandelPofilePicture();
         }
 
         public void reload()
         {
-            fillPersonDetails();
-            HandelGenderIcon();
-            HandelPofilePicture();
+            LoadPersonDetails();
         }
 
         private void PersonDetails_Load(object sender, EventArgs e)
@@ -115,6 +146,8 @@ namespace DvldProject
         {
             AddEditPerson fm = new AddEditPerson(_PersonID);
             fm.ShowDialog();
+
+            reload();
         }
     }
 }

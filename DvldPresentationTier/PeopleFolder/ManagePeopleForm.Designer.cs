@@ -33,7 +33,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.records = new System.Windows.Forms.Label();
-            this.pictureAddPerson = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -43,9 +42,9 @@
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sendEmailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.phoneCallToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.BtnAdd = new System.Windows.Forms.Button();
             this.filterPeople1 = new DvldProject.filterPeople();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureAddPerson)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -95,18 +94,6 @@
             this.records.Name = "records";
             this.records.Size = new System.Drawing.Size(0, 17);
             this.records.TabIndex = 5;
-            // 
-            // pictureAddPerson
-            // 
-            this.pictureAddPerson.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureAddPerson.Image = global::DvldProject.Properties.Resources.addPerson;
-            this.pictureAddPerson.Location = new System.Drawing.Point(991, 157);
-            this.pictureAddPerson.Name = "pictureAddPerson";
-            this.pictureAddPerson.Size = new System.Drawing.Size(48, 45);
-            this.pictureAddPerson.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pictureAddPerson.TabIndex = 7;
-            this.pictureAddPerson.TabStop = false;
-            this.pictureAddPerson.Click += new System.EventHandler(this.pictureAddPerson_Click);
             // 
             // pictureBox2
             // 
@@ -185,6 +172,7 @@
             this.sendEmailToolStripMenuItem.Name = "sendEmailToolStripMenuItem";
             this.sendEmailToolStripMenuItem.Size = new System.Drawing.Size(196, 38);
             this.sendEmailToolStripMenuItem.Text = "Send Email";
+            this.sendEmailToolStripMenuItem.Click += new System.EventHandler(this.sendEmailToolStripMenuItem_Click);
             // 
             // phoneCallToolStripMenuItem
             // 
@@ -193,6 +181,21 @@
             this.phoneCallToolStripMenuItem.Name = "phoneCallToolStripMenuItem";
             this.phoneCallToolStripMenuItem.Size = new System.Drawing.Size(196, 38);
             this.phoneCallToolStripMenuItem.Text = "Phone Call";
+            this.phoneCallToolStripMenuItem.Click += new System.EventHandler(this.phoneCallToolStripMenuItem_Click);
+            // 
+            // BtnAdd
+            // 
+            this.BtnAdd.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BtnAdd.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.BtnAdd.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
+            this.BtnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnAdd.Image = global::DvldProject.Properties.Resources.user__1_1;
+            this.BtnAdd.Location = new System.Drawing.Point(991, 157);
+            this.BtnAdd.Name = "BtnAdd";
+            this.BtnAdd.Size = new System.Drawing.Size(48, 45);
+            this.BtnAdd.TabIndex = 8;
+            this.BtnAdd.UseVisualStyleBackColor = true;
+            this.BtnAdd.Click += new System.EventHandler(this.pictureAddPerson_Click);
             // 
             // filterPeople1
             // 
@@ -201,12 +204,12 @@
             this.filterPeople1.Size = new System.Drawing.Size(430, 27);
             this.filterPeople1.TabIndex = 1;
             // 
-            // Form3
+            // ManagePeopleForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1051, 508);
-            this.Controls.Add(this.pictureAddPerson);
+            this.Controls.Add(this.BtnAdd);
             this.Controls.Add(this.filterPeople1);
             this.Controls.Add(this.records);
             this.Controls.Add(this.button1);
@@ -216,12 +219,11 @@
             this.Controls.Add(this.pictureBox1);
             this.Cursor = System.Windows.Forms.Cursors.Hand;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "Form3";
+            this.Name = "ManagePeopleForm";
             this.Text = "Form3";
             this.Load += new System.EventHandler(this.Form3_Load);
             this.Click += new System.EventHandler(this.Form3_Click);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureAddPerson)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
@@ -239,7 +241,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label records;
         private filterPeople filterPeople1;
-        private System.Windows.Forms.PictureBox pictureAddPerson;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem showDetailsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addNewPersonToolStripMenuItem;
@@ -247,5 +248,6 @@
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sendEmailToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem phoneCallToolStripMenuItem;
+        private System.Windows.Forms.Button BtnAdd;
     }
 }

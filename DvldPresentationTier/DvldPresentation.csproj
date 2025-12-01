@@ -64,10 +64,10 @@
     <Compile Include="DriverForm.Designer.cs">
       <DependentUpon>DriverForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="people\filterPeople.cs">
+    <Compile Include="PeopleFolder\controls\filterPeople.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="people\filterPeople.Designer.cs">
+    <Compile Include="PeopleFolder\controls\filterPeople.Designer.cs">
       <DependentUpon>filterPeople.cs</DependentUpon>
     </Compile>
     <Compile Include="FilterUser.cs">
@@ -115,11 +115,23 @@
     <Compile Include="NewInternationalDrivingLicenseApp.Designer.cs">
       <DependentUpon>NewInternationalDrivingLicenseApp.cs</DependentUpon>
     </Compile>
-    <Compile Include="people\PersonDetails.cs">
+    <Compile Include="PeopleFolder\controls\PersonDetails.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="people\PersonDetails.Designer.cs">
+    <Compile Include="PeopleFolder\controls\PersonDetails.Designer.cs">
       <DependentUpon>PersonDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PeopleFolder\controls\PersonDetailsFilter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PeopleFolder\controls\PersonDetailsFilter.Designer.cs">
+      <DependentUpon>PersonDetailsFilter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PeopleFolder\FindPerson.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PeopleFolder\FindPerson.Designer.cs">
+      <DependentUpon>FindPerson.cs</DependentUpon>
     </Compile>
     <Compile Include="ReleaseDetainForm.cs">
       <SubType>Form</SubType>
@@ -223,22 +235,22 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="people\ManagePeopleForm.cs">
+    <Compile Include="PeopleFolder\ManagePeopleForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="people\ManagePeopleForm.Designer.cs">
+    <Compile Include="PeopleFolder\ManagePeopleForm.Designer.cs">
       <DependentUpon>ManagePeopleForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="people\AddEditPerson.cs">
+    <Compile Include="PeopleFolder\AddEditPerson.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="people\AddEditPerson.Designer.cs">
+    <Compile Include="PeopleFolder\AddEditPerson.Designer.cs">
       <DependentUpon>AddEditPerson.cs</DependentUpon>
     </Compile>
-    <Compile Include="people\PersonDetailsForm.cs">
+    <Compile Include="PeopleFolder\PersonDetailsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="people\PersonDetailsForm.Designer.cs">
+    <Compile Include="PeopleFolder\PersonDetailsForm.Designer.cs">
       <DependentUpon>PersonDetailsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ManageUsersForm.cs">
@@ -289,7 +301,7 @@
     <EmbeddedResource Include="DriverForm.resx">
       <DependentUpon>DriverForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="people\filterPeople.resx">
+    <EmbeddedResource Include="PeopleFolder\controls\filterPeople.resx">
       <DependentUpon>filterPeople.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FilterUser.resx">
@@ -316,8 +328,14 @@
     <EmbeddedResource Include="NewInternationalDrivingLicenseApp.resx">
       <DependentUpon>NewInternationalDrivingLicenseApp.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="people\PersonDetails.resx">
+    <EmbeddedResource Include="PeopleFolder\controls\PersonDetails.resx">
       <DependentUpon>PersonDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PeopleFolder\controls\PersonDetailsFilter.resx">
+      <DependentUpon>PersonDetailsFilter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PeopleFolder\FindPerson.resx">
+      <DependentUpon>FindPerson.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReleaseDetainForm.resx">
       <DependentUpon>ReleaseDetainForm.cs</DependentUpon>
@@ -370,13 +388,13 @@
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="people\ManagePeopleForm.resx">
+    <EmbeddedResource Include="PeopleFolder\ManagePeopleForm.resx">
       <DependentUpon>ManagePeopleForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="people\AddEditPerson.resx">
+    <EmbeddedResource Include="PeopleFolder\AddEditPerson.resx">
       <DependentUpon>AddEditPerson.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="people\PersonDetailsForm.resx">
+    <EmbeddedResource Include="PeopleFolder\PersonDetailsForm.resx">
       <DependentUpon>PersonDetailsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ManageUsersForm.resx">
@@ -526,12 +544,6 @@
     <None Include="Resources\registration.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DvldBusinessTier\DvldBusinessTier.csproj">
-      <Project>{a29ce410-af7a-45df-b35d-4f1d33d149c1}</Project>
-      <Name>DvldBusinessTier</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\user_add.png" />
   </ItemGroup>
   <ItemGroup>
@@ -656,6 +668,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\hand_close2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DvldBusinessTier\DvldBusinessTier.csproj">
+      <Project>{a29ce410-af7a-45df-b35d-4f1d33d149c1}</Project>
+      <Name>DvldBusinessTier</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

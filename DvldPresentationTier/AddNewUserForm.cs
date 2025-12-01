@@ -39,23 +39,23 @@ namespace DvldProject
             ComboBoxText = text; 
         }
 
-        private void BTNfilterSearch_Click(object sender, EventArgs e)
-        {
-            DataTable Person =  people.filterPeople(FilterWithText , ComboBoxText);
-            if(Person != null && Person.Rows.Count > 0)
-            {
-               int PersonID = (int)Person.Rows[0]["PersonID"];
-               personDetails1.setPersonId(PersonID);
-               personDetails1.reload();
-               BTNNext.Enabled = true;
-            } else
-            {
-                MessageBox.Show("We didn't found any person !!", "Error", MessageBoxButtons.OK , MessageBoxIcon.Error);
-                BTNNext.Enabled = false;
-                personDetails1.setPersonId(-1);
-                personDetails1.reload();
-            }
-        }
+        //private void BTNfilterSearch_Click(object sender, EventArgs e)
+        //{
+        //    DataTable Person =  people.filterPeople(FilterWithText , ComboBoxText);
+        //    if(Person != null && Person.Rows.Count > 0)
+        //    {
+        //       int PersonID = (int)Person.Rows[0]["PersonID"];
+        //       personDetails1.setPersonId(PersonID);
+        //       personDetails1.reload();
+        //       BTNNext.Enabled = true;
+        //    } else
+        //    {
+        //        MessageBox.Show("We didn't found any person !!", "Error", MessageBoxButtons.OK , MessageBoxIcon.Error);
+        //        BTNNext.Enabled = false;
+        //        personDetails1.setPersonId(-1);
+        //        personDetails1.reload();
+        //    }
+        //}
 
         private void BTNNext_Click(object sender, EventArgs e)
         {

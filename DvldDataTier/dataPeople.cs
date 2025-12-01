@@ -78,49 +78,61 @@ namespace DvldDataTier
             return Found;
         }
 
-        static public DataTable filterPeople(string text , string Filter)
+        static public bool FindPersonByNationalNo(ref int PersonID, string NationalNo, ref string FirstName, ref string SecondName, ref string ThirdName,
+            ref string LastName, ref DateTime DateOfBirth, ref string Gender, ref string Address, ref string Phone, ref string Email,
+            ref string Country, ref string ImagePath)
         {
-            DataTable DT = new DataTable();
-
-            string GetFilter = Filter == "person ID" ? "PersonID" :
-                               Filter == "national No" ? "NationalNo" :
-                               Filter == "first name" ? "FirstName" :
-                               Filter == "second name" ? "SecondName" :
-                               Filter == "third name" ? "ThirdName" :
-                               Filter == "last name" ? "LastName" :
-                               Filter == "nationality" ? "Countries.CountryName" :
-                               Filter == "gender" ? "Gender" :
-                               Filter == "phone" ? "Phone" :
-                               Filter == "email" ? "Email" : null;
-
-            if(GetFilter == null)
-                return DT;
-
-
-            string Query = $@"select PersonID , NationalNo , FirstName, SecondName , ThirdName , LastName ,
-                            case when Gendor = 0 then 'Male' else 'Female' end as Gender , DateOfBirth ,
-                            Countries.CountryName, Phone , Email from People 
-                            inner join Countries on Countries.CountryID = People.NationalityCountryID 
-                            where {GetFilter} like @text; ";
+            bool Found = false;
 
             SqlConnection connection = new SqlConnection(dataSettings.ConnectionString);
 
-            SqlCommand command = new SqlCommand(Query, connection);
+            string query = @"select top 1 PersonID , FirstName , SecondName , ThirdName , LastName , DateOfBirth , Gendor , Address , Phone
+                  ,Email , C.CountryName as Country , ImagePath 
+                  from People P INNER JOIN Countries C on C.CountryID = P.NationalityCountryID
+                  where NationalNo = @NationalNo ; ";
 
-            command.Parameters.AddWithValue("@text", text + "%");
+            SqlCommand Command = new SqlCommand(query, connection);
+
+            Command.Parameters.AddWithValue("@NationalNo", NationalNo);
 
             try
             {
                 connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
+                SqlDataReader reader = Command.ExecuteReader();
 
-                if (reader.HasRows)
+                if (reader.Read())
                 {
-                    DT.Load(reader);
+                    Found = true;
+
+                    PersonID = (int)reader["PersonID"];
+                    FirstName = reader["FirstName"].ToString();
+                    SecondName = reader["SecondName"].ToString();
+
+                    if (reader["ThirdName"] != DBNull.Value)
+                        ThirdName = reader["ThirdName"].ToString();
+                    else
+                        ThirdName = "";
+
+                    LastName = reader["LastName"].ToString();
+                    DateOfBirth = (DateTime)reader["DateOfBirth"];
+                    Gender = (byte)reader["Gendor"] == 0 ? "Male" : "Female";
+                    Address = reader["Address"].ToString();
+                    Phone = reader["Phone"].ToString();
+                    Country = reader["Country"].ToString();
+
+                    if (reader["Email"] != DBNull.Value)
+                        Email = reader["Email"].ToString();
+                    else
+                        Email = "";
+
+                    if (reader["ImagePath"] != DBNull.Value)
+                        ImagePath = reader["ImagePath"].ToString();
+                    else
+                        ImagePath = "";
+
                 }
 
                 reader.Close();
-
             }
             catch (Exception e)
             {
@@ -131,8 +143,9 @@ namespace DvldDataTier
                 connection.Close();
             }
 
-            return DT;
+            return Found;
         }
+
 
         static public DataTable getAllPeople()
         {
@@ -140,7 +153,7 @@ namespace DvldDataTier
             SqlConnection connection = new SqlConnection(dataSettings.ConnectionString);
 
             string Query = @"select PersonID , NationalNo , FirstName, SecondName , ThirdName , LastName , case when Gendor = 0 then 'Male' else 'Female' end as Gender , DateOfBirth ,
-            Countries.CountryName, Phone , Email from People 
+            Countries.CountryName as Country, Phone , Email from People 
             inner join Countries on Countries.CountryID = People.NationalityCountryID ; ";
 
             SqlCommand command = new SqlCommand(Query , connection);

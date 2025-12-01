@@ -50,6 +50,7 @@
     <Compile Include="Tests.cs" />
     <Compile Include="Users.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Validation.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DvldDataTier\DvldDataTier.csproj">

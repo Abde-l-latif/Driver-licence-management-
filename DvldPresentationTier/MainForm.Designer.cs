@@ -47,6 +47,8 @@
             this.manageApplicationTypesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.manageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.peopleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.managePeopleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.findPersonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.driversToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.usersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.accountSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -234,12 +236,32 @@
             // 
             // peopleToolStripMenuItem
             // 
+            this.peopleToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.managePeopleToolStripMenuItem,
+            this.findPersonToolStripMenuItem});
             this.peopleToolStripMenuItem.Image = global::DvldProject.Properties.Resources.group32;
             this.peopleToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.peopleToolStripMenuItem.Name = "peopleToolStripMenuItem";
             this.peopleToolStripMenuItem.Size = new System.Drawing.Size(94, 64);
             this.peopleToolStripMenuItem.Text = "People";
-            this.peopleToolStripMenuItem.Click += new System.EventHandler(this.peopleToolStripMenuItem_Click);
+            // 
+            // managePeopleToolStripMenuItem
+            // 
+            this.managePeopleToolStripMenuItem.Image = global::DvldProject.Properties.Resources.group32;
+            this.managePeopleToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.managePeopleToolStripMenuItem.Name = "managePeopleToolStripMenuItem";
+            this.managePeopleToolStripMenuItem.Size = new System.Drawing.Size(196, 38);
+            this.managePeopleToolStripMenuItem.Text = "Manage People";
+            this.managePeopleToolStripMenuItem.Click += new System.EventHandler(this.managePeopleToolStripMenuItem_Click);
+            // 
+            // findPersonToolStripMenuItem
+            // 
+            this.findPersonToolStripMenuItem.Image = global::DvldProject.Properties.Resources.patient_information;
+            this.findPersonToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.findPersonToolStripMenuItem.Name = "findPersonToolStripMenuItem";
+            this.findPersonToolStripMenuItem.Size = new System.Drawing.Size(196, 38);
+            this.findPersonToolStripMenuItem.Text = "Find Person";
+            this.findPersonToolStripMenuItem.Click += new System.EventHandler(this.findPersonToolStripMenuItem_Click);
             // 
             // driversToolStripMenuItem
             // 
@@ -342,5 +364,7 @@
         private System.Windows.Forms.ToolStripMenuItem manageDetainedLicenseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem detainLicenseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem releaseDetainedLicenseToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem managePeopleToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem findPersonToolStripMenuItem;
     }
 }

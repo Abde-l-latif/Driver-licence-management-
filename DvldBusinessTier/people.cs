@@ -65,12 +65,6 @@ namespace DvldBusinessTier
             return dataPeople.getAllPeople();
         }
 
-        static public DataTable filterPeople(string text , string Filter)
-        {
-            return dataPeople.filterPeople(text , Filter);
-        }
-
-
         static public bool checkNationalNoExists(string text)
         {
             return dataPeople.checkNationalNoExists(text); 
@@ -92,6 +86,25 @@ namespace DvldBusinessTier
 
             return null; 
         }
+
+        static public people Find(string nationalNo)
+        {
+            int PersonID = -1;
+            string FirstName = "", SecondName = "", ThirdName = "", LastName = "";
+            DateTime DateOfBirth = DateTime.Now;
+            string Gender = "", Address = "", Phone = "", Email = "", Country = "", ImagePath = "";
+
+
+            if (dataPeople.FindPersonByNationalNo(ref PersonID, nationalNo, ref FirstName, ref SecondName, ref ThirdName, ref LastName, ref DateOfBirth, ref Gender,
+            ref Address, ref Phone, ref Email, ref Country, ref ImagePath))
+            {
+                return new people(PersonID, nationalNo, FirstName, SecondName, ThirdName, LastName, DateOfBirth, Gender,
+                       Address, Phone, Email, Country, ImagePath);
+            }
+
+            return null;
+        }
+
 
         bool _AddPerson()
         {

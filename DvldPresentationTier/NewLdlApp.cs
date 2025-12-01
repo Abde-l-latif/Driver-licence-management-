@@ -52,21 +52,21 @@ namespace DvldProject
             Filter = text; 
         }
 
-        private void BTNfilterSearch_Click(object sender, EventArgs e)
-        {
-            DataTable dt = people.filterPeople(text, Filter);
-            if (dt.Rows.Count > 0)
-            {
-                int personID = (int)dt.Rows[0][0];
-                personDetails1.setPersonId(personID);
-                personDetails1.reload();
-                BTNNext.Enabled = true;
-            }
-            else
-            {
-                MessageBox.Show("Person Not Found !", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); 
-            }
-        }
+        //private void BTNfilterSearch_Click(object sender, EventArgs e)
+        //{
+        //    DataTable dt = people.filterPeople(text, Filter);
+        //    if (dt.Rows.Count > 0)
+        //    {
+        //        int personID = (int)dt.Rows[0][0];
+        //        personDetails1.setPersonId(personID);
+        //        personDetails1.reload();
+        //        BTNNext.Enabled = true;
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("Person Not Found !", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); 
+        //    }
+        //}
 
         private void BTNAddPerson_Click(object sender, EventArgs e)
         {

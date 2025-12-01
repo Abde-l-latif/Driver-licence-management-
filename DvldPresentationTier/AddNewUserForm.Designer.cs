@@ -34,7 +34,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.BTNAddPerson = new System.Windows.Forms.Button();
             this.BTNfilterSearch = new System.Windows.Forms.Button();
-            this.filterPeople1 = new DvldProject.filterPeople();
+            //this.filterPeople1 = new DvldProject.filterPeople();
             this.personDetails1 = new DvldProject.PersonDetails();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.UserIDValue = new System.Windows.Forms.Label();
@@ -108,7 +108,7 @@
             // 
             this.groupBox1.Controls.Add(this.BTNAddPerson);
             this.groupBox1.Controls.Add(this.BTNfilterSearch);
-            this.groupBox1.Controls.Add(this.filterPeople1);
+            //this.groupBox1.Controls.Add(this.filterPeople1);
             this.groupBox1.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.groupBox1.Location = new System.Drawing.Point(18, 16);
             this.groupBox1.Name = "groupBox1";
@@ -141,15 +141,15 @@
             this.BTNfilterSearch.Size = new System.Drawing.Size(36, 32);
             this.BTNfilterSearch.TabIndex = 1;
             this.BTNfilterSearch.UseVisualStyleBackColor = false;
-            this.BTNfilterSearch.Click += new System.EventHandler(this.BTNfilterSearch_Click);
+            //this.BTNfilterSearch.Click += new System.EventHandler(this.BTNfilterSearch_Click);
             // 
             // filterPeople1
             // 
-            this.filterPeople1.Location = new System.Drawing.Point(7, 13);
-            this.filterPeople1.Margin = new System.Windows.Forms.Padding(4);
-            this.filterPeople1.Name = "filterPeople1";
-            this.filterPeople1.Size = new System.Drawing.Size(572, 35);
-            this.filterPeople1.TabIndex = 0;
+            //this.filterPeople1.Location = new System.Drawing.Point(7, 13);
+            //this.filterPeople1.Margin = new System.Windows.Forms.Padding(4);
+            ////this.filterPeople1.Name = "filterPeople1";
+            //this.filterPeople1.Size = new System.Drawing.Size(572, 35);
+            //this.filterPeople1.TabIndex = 0;
             // 
             // personDetails1
             // 

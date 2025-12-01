@@ -90,7 +90,7 @@
             this.BTNfilterSearch.Size = new System.Drawing.Size(36, 32);
             this.BTNfilterSearch.TabIndex = 1;
             this.BTNfilterSearch.UseVisualStyleBackColor = false;
-            this.BTNfilterSearch.Click += new System.EventHandler(this.BTNfilterSearch_Click);
+            //this.BTNfilterSearch.Click += new System.EventHandler(this.BTNfilterSearch_Click);
             // 
             // groupBox1
             // 
