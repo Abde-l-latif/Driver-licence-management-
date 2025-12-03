@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using DvldDataTier; 
 
 namespace DvldBusinessTier
@@ -14,7 +15,7 @@ namespace DvldBusinessTier
         public int PersonID { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
-        public sbyte isActive { get; set; }
+        public bool isActive { get; set; }
 
         public Users()
         {
@@ -22,11 +23,11 @@ namespace DvldBusinessTier
             this.PersonID = -1;
             this.UserName = "";
             this.Password = "";
-            this.isActive = -1;
+            this.isActive = true;
             Mode = enMode.addMode;
         }
 
-        public Users(int userID , int personID , string UserName , string Password , sbyte isActive)
+        public Users(int userID , int personID , string UserName , string Password , bool isActive)
         {
             this.UserID = userID; 
             this.PersonID = personID;
@@ -44,12 +45,12 @@ namespace DvldBusinessTier
 
             if(dataUser.isUserExist(username, password , ref userID , ref personID , ref isActive))
             {
-                return new Users(userID, personID, username, password, isActive); 
+                return new Users(userID, personID, username, password, isActive == 1 ? true : false); 
             }
             return null; 
         }
 
-        static public bool isUserExist(int personID)
+        static public bool isUserExistByPersonID(int personID)
         {
             return dataUser.isUserExistsByPersonID(personID);
         }
@@ -71,7 +72,7 @@ namespace DvldBusinessTier
             byte isActive = 0 ;
             if(dataUser.getUserByPersonID(ref userID , personID , ref username , ref password , ref isActive))
             {
-                return new Users(userID, personID, username, password, (sbyte)isActive);
+                return new Users(userID, personID, username, password, isActive == 1 ? true : false);
             }
             return null;
         }
@@ -83,7 +84,7 @@ namespace DvldBusinessTier
             byte isActive = 0;
             if (dataUser.getUserByUserID(UserID, ref personID, ref username, ref password, ref isActive))
             {
-                return new Users(UserID, personID, username, password, (sbyte)isActive);
+                return new Users(UserID, personID, username, password, isActive == 1 ? true : false);
             }
             return null;
         }
@@ -100,7 +101,7 @@ namespace DvldBusinessTier
 
         private bool addUser()
         {
-            this.UserID = dataUser.insertUser(this.PersonID , this.UserName , this.Password, (byte)this.isActive);
+            this.UserID = dataUser.insertUser(this.PersonID , this.UserName , this.Password, Convert.ToByte(this.isActive));
             return (this.UserID != -1);
         }
 
@@ -111,7 +112,7 @@ namespace DvldBusinessTier
 
         private bool UpdateUser()
         {
-            return dataUser.UpdateUser(this.UserID, this.UserName , this.Password , (byte)this.isActive); 
+            return dataUser.UpdateUser(this.UserID, this.UserName , this.Password , Convert.ToByte(this.isActive)); 
         }
 
         public bool Save()

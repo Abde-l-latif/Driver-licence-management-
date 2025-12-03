@@ -14,7 +14,7 @@ namespace DvldProject
     public partial class userInfo : UserControl
     {
 
-        private int UserID;
+        private int _UserID;
 
         private Users User; 
 
@@ -23,24 +23,27 @@ namespace DvldProject
             InitializeComponent();
         }
 
-        public void setUserID(int UserID)
+        private void FillUserDetails()
         {
-            this.UserID = UserID;
+            TxtID.Text = _UserID.ToString();
+            TxtUserName.Text = User.UserName;
+            TxtActive.Text = User.isActive == true ? "Yes" : "No";
         }
 
-        public void reload()
+        public void LoadUserInfo(int UserID)
         {
             User = Users.getUserByUserID(UserID);
-            if(User != null)
+            if (User != null)
             {
-                TxtID.Text = UserID.ToString();
-                TxtUserName.Text = User.UserName;
-                TxtActive.Text = User.isActive == 1 ? "Yes" : "No";
+                this._UserID = UserID;
+                personDetails1.LoadPersonByID(User.PersonID);
+                FillUserDetails();
             }
             else
             {
-                MessageBox.Show("User Not Found !!", "Error", MessageBoxButtons.OK , MessageBoxIcon.Error); 
+                MessageBox.Show("User Not Found !!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
     }
 }

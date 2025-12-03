@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DvldBusinessTier;
+using System;
 using System.Windows.Forms;
 
 namespace DvldProject.PeopleFolder.Controls
@@ -52,6 +53,16 @@ namespace DvldProject.PeopleFolder.Controls
             }
         }
 
+
+        public void LoadPersonInfo(int PersonID)
+        {
+
+            comboBox1.SelectedIndex = 0;
+            textFilter.Text = PersonID.ToString();
+            FindNow();
+
+        }
+
         private void FindNow()
         {
             switch (comboBox1.SelectedItem.ToString())
@@ -81,6 +92,13 @@ namespace DvldProject.PeopleFolder.Controls
                 MessageBox.Show("Some fileds are not valide!, put the mouse over the red icon(s) to see the error","Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
 
+            }
+
+            if(!people.checkPersonIdExists(textFilter.Text))
+            {
+                MessageBox.Show("PersonID not found", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textFilter.Text = "";
+                return;
             }
 
             FindNow(); 
@@ -125,9 +143,13 @@ namespace DvldProject.PeopleFolder.Controls
 
         private void getPersonID(int personID)
         {
-            comboBox1.SelectedIndex = 0;
-            textFilter.Text = personID.ToString();
+            LoadPersonInfo(personID);
             FilterPerson = false;
+        }
+
+        public void FocusFilter()
+        {
+            textFilter.Focus();
         }
     }
 }

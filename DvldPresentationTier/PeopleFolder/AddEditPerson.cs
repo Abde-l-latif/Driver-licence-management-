@@ -26,6 +26,12 @@ namespace DvldProject
 
         public event storePersonID personIDAdded;
 
+        public AddEditPerson()
+        {
+            InitializeComponent();
+            StartPosition = FormStartPosition.CenterParent;
+        }
+
         public AddEditPerson(int PersonID)
         {
             InitializeComponent();
@@ -376,19 +382,6 @@ namespace DvldProject
                     personIDAdded?.Invoke(Person.PersonID);
                 }
 
-                foreach (Form frm in Application.OpenForms)
-                {
-                    if (frm is ManagePeopleForm peopleListForm)
-                    {
-                        peopleListForm.FillDataGridWithPeople();
-                        break;
-                    }
-                    if(frm is AddNewUserForm editFromUser)
-                    {
-                        editFromUser.reloadPersonCard();
-                        break;
-                    }
-                }
                 BTNsave.Enabled = false; 
             }
             else

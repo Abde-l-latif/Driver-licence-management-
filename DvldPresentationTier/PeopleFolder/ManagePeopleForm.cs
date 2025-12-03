@@ -5,7 +5,7 @@ using System.Data;
 using System.Security.Policy;
 using System.Windows.Forms;
 using System.Xml.Linq;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
+
 
 
 namespace DvldProject
@@ -127,7 +127,7 @@ namespace DvldProject
 
         private void pictureAddPerson_Click(object sender, EventArgs e)
         {
-            AddEditPerson fm = new AddEditPerson(-1);
+            AddEditPerson fm = new AddEditPerson();
             fm.ShowDialog();
         }
 
@@ -141,7 +141,7 @@ namespace DvldProject
                 return;
             }
 
-            AddEditPerson fm = new AddEditPerson(-1);
+            AddEditPerson fm = new AddEditPerson();
             fm.ShowDialog();
 
             InitializeDataPeople();
@@ -186,6 +186,7 @@ namespace DvldProject
                 int PersonID = (int)dataGridView1.SelectedRows[0].Cells["PersonID"].Value;
                 if(people.DeletePerson(PersonID))
                 {
+                    InitializeDataPeople();
                     FillDataGridWithPeople();
                 }
                 else

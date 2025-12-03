@@ -70,6 +70,11 @@ namespace DvldBusinessTier
             return dataPeople.checkNationalNoExists(text); 
         }
 
+        static public bool checkPersonIdExists(string text)
+        {
+            return dataPeople.checkPersonIdExists(text);    
+        }
+
         static public people Find(int PersonID)
         {
             string NationalNo = "", FirstName = "", SecondName = "", ThirdName = "", LastName = "";

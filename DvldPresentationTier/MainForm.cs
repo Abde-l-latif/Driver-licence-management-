@@ -22,19 +22,19 @@ namespace DvldProject
 
         private void usersToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form fm = new ManageUsersForm();
+            ManageUsersForm fm = new ManageUsersForm();
             fm.ShowDialog(); 
         }
 
         private void currentUserInfoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            UserDetailsForm fm = new UserDetailsForm(Global.USER.PersonID, Global.USER.UserID);
+            UserDetailsForm fm = new UserDetailsForm(Global.USER.UserID);
             fm.ShowDialog();
         }
 
         private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ChangePasswordForm fm = new ChangePasswordForm(Global.USER.PersonID, Global.USER.UserID);
+            ChangePasswordForm fm = new ChangePasswordForm(Global.USER.UserID);
             fm.ShowDialog();
         }
 
@@ -112,13 +112,13 @@ namespace DvldProject
 
         private void managePeopleToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form fm = new ManagePeopleForm();
+            ManagePeopleForm fm = new ManagePeopleForm();
             fm.ShowDialog();
         }
 
         private void findPersonToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form fm = new FindPerson();
+            FindPerson fm = new FindPerson();
             fm.ShowDialog(); 
         }
     }

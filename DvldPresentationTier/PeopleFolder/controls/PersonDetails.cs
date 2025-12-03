@@ -83,9 +83,11 @@ namespace DvldProject
         public void LoadPersonByNationalNo(string NationalNo)
         {
             person = people.Find(NationalNo);
-            _PersonID = person.PersonID;
             if (person != null)
+            {
+                _PersonID = person.PersonID;
                 fillPersonDetails();
+            }
             else
             {
                 linkLabel1.Enabled = false;

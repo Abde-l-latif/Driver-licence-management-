@@ -1,6 +1,6 @@
 ﻿namespace DvldProject
 {
-    partial class AddNewUserForm
+    partial class AddUpdateUserForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,14 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.personDetailsFilter1 = new DvldProject.PeopleFolder.Controls.PersonDetailsFilter();
             this.BTNNext = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.BTNAddPerson = new System.Windows.Forms.Button();
-            this.BTNfilterSearch = new System.Windows.Forms.Button();
-            //this.filterPeople1 = new DvldProject.filterPeople();
-            this.personDetails1 = new DvldProject.PersonDetails();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.UserIDValue = new System.Windows.Forms.Label();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
@@ -52,13 +49,14 @@
             this.label1 = new System.Windows.Forms.Label();
             this.BTNsave = new System.Windows.Forms.Button();
             this.BTNclose = new System.Windows.Forms.Button();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -74,9 +72,8 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.personDetailsFilter1);
             this.tabPage1.Controls.Add(this.BTNNext);
-            this.tabPage1.Controls.Add(this.groupBox1);
-            this.tabPage1.Controls.Add(this.personDetails1);
             this.tabPage1.Font = new System.Drawing.Font("Microsoft YaHei UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
@@ -85,6 +82,16 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Personel Info";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // personDetailsFilter1
+            // 
+            this.personDetailsFilter1.FilterPerson = true;
+            this.personDetailsFilter1.Location = new System.Drawing.Point(6, 3);
+            this.personDetailsFilter1.Margin = new System.Windows.Forms.Padding(4);
+            this.personDetailsFilter1.Name = "personDetailsFilter1";
+            this.personDetailsFilter1.ShowAddPerson = true;
+            this.personDetailsFilter1.Size = new System.Drawing.Size(732, 373);
+            this.personDetailsFilter1.TabIndex = 18;
             // 
             // BTNNext
             // 
@@ -95,69 +102,14 @@
             this.BTNNext.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.BTNNext.Image = global::DvldProject.Properties.Resources.right;
             this.BTNNext.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BTNNext.Location = new System.Drawing.Point(647, 369);
+            this.BTNNext.Location = new System.Drawing.Point(652, 376);
             this.BTNNext.Name = "BTNNext";
-            this.BTNNext.Size = new System.Drawing.Size(81, 38);
+            this.BTNNext.Size = new System.Drawing.Size(81, 36);
             this.BTNNext.TabIndex = 17;
             this.BTNNext.Text = "Next";
             this.BTNNext.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.BTNNext.UseVisualStyleBackColor = true;
             this.BTNNext.Click += new System.EventHandler(this.BTNNext_Click);
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.BTNAddPerson);
-            this.groupBox1.Controls.Add(this.BTNfilterSearch);
-            //this.groupBox1.Controls.Add(this.filterPeople1);
-            this.groupBox1.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.groupBox1.Location = new System.Drawing.Point(18, 16);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(710, 55);
-            this.groupBox1.TabIndex = 1;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Filter";
-            // 
-            // BTNAddPerson
-            // 
-            this.BTNAddPerson.BackColor = System.Drawing.Color.LightGray;
-            this.BTNAddPerson.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BTNAddPerson.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BTNAddPerson.Image = global::DvldProject.Properties.Resources.user__1_1;
-            this.BTNAddPerson.Location = new System.Drawing.Point(662, 14);
-            this.BTNAddPerson.Name = "BTNAddPerson";
-            this.BTNAddPerson.Size = new System.Drawing.Size(36, 32);
-            this.BTNAddPerson.TabIndex = 2;
-            this.BTNAddPerson.UseVisualStyleBackColor = false;
-            this.BTNAddPerson.Click += new System.EventHandler(this.BTNAddPerson_Click);
-            // 
-            // BTNfilterSearch
-            // 
-            this.BTNfilterSearch.BackColor = System.Drawing.Color.LightGray;
-            this.BTNfilterSearch.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BTNfilterSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BTNfilterSearch.Image = global::DvldProject.Properties.Resources.user__2_;
-            this.BTNfilterSearch.Location = new System.Drawing.Point(613, 14);
-            this.BTNfilterSearch.Name = "BTNfilterSearch";
-            this.BTNfilterSearch.Size = new System.Drawing.Size(36, 32);
-            this.BTNfilterSearch.TabIndex = 1;
-            this.BTNfilterSearch.UseVisualStyleBackColor = false;
-            //this.BTNfilterSearch.Click += new System.EventHandler(this.BTNfilterSearch_Click);
-            // 
-            // filterPeople1
-            // 
-            //this.filterPeople1.Location = new System.Drawing.Point(7, 13);
-            //this.filterPeople1.Margin = new System.Windows.Forms.Padding(4);
-            ////this.filterPeople1.Name = "filterPeople1";
-            //this.filterPeople1.Size = new System.Drawing.Size(572, 35);
-            //this.filterPeople1.TabIndex = 0;
-            // 
-            // personDetails1
-            // 
-            this.personDetails1.Location = new System.Drawing.Point(4, 71);
-            this.personDetails1.Margin = new System.Windows.Forms.Padding(4);
-            this.personDetails1.Name = "personDetails1";
-            this.personDetails1.Size = new System.Drawing.Size(737, 305);
-            this.personDetails1.TabIndex = 0;
             // 
             // tabPage2
             // 
@@ -210,6 +162,7 @@
             this.textConfirm.Size = new System.Drawing.Size(210, 23);
             this.textConfirm.TabIndex = 66;
             this.textConfirm.UseSystemPasswordChar = true;
+            this.textConfirm.Validating += new System.ComponentModel.CancelEventHandler(this.textConfirm_Validating);
             // 
             // lb
             // 
@@ -240,6 +193,7 @@
             this.textPassword22.Size = new System.Drawing.Size(210, 23);
             this.textPassword22.TabIndex = 63;
             this.textPassword22.UseSystemPasswordChar = true;
+            this.textPassword22.Validating += new System.ComponentModel.CancelEventHandler(this.textPassword22_Validating);
             // 
             // TextPassword
             // 
@@ -269,6 +223,7 @@
             this.textUserName.Name = "textUserName";
             this.textUserName.Size = new System.Drawing.Size(210, 23);
             this.textUserName.TabIndex = 60;
+            this.textUserName.Validating += new System.ComponentModel.CancelEventHandler(this.textUserName_Validating);
             // 
             // label3
             // 
@@ -304,14 +259,14 @@
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft YaHei UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.label1.Location = new System.Drawing.Point(294, 42);
+            this.label1.Location = new System.Drawing.Point(267, 37);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(182, 30);
+            this.label1.Size = new System.Drawing.Size(232, 30);
             this.label1.TabIndex = 1;
             this.label1.Text = "Add New User ";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // BTNsave
             // 
@@ -322,7 +277,7 @@
             this.BTNsave.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.BTNsave.Image = global::DvldProject.Properties.Resources.diskette;
             this.BTNsave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BTNsave.Location = new System.Drawing.Point(678, 541);
+            this.BTNsave.Location = new System.Drawing.Point(674, 550);
             this.BTNsave.Name = "BTNsave";
             this.BTNsave.Size = new System.Drawing.Size(81, 38);
             this.BTNsave.TabIndex = 15;
@@ -340,7 +295,7 @@
             this.BTNclose.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.BTNclose.Image = global::DvldProject.Properties.Resources.close2;
             this.BTNclose.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BTNclose.Location = new System.Drawing.Point(561, 541);
+            this.BTNclose.Location = new System.Drawing.Point(561, 550);
             this.BTNclose.Name = "BTNclose";
             this.BTNclose.Size = new System.Drawing.Size(81, 38);
             this.BTNclose.TabIndex = 16;
@@ -349,7 +304,11 @@
             this.BTNclose.UseVisualStyleBackColor = true;
             this.BTNclose.Click += new System.EventHandler(this.BTNclose_Click);
             // 
-            // Form7
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
+            // AddNewUserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -359,19 +318,18 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Name = "Form7";
+            this.Name = "AddNewUserForm";
             this.Text = "Users";
             this.Load += new System.EventHandler(this.Form7_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -380,12 +338,7 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private PersonDetails personDetails1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private filterPeople filterPeople1;
-        private System.Windows.Forms.Button BTNfilterSearch;
-        private System.Windows.Forms.Button BTNAddPerson;
         private System.Windows.Forms.Button BTNNext;
         private System.Windows.Forms.Button BTNsave;
         private System.Windows.Forms.Button BTNclose;
@@ -401,5 +354,7 @@
         private System.Windows.Forms.Label lb;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Label UserIDValue;
+        private PeopleFolder.Controls.PersonDetailsFilter personDetailsFilter1;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

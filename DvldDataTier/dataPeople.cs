@@ -219,6 +219,7 @@ namespace DvldDataTier
             return personID; 
         }
 
+
         static public bool checkNationalNoExists(string text)
         {
             bool isExists = false;
@@ -248,6 +249,40 @@ namespace DvldDataTier
             finally
             {
                 connection.Close(); 
+            }
+
+            return isExists;
+        }
+
+        static public bool checkPersonIdExists(string text)
+        {
+            bool isExists = false;
+
+            SqlConnection connection = new SqlConnection(dataSettings.ConnectionString);
+
+            string query = @"select found = 1 from People where PersonID = @PersonID;";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@PersonID", text);
+
+            try
+            {
+                connection.Open();
+                object result = command.ExecuteScalar();
+
+                if (result != null && int.TryParse(result.ToString(), out int number))
+                {
+                    isExists = true;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"error detected : {e}");
+            }
+            finally
+            {
+                connection.Close();
             }
 
             return isExists;

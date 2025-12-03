@@ -23,7 +23,7 @@ namespace DvldProject
 
             if (user != null)
             {
-                if(user.isActive == 0)
+                if(user.isActive == false)
                     MessageBox.Show("this user is no longer active !!", "Authentication", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 else
                {

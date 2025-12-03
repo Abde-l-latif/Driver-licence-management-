@@ -29,9 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.personDetails1 = new DvldProject.PersonDetails();
-            this.userInfo1 = new DvldProject.userInfo();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -44,45 +41,19 @@
             this.textNewPass = new System.Windows.Forms.TextBox();
             this.textConfirmPass = new System.Windows.Forms.TextBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.groupBox1.SuspendLayout();
+            this.userInfo1 = new DvldProject.userInfo();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
-            // personDetails1
-            // 
-            this.personDetails1.Location = new System.Drawing.Point(-1, 0);
-            this.personDetails1.Name = "personDetails1";
-            this.personDetails1.Size = new System.Drawing.Size(635, 258);
-            this.personDetails1.TabIndex = 0;
-            // 
-            // userInfo1
-            // 
-            this.userInfo1.Location = new System.Drawing.Point(24, 14);
-            this.userInfo1.Margin = new System.Windows.Forms.Padding(4);
-            this.userInfo1.Name = "userInfo1";
-            this.userInfo1.Size = new System.Drawing.Size(555, 48);
-            this.userInfo1.TabIndex = 1;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.userInfo1);
-            this.groupBox1.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.groupBox1.Location = new System.Drawing.Point(12, 251);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(607, 70);
-            this.groupBox1.TabIndex = 2;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "User Information";
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(16, 348);
+            this.label1.Location = new System.Drawing.Point(25, 376);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(116, 17);
             this.label1.TabIndex = 3;
@@ -92,7 +63,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(37, 380);
+            this.label2.Location = new System.Drawing.Point(46, 408);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(95, 17);
             this.label2.TabIndex = 4;
@@ -102,7 +73,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(12, 410);
+            this.label3.Location = new System.Drawing.Point(21, 438);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(120, 17);
             this.label3.TabIndex = 5;
@@ -117,7 +88,7 @@
             this.BTNsave.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.BTNsave.Image = global::DvldProject.Properties.Resources.diskette;
             this.BTNsave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BTNsave.Location = new System.Drawing.Point(537, 454);
+            this.BTNsave.Location = new System.Drawing.Point(552, 470);
             this.BTNsave.Name = "BTNsave";
             this.BTNsave.Size = new System.Drawing.Size(81, 38);
             this.BTNsave.TabIndex = 15;
@@ -135,7 +106,7 @@
             this.BTNclose.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.BTNclose.Image = global::DvldProject.Properties.Resources.close2;
             this.BTNclose.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BTNclose.Location = new System.Drawing.Point(394, 454);
+            this.BTNclose.Location = new System.Drawing.Point(415, 470);
             this.BTNclose.Name = "BTNclose";
             this.BTNclose.Size = new System.Drawing.Size(81, 38);
             this.BTNclose.TabIndex = 16;
@@ -147,7 +118,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::DvldProject.Properties.Resources.password22;
-            this.pictureBox1.Location = new System.Drawing.Point(141, 344);
+            this.pictureBox1.Location = new System.Drawing.Point(150, 372);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(25, 24);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -157,7 +128,7 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = global::DvldProject.Properties.Resources.password22;
-            this.pictureBox2.Location = new System.Drawing.Point(141, 405);
+            this.pictureBox2.Location = new System.Drawing.Point(150, 433);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(25, 24);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -167,7 +138,7 @@
             // pictureBox3
             // 
             this.pictureBox3.Image = global::DvldProject.Properties.Resources.password22;
-            this.pictureBox3.Location = new System.Drawing.Point(141, 375);
+            this.pictureBox3.Location = new System.Drawing.Point(150, 403);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(25, 24);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -177,7 +148,7 @@
             // textCurrentPass
             // 
             this.textCurrentPass.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textCurrentPass.Location = new System.Drawing.Point(172, 345);
+            this.textCurrentPass.Location = new System.Drawing.Point(181, 373);
             this.textCurrentPass.Name = "textCurrentPass";
             this.textCurrentPass.Size = new System.Drawing.Size(164, 23);
             this.textCurrentPass.TabIndex = 20;
@@ -187,16 +158,17 @@
             // textNewPass
             // 
             this.textNewPass.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textNewPass.Location = new System.Drawing.Point(172, 376);
+            this.textNewPass.Location = new System.Drawing.Point(181, 404);
             this.textNewPass.Name = "textNewPass";
             this.textNewPass.Size = new System.Drawing.Size(164, 23);
             this.textNewPass.TabIndex = 21;
             this.textNewPass.UseSystemPasswordChar = true;
+            this.textNewPass.Validating += new System.ComponentModel.CancelEventHandler(this.textNewPass_Validating);
             // 
             // textConfirmPass
             // 
             this.textConfirmPass.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textConfirmPass.Location = new System.Drawing.Point(172, 407);
+            this.textConfirmPass.Location = new System.Drawing.Point(181, 435);
             this.textConfirmPass.Name = "textConfirmPass";
             this.textConfirmPass.Size = new System.Drawing.Size(164, 23);
             this.textConfirmPass.TabIndex = 22;
@@ -207,11 +179,31 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // Form8
+            // userInfo1
+            // 
+            this.userInfo1.Location = new System.Drawing.Point(6, 48);
+            this.userInfo1.Name = "userInfo1";
+            this.userInfo1.Size = new System.Drawing.Size(644, 323);
+            this.userInfo1.TabIndex = 23;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft YaHei UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.label4.Location = new System.Drawing.Point(216, 9);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(210, 30);
+            this.label4.TabIndex = 24;
+            this.label4.Text = "Change Password";
+            // 
+            // ChangePasswordForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(632, 504);
+            this.ClientSize = new System.Drawing.Size(645, 519);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.userInfo1);
             this.Controls.Add(this.textConfirmPass);
             this.Controls.Add(this.textNewPass);
             this.Controls.Add(this.textCurrentPass);
@@ -223,13 +215,10 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.personDetails1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Name = "Form8";
+            this.Name = "ChangePasswordForm";
             this.Text = "Change Password";
             this.Load += new System.EventHandler(this.Form8_Load);
-            this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
@@ -240,10 +229,6 @@
         }
 
         #endregion
-
-        private PersonDetails personDetails1;
-        private userInfo userInfo1;
-        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
@@ -256,5 +241,7 @@
         private System.Windows.Forms.TextBox textNewPass;
         private System.Windows.Forms.TextBox textConfirmPass;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private userInfo userInfo1;
+        private System.Windows.Forms.Label label4;
     }
 }
