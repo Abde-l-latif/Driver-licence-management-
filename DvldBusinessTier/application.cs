@@ -65,17 +65,6 @@ namespace DvldBusinessTier
             PaidFees = dataApplication.getApplicationFee(id);
             return PaidFees;
         }
-
-        static public DataTable getApplicationTypes()
-        {
-            return dataApplication.getAllApplictionTypes();
-        }
-
-        static public bool updateApplicationTypes(int id, string title , string fee)
-        {
-            return dataApplication.UpdateApplicationType(id , title , Convert.ToDecimal(fee));
-        }
-
         static public DataTable getAll_LDL_ApplicationPeople()
         {
             return dataApplication.getAll_LDL_ApplicationPeople();

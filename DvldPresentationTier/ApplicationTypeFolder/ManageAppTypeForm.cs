@@ -28,13 +28,7 @@ namespace DvldProject
 
         private void getAllAppTypes()
         {
-            dataGridView1.DataSource = application.getApplicationTypes();
-        }
-
-        public void reloadDataGrid()
-        {
-            initializeDataGrid();
-            getAllAppTypes();
+            dataGridView1.DataSource = ApplicationType.getAllApplicationType();
         }
 
         private void updateApplicationTypeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -42,10 +36,10 @@ namespace DvldProject
             if (dataGridView1.SelectedRows.Count > 0)
             {
                 int ID = (int)dataGridView1.SelectedRows[0].Cells[0].Value;
-                string title = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
-                string fee = dataGridView1.SelectedRows[0].Cells[2].Value.ToString();
-                UpdateAppTypeForm fm = new UpdateAppTypeForm(ID , title , fee);
+                UpdateAppTypeForm fm = new UpdateAppTypeForm(ID);
                 fm.ShowDialog();
+
+                ManageAppTypeForm_Load(null, null); 
             }
             else
             {
@@ -56,7 +50,8 @@ namespace DvldProject
 
         private void ManageAppTypeForm_Load(object sender, EventArgs e)
         {
-            reloadDataGrid();
+            initializeDataGrid();
+            getAllAppTypes();
             LbRecord.Text = dataGridView1.Rows.Count.ToString() + " Records";
         }
 

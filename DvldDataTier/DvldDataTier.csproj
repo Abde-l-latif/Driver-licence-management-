@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="dataApplication.cs" />
+    <Compile Include="dataApplicationType.cs" />
     <Compile Include="dataCountry.cs" />
     <Compile Include="dataDriver.cs" />
     <Compile Include="dataLicense.cs" />

@@ -88,7 +88,7 @@
     <Compile Include="LoginFolder\Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
-    <Compile Include="ManageAppTypeForm.Designer.cs">
+    <Compile Include="ApplicationTypeFolder\ManageAppTypeForm.Designer.cs">
       <DependentUpon>ManageAppTypeForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ManageDetainLicenses.cs">
@@ -151,10 +151,10 @@
     <Compile Include="UpdateApplication.Designer.cs">
       <DependentUpon>UpdateApplication.cs</DependentUpon>
     </Compile>
-    <Compile Include="UpdateAppTypeForm.cs">
+    <Compile Include="ApplicationTypeFolder\UpdateAppTypeForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UpdateAppTypeForm.Designer.cs">
+    <Compile Include="ApplicationTypeFolder\UpdateAppTypeForm.Designer.cs">
       <DependentUpon>UpdateAppTypeForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ManageTestType.cs">
@@ -307,7 +307,7 @@
     <EmbeddedResource Include="LoginFolder\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ManageAppTypeForm.resx">
+    <EmbeddedResource Include="ApplicationTypeFolder\ManageAppTypeForm.resx">
       <DependentUpon>ManageAppTypeForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ManageDetainLicenses.resx">
@@ -340,7 +340,7 @@
     <EmbeddedResource Include="UpdateApplication.resx">
       <DependentUpon>UpdateApplication.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UpdateAppTypeForm.resx">
+    <EmbeddedResource Include="ApplicationTypeFolder\UpdateAppTypeForm.resx">
       <DependentUpon>UpdateAppTypeForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ManageTestType.resx">
@@ -411,7 +411,7 @@
     <EmbeddedResource Include="UserFolder\Controls\userInfo.resx">
       <DependentUpon>userInfo.cs</DependentUpon>
     </EmbeddedResource>
-    <Compile Include="ManageAppTypeForm.cs">
+    <Compile Include="ApplicationTypeFolder\ManageAppTypeForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <None Include="Properties\Settings.settings">
