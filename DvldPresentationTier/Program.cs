@@ -16,24 +16,8 @@ namespace DvldProject
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new Login());
 
-
-            while(true)
-            {
-
-                Login loginForm = new Login();
-                DialogResult result = loginForm.ShowDialog();
-
-                if (result != DialogResult.OK)
-                    return;
-
-                if (result == DialogResult.OK)
-                {
-
-                    Application.Run(new MainForm());
-
-                }
-            }
         }
     }
 }

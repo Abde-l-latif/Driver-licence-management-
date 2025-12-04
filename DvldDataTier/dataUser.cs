@@ -11,10 +11,7 @@ namespace DvldDataTier
     public class dataUser
     {
 
-
-        /* modification*/
-
-        static public bool isUserExist(string username, string password, ref int userID, ref int personID, ref sbyte isActive)
+        static public bool GetUserByUsernamePassword(string username, string password, ref int userID, ref int personID, ref sbyte isActive)
         {
             bool isExists = false;
 
@@ -58,9 +55,6 @@ namespace DvldDataTier
             return isExists;
 
         }
-
-
-        /* ========= modification ========= */
 
         static public bool isUserExistsByPersonID(int PersonID)
         {
@@ -186,7 +180,6 @@ namespace DvldDataTier
             return isExists;
         }
 
-
         static public DataTable GetAllUsers()
         {
             DataTable DT = new DataTable();
@@ -302,203 +295,6 @@ namespace DvldDataTier
             return effectedRow > 0;
 
         }
-
-        /* delete */
-
-        static public bool UpdatePassword(string password , int userID)
-        {
-            int effectedRow = 0;
-
-            string query = "update Users set Password = @password where UserID = @UserID; ";
-
-            SqlConnection Connection = new SqlConnection(dataSettings.ConnectionString);
-
-            SqlCommand Command = new SqlCommand(query, Connection);
-
-
-            Command.Parameters.AddWithValue("@password", password);   
-            Command.Parameters.AddWithValue("@UserID", userID);
-
-
-            try
-            {
-                Connection.Open();
-                effectedRow = Command.ExecuteNonQuery();
-
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine($"error detected : {e}");
-            }
-            finally
-            {
-                Connection.Close();
-            }
-
-            return effectedRow > 0;
-        }
-
-        static public DataTable filterUser(string user, string Filter)
-        {
-            DataTable DT = new DataTable();
-
-            string Query = "";
-
-            SqlConnection connection = new SqlConnection(dataSettings.ConnectionString);
-
-            switch (Filter)
-            {
-                case "user ID":
-                    Query = @"select
-                            UserID ,
-                            U.PersonID ,
-                            P.FirstName + ' ' + P.SecondName + ' ' + P.ThirdName + ' ' + P.LastName as FullName ,
-                            UserName ,
-                            IsActive 
-                            from Users U
-                            inner join People P on P.PersonID = U.PersonID
-                            where UserID = @UserID ; ";
-                    break;
-                case "person ID":
-                    Query = @"select
-                            UserID ,
-                            U.PersonID ,
-                            P.FirstName + ' ' + P.SecondName + ' ' + P.ThirdName + ' ' + P.LastName as FullName ,
-                            UserName ,
-                            IsActive 
-                            from Users U
-                            inner join People P on P.PersonID = U.PersonID
-                            where U.PersonID = @PersonID ; ";
-                    break;
-                case "UserName":
-                    Query = @"select
-                            UserID ,
-                            U.PersonID ,
-                            P.FirstName + ' ' + P.SecondName + ' ' + P.ThirdName + ' ' + P.LastName as FullName ,
-                            UserName ,
-                            IsActive 
-                            from Users U
-                            inner join People P on P.PersonID = U.PersonID
-                            where UserName = @UserName ; ";
-                    break;
-                case "is Active":
-                    Query = @"select
-                            UserID ,
-                            U.PersonID ,
-                            P.FirstName + ' ' + P.SecondName + ' ' + P.ThirdName + ' ' + P.LastName as FullName ,
-                            UserName ,
-                            IsActive 
-                            from Users U
-                            inner join People P on P.PersonID = U.PersonID
-                            where IsActive = @IsActive ; ";
-                    break;
-                case "FullName":
-                    Query = @"select * from (
-                            select
-                            UserID ,
-                            U.PersonID ,
-                            P.FirstName + ' ' + P.SecondName + ' ' + P.ThirdName + ' ' + P.LastName as FullName ,
-                            UserName ,
-                            IsActive 
-                            from Users U
-                            inner join People P on P.PersonID = U.PersonID) T 
-                            where T.FullName = @FullName";
-                    break;
-
-            }
-   ;
-
-            SqlCommand command = new SqlCommand(Query, connection);
-
-
-            switch (Filter)
-            {
-                case "person ID":
-                    command.Parameters.AddWithValue("@PersonID", user);
-                    break;
-                case "user ID":
-                    command.Parameters.AddWithValue("@UserID", user);
-                    break;
-                case "UserName":
-                    command.Parameters.AddWithValue("@UserName", user);
-                    break;
-                case "is Active":
-                    command.Parameters.AddWithValue("@IsActive", user);
-                    break;
-                case "FullName":
-                    command.Parameters.AddWithValue("@FullName", user);
-                    break;
-            }
-   ;
-
-
-            try
-            {
-                connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
-
-                if (reader.HasRows)
-                {
-                    DT.Load(reader);
-                }
-
-                reader.Close();
-
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine($"error detected : {e}");
-            }
-            finally
-            {
-                connection.Close();
-            }
-
-            return DT;
-
-        }
-
-        static public bool isPasswordCorrect(string password, int userID)
-        {
-            bool isCorrect = false;
-
-            SqlConnection connection = new SqlConnection(dataSettings.ConnectionString);
-
-            string query = @"select found = 1 from Users
-            where Password=@password and UserID = @UserID;";
-
-            SqlCommand Command = new SqlCommand(query, connection);
-
-            Command.Parameters.AddWithValue("@UserID", userID);
-            Command.Parameters.AddWithValue("@password", password);
-
-
-            try
-            {
-                connection.Open();
-
-                object result = Command.ExecuteScalar();
-
-                if (result != null)
-                {
-                    isCorrect = true;
-                }
-
-            }
-            catch (Exception ex)
-            {
-                isCorrect = false;
-            }
-            finally
-            {
-                connection.Close();
-            }
-
-            return isCorrect;
-        }
-
-
-        /* ========= delete ========= */
 
         static public bool DeleteUserById(int UserID)
         {

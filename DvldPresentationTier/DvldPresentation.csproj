@@ -70,12 +70,6 @@
     <Compile Include="PeopleFolder\controls\filterPeople.Designer.cs">
       <DependentUpon>filterPeople.cs</DependentUpon>
     </Compile>
-    <Compile Include="FilterUser.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="FilterUser.Designer.cs">
-      <DependentUpon>FilterUser.cs</DependentUpon>
-    </Compile>
     <Compile Include="interLicenseDetails.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,10 +82,10 @@
     <Compile Include="LicenseDetailsControle.Designer.cs">
       <DependentUpon>LicenseDetailsControle.cs</DependentUpon>
     </Compile>
-    <Compile Include="Login.cs">
+    <Compile Include="LoginFolder\Login.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Login.Designer.cs">
+    <Compile Include="LoginFolder\Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
     <Compile Include="ManageAppTypeForm.Designer.cs">
@@ -304,16 +298,13 @@
     <EmbeddedResource Include="PeopleFolder\controls\filterPeople.resx">
       <DependentUpon>filterPeople.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FilterUser.resx">
-      <DependentUpon>FilterUser.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="interLicenseDetails.resx">
       <DependentUpon>interLicenseDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LicenseDetailsControle.resx">
       <DependentUpon>LicenseDetailsControle.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Login.resx">
+    <EmbeddedResource Include="LoginFolder\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ManageAppTypeForm.resx">

@@ -43,7 +43,7 @@ namespace DvldBusinessTier
             int userID = -1 , personID = -1;
             sbyte isActive = -1;
 
-            if(dataUser.isUserExist(username, password , ref userID , ref personID , ref isActive))
+            if(dataUser.GetUserByUsernamePassword(username, password , ref userID , ref personID , ref isActive))
             {
                 return new Users(userID, personID, username, password, isActive == 1 ? true : false); 
             }
@@ -58,11 +58,6 @@ namespace DvldBusinessTier
         static public DataTable GetAllUsers()
         {
             return dataUser.GetAllUsers();
-        }
-
-        static public DataTable GetFiltredUsers(string text , string filter)
-        {
-            return dataUser.filterUser(text, filter); 
         }
 
         static public Users getUserByPersonID(int personID)
@@ -89,10 +84,6 @@ namespace DvldBusinessTier
             return null;
         }
 
-        static public bool isPasswordCorrect(string password , int userID)
-        {
-            return dataUser.isPasswordCorrect(password, userID);
-        }
 
         static public bool DeleteUser(int userID)
         {
@@ -103,11 +94,6 @@ namespace DvldBusinessTier
         {
             this.UserID = dataUser.insertUser(this.PersonID , this.UserName , this.Password, Convert.ToByte(this.isActive));
             return (this.UserID != -1);
-        }
-
-        static public bool UpdatePassword(string password, int userID)
-        {
-            return dataUser.UpdatePassword(password, userID); 
         }
 
         private bool UpdateUser()

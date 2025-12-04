@@ -7,16 +7,20 @@ namespace DvldProject
 {
     public partial class MainForm : Form
     {
-        
-        public MainForm()
+        Login LoginForm;
+        public MainForm(Login LgForm)
         {
             InitializeComponent();
             this.WindowState = FormWindowState.Maximized;
+            LoginForm = LgForm;
         }
 
 
         private void signOutToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Global.USER = null;
+            LoginForm.Form1_Load(null , null);
+            LoginForm.Show(); 
             this.Close();
         }
 
