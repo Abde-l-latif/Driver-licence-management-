@@ -10,17 +10,6 @@ namespace DvldBusinessTier
 {
     public class Tests
     {
-
-        static public DataTable getAllTestTypes()
-        {
-            return dataTest.getAllTestTypes();
-        }
-
-        static public bool UpdateTestType(int id , string title, string description , string fee)
-        {
-            return dataTest.UpdateTestType(id, title, description, Convert.ToDecimal(fee));
-        }
-
         static public Decimal getTestFee(int id)
         {
             return dataTest.getTestFee(id);

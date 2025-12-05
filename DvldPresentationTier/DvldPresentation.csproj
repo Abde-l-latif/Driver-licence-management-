@@ -157,10 +157,10 @@
     <Compile Include="ApplicationTypeFolder\UpdateAppTypeForm.Designer.cs">
       <DependentUpon>UpdateAppTypeForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ManageTestType.cs">
+    <Compile Include="TestsFolder\TestTypeFolder\ManageTestType.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ManageTestType.Designer.cs">
+    <Compile Include="TestsFolder\TestTypeFolder\ManageTestType.Designer.cs">
       <DependentUpon>ManageTestType.cs</DependentUpon>
     </Compile>
     <Compile Include="ShowAppDetails.cs">
@@ -169,10 +169,10 @@
     <Compile Include="ShowAppDetails.Designer.cs">
       <DependentUpon>ShowAppDetails.cs</DependentUpon>
     </Compile>
-    <Compile Include="UpdateTestTypeForm.cs">
+    <Compile Include="TestsFolder\TestTypeFolder\UpdateTestTypeForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UpdateTestTypeForm.Designer.cs">
+    <Compile Include="TestsFolder\TestTypeFolder\UpdateTestTypeForm.Designer.cs">
       <DependentUpon>UpdateTestTypeForm.cs</DependentUpon>
     </Compile>
     <Compile Include="issueDrivingLicense_firstTime.cs">
@@ -343,13 +343,13 @@
     <EmbeddedResource Include="ApplicationTypeFolder\UpdateAppTypeForm.resx">
       <DependentUpon>UpdateAppTypeForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ManageTestType.resx">
+    <EmbeddedResource Include="TestsFolder\TestTypeFolder\ManageTestType.resx">
       <DependentUpon>ManageTestType.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ShowAppDetails.resx">
       <DependentUpon>ShowAppDetails.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UpdateTestTypeForm.resx">
+    <EmbeddedResource Include="TestsFolder\TestTypeFolder\UpdateTestTypeForm.resx">
       <DependentUpon>UpdateTestTypeForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="issueDrivingLicense_firstTime.resx">

@@ -28,6 +28,11 @@ namespace DvldProject
 
         private void BTNsave_Click(object sender, EventArgs e)
         {
+            if (!this.ValidateChildren())
+            {
+                MessageBox.Show("Operation failed !!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             AppType.ApplicationFees = Convert.ToDecimal(textCoins.Text);
             AppType.ApplicationTypeTitle = textTitle.Text;
@@ -56,10 +61,32 @@ namespace DvldProject
 
             if (AppType != null)
             {
-                labelID.Text = AppType.ApplicationID.ToString();
+                labelID.Text = ID.ToString();
                 textTitle.Text = AppType.ApplicationTypeTitle;
                 textCoins.Text = AppType.ApplicationFees.ToString("0.00");
             }
+        }
+
+        private void textCoins_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (String.IsNullOrEmpty(textCoins.Text))
+            {
+                errorProvider1.SetError(textCoins, "this field is required");
+                e.Cancel = true;
+            }
+            else
+                errorProvider1.SetError(textCoins, "");
+        }
+
+        private void textTitle_Validating_1(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (String.IsNullOrEmpty(textTitle.Text))
+            {
+                errorProvider1.SetError(textTitle, "this field is required");
+                e.Cancel = true;
+            }
+            else
+                errorProvider1.SetError(textTitle, "");
         }
     }
 }

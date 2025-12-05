@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.textCoins = new System.Windows.Forms.TextBox();
             this.textTitle = new System.Windows.Forms.TextBox();
             this.labelID = new System.Windows.Forms.Label();
@@ -42,9 +43,11 @@
             this.label5 = new System.Windows.Forms.Label();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.textDescription = new System.Windows.Forms.TextBox();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // textCoins
@@ -55,6 +58,7 @@
             this.textCoins.Size = new System.Drawing.Size(114, 21);
             this.textCoins.TabIndex = 30;
             this.textCoins.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textCoins_KeyPress);
+            this.textCoins.Validating += new System.ComponentModel.CancelEventHandler(this.textCoins_Validating);
             // 
             // textTitle
             // 
@@ -63,6 +67,7 @@
             this.textTitle.Name = "textTitle";
             this.textTitle.Size = new System.Drawing.Size(270, 21);
             this.textTitle.TabIndex = 29;
+            this.textTitle.Validating += new System.ComponentModel.CancelEventHandler(this.textTitle_Validating);
             // 
             // labelID
             // 
@@ -198,8 +203,13 @@
             this.textDescription.Name = "textDescription";
             this.textDescription.Size = new System.Drawing.Size(267, 128);
             this.textDescription.TabIndex = 35;
+            this.textDescription.Validating += new System.ComponentModel.CancelEventHandler(this.textDescription_Validating);
             // 
-            // Form13
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
+            // UpdateTestTypeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -220,12 +230,14 @@
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.Name = "Form13";
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Name = "UpdateTestTypeForm";
             this.Text = "Update Test Type ";
+            this.Load += new System.EventHandler(this.UpdateTestTypeForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -247,5 +259,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.TextBox textDescription;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

@@ -10,7 +10,7 @@ namespace DvldBusinessTier
 {
     public class ApplicationType
     {
-        public int ApplicationID { get; set; }
+        private int ApplicationID { get; set; }
 
         public string ApplicationTypeTitle { get; set; }
 

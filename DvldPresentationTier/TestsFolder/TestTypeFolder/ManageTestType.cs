@@ -30,7 +30,7 @@ namespace DvldProject
 
         private void getAllAppTypes()
         {
-            dataGridView1.DataSource = Tests.getAllTestTypes();
+            dataGridView1.DataSource = TestType.getAllTestsType();
         }
 
         public void reloadDataGrid()
@@ -61,11 +61,10 @@ namespace DvldProject
             if (dataGridView1.SelectedRows.Count > 0)
             {
                 int ID = (int)dataGridView1.SelectedRows[0].Cells[0].Value;
-                string title = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
-                string description = dataGridView1.SelectedRows[0].Cells[2].Value.ToString();
-                string fee = dataGridView1.SelectedRows[0].Cells[3].Value.ToString();
-                UpdateTestTypeForm fm = new UpdateTestTypeForm(ID, title, description, fee);
+                UpdateTestTypeForm fm = new UpdateTestTypeForm((TestType.enTestType)ID);
                 fm.ShowDialog();
+
+                reloadDataGrid(); 
             }
             else
             {
