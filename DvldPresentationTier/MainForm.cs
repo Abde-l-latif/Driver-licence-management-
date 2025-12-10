@@ -56,7 +56,7 @@ namespace DvldProject
 
         private void localLicenseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            NewLdlApp fm = new NewLdlApp();
+            AddUpdateLdlApp fm = new AddUpdateLdlApp();
             fm.ShowDialog();
         }
 

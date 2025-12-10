@@ -346,7 +346,6 @@
             this.Controls.Add(this.label1);
             this.Name = "AppDetails";
             this.Size = new System.Drawing.Size(571, 140);
-            this.Load += new System.EventHandler(this.AppDetails_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();

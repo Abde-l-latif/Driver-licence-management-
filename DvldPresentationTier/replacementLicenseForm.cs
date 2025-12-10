@@ -12,8 +12,8 @@ namespace DvldProject
         {
             InitializeComponent();
             StartPosition = FormStartPosition.CenterScreen;
-            App.ApplicationType = application.enAppTypes.replaceDamagedLicense;
-            App.Status = application.enAppStatus.Completed;
+            //App.ApplicationType = application.enAppTypes.replaceDamagedLicense;
+            //App.Status = application.enAppStatus.Completed;
             License.Reason = Licenses.enReason.ReplacementforDamaged;
         }
 
@@ -37,13 +37,13 @@ namespace DvldProject
             if (radioButton == radioDamaged)
             {
                 LbTitle.Text = "Replacement for Damaged License";
-                App.ApplicationType = application.enAppTypes.replaceDamagedLicense;
+                //App.ApplicationType = application.enAppTypes.replaceDamagedLicense;
                 License.Reason = Licenses.enReason.ReplacementforDamaged;
             }
             else if (radioButton == radioLost)
             {
                 LbTitle.Text = "Replacement for Lost License";
-                App.ApplicationType = application.enAppTypes.replaceLostLicense;
+                //App.ApplicationType = application.enAppTypes.replaceLostLicense;
                 License.Reason = Licenses.enReason.ReplacementforLost;
             }
         }
@@ -56,13 +56,13 @@ namespace DvldProject
 
         private void fillApplication()
         {
-            App.getApplicationFee();
-            App.ApplicationDate = DateTime.Now;
-            App.CreatedByUserID = Global.USER.UserID;
-            App.ApplicantPersonID = PersonID;
-            App.ApplicationTypeID = (int)App.ApplicationType; 
-            App.LastStatusDate = DateTime.Now;
-            App.ApplicationStatus = (int)App.Status; 
+            //App.getApplicationFee();
+            //App.ApplicationDate = DateTime.Now;
+            //App.CreatedByUserID = Global.USER.UserID;
+            //App.ApplicantPersonID = PersonID;
+            //App.ApplicationTypeID = (int)App.ApplicationType; 
+            //App.LastStatusDate = DateTime.Now;
+            //App.ApplicationStatus = (int)App.Status; 
 
         }
 

@@ -80,15 +80,15 @@ namespace DvldProject
             personID = people.getPersonIDbyNationalNo(NationalNo); 
             AppId = application.getAppIdByLDLid(LDLid);
 
-            ldLapplicationInfo1.setDldId(this.LDLid);
-            appDetails1.setAppID(AppId);
-            appDetails1.setPersonID(personID);
+            //ldLapplicationInfo1.setDldId(this.LDLid);
+            //appDetails1.setAppID(AppId);
+            //appDetails1.setPersonID(personID);
             reloadDataGrid(); 
         }
 
         public void reloadLDLapplication()
         {
-            ldLapplicationInfo1.reload(); 
+            //ldLapplicationInfo1.reload(); 
         }
 
         private void BTNclose_Click(object sender, EventArgs e)

@@ -1,6 +1,6 @@
 ﻿namespace DvldProject
 {
-    partial class ShowAppDetails
+    partial class ShowLdlAppDetails
     {
         /// <summary>
         /// Required designer variable.
@@ -29,9 +29,10 @@
         private void InitializeComponent()
         {
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.appDetails1 = new DvldProject.AppDetails();
             this.BTNclose = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.appDetails1 = new DvldProject.AppDetails();
+            this.ldLapplicationInfo1 = new DvldProject.LDLapplicationInfo();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -39,20 +40,12 @@
             // 
             this.groupBox2.Controls.Add(this.appDetails1);
             this.groupBox2.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.groupBox2.Location = new System.Drawing.Point(11, 43);
+            this.groupBox2.Location = new System.Drawing.Point(12, 148);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(625, 205);
             this.groupBox2.TabIndex = 22;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Application basic information";
-            // 
-            // appDetails1
-            // 
-            this.appDetails1.Location = new System.Drawing.Point(9, 21);
-            this.appDetails1.Margin = new System.Windows.Forms.Padding(4);
-            this.appDetails1.Name = "appDetails1";
-            this.appDetails1.Size = new System.Drawing.Size(595, 173);
-            this.appDetails1.TabIndex = 0;
             // 
             // BTNclose
             // 
@@ -63,7 +56,7 @@
             this.BTNclose.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.BTNclose.Image = global::DvldProject.Properties.Resources.close2;
             this.BTNclose.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BTNclose.Location = new System.Drawing.Point(555, 253);
+            this.BTNclose.Location = new System.Drawing.Point(556, 359);
             this.BTNclose.Name = "BTNclose";
             this.BTNclose.Size = new System.Drawing.Size(81, 38);
             this.BTNclose.TabIndex = 29;
@@ -77,23 +70,40 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft YaHei UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.label1.Location = new System.Drawing.Point(206, 9);
+            this.label1.Location = new System.Drawing.Point(107, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(218, 28);
+            this.label1.Size = new System.Drawing.Size(444, 28);
             this.label1.TabIndex = 30;
-            this.label1.Text = "Application Details ";
+            this.label1.Text = "Local Driving License Application Details ";
             // 
-            // ShowAppDetails
+            // appDetails1
+            // 
+            this.appDetails1.Location = new System.Drawing.Point(9, 21);
+            this.appDetails1.Margin = new System.Windows.Forms.Padding(4);
+            this.appDetails1.Name = "appDetails1";
+            this.appDetails1.Size = new System.Drawing.Size(595, 173);
+            this.appDetails1.TabIndex = 0;
+            // 
+            // ldLapplicationInfo1
+            // 
+            this.ldLapplicationInfo1.Location = new System.Drawing.Point(8, 51);
+            this.ldLapplicationInfo1.Name = "ldLapplicationInfo1";
+            this.ldLapplicationInfo1.Size = new System.Drawing.Size(637, 99);
+            this.ldLapplicationInfo1.TabIndex = 31;
+            // 
+            // ShowLdlAppDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(647, 297);
+            this.ClientSize = new System.Drawing.Size(647, 406);
+            this.Controls.Add(this.ldLapplicationInfo1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.BTNclose);
             this.Controls.Add(this.groupBox2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
-            this.Name = "ShowAppDetails";
+            this.Name = "ShowLdlAppDetails";
             this.Text = "ShowAppDetails";
+            this.Load += new System.EventHandler(this.ShowLdlAppDetails_Load);
             this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -106,5 +116,6 @@
         private AppDetails appDetails1;
         private System.Windows.Forms.Button BTNclose;
         private System.Windows.Forms.Label label1;
+        private LDLapplicationInfo ldLapplicationInfo1;
     }
 }

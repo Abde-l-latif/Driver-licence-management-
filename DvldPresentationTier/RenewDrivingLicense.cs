@@ -97,10 +97,10 @@ namespace DvldProject
             application app = new application();
             app.CreatedByUserID = Global.USER.UserID;
             app.PaidFees = Convert.ToDecimal(AppFees.Text);
-            app.ApplicationStatus = 3;
+            //app.ApplicationStatus = 3;
             app.LastStatusDate = Convert.ToDateTime(AppDate.Text);
             app.ApplicationDate = Convert.ToDateTime(AppDate.Text);
-            app.ApplicationTypeID = 2;
+            //app.ApplicationTypeID = 2;
             app.ApplicantPersonID = PersonID;
             if (!app.Save())
             {

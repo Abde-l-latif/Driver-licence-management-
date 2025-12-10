@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -33,6 +34,11 @@ namespace DvldProject
 
         enStatus Status;
 
+        string FilterWith = ""; 
+
+
+        DataTable _dt;
+
         public localDrivingLicenseApp()
         {
             InitializeComponent();
@@ -50,7 +56,8 @@ namespace DvldProject
 
         private void FillDataGrid()
         {
-            dataGridView1.DataSource = application.getAll_LDL_ApplicationPeople();
+            _dt = LdlApplication.GetAllLocalDrivingLicenseApplications();
+            dataGridView1.DataSource = _dt;
         }
 
         public void reload()
@@ -78,17 +85,9 @@ namespace DvldProject
 
         private void pictureAddPerson_Click(object sender, EventArgs e)
         {
-            NewLdlApp fm = new NewLdlApp();
+            AddUpdateLdlApp fm = new AddUpdateLdlApp();
             fm.ShowDialog();
-
-            foreach (Form frm in Application.OpenForms)
-            {
-                if (frm is localDrivingLicenseApp ldlManage)
-                {
-                    ldlManage.reload();
-                    return;
-                }
-            }
+            reload(); 
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -110,11 +109,47 @@ namespace DvldProject
                 textBox1.Visible = false;
                 reload();
             }
+
+            FilterWith = comboBox1.SelectedItem.ToString();
+        }
+
+        private void InitializeFilterWith()
+        {
+            switch (FilterWith)
+            {
+                case "LDLAppId":
+                    FilterWith = "LocalDrivingLicenseApplicationID";
+                    break;
+                case "National No":
+                    FilterWith = "NationalNo";
+                    break;
+                case "Full Name":
+                    FilterWith = "FullName";
+                    break;
+                case "Status":
+                    FilterWith = "Status";
+                    break;
+                case "none":
+                    FilterWith = "none";
+                    break;
+            }
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            dataGridView1.DataSource = application.getFiltred_LDL_ApplicationPeople(textBox1.Text, comboBox1.SelectedItem.ToString());
+
+            InitializeFilterWith();
+            if (String.IsNullOrEmpty(textBox1.Text))
+            {
+                _dt.DefaultView.RowFilter = "";
+                return; 
+            }
+
+            if(FilterWith == "LocalDrivingLicenseApplicationID")
+                _dt.DefaultView.RowFilter = String.Format("[{0}] = {1}", FilterWith, Convert.ToInt32(textBox1.Text));
+            else
+                _dt.DefaultView.RowFilter = String.Format("[{0}] like '{1}%'", FilterWith, textBox1.Text);
+
             LBrecord.Text = dataGridView1.Rows.Count.ToString() + " Record(s)";
         }
 
@@ -123,6 +158,120 @@ namespace DvldProject
             if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
                 e.Handled = true;
         }
+
+        private void editApplicationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                int LdlAppID = (int)dataGridView1.SelectedRows[0].Cells[0].Value;
+                AddUpdateLdlApp fm = new AddUpdateLdlApp(LdlAppID);
+                fm.ShowDialog();
+
+                reload();
+            }
+            else
+            {
+                MessageBox.Show("You have to select a person before setting an appointment", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void showApplicationDetailsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                int LdlAppID = (int)dataGridView1.SelectedRows[0].Cells[0].Value;
+                ShowLdlAppDetails fm = new ShowLdlAppDetails(LdlAppID);
+                fm.ShowDialog();
+
+            }
+            else
+            {
+                MessageBox.Show("You have to select a person before setting an appointment", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void deleteApplicationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                int LdlAppID = (int)dataGridView1.SelectedRows[0].Cells[0].Value;
+
+                LdlApplication LocalDrivingLicenseApplication = LdlApplication.FindByLocalDrivingAppLicenseID(LdlAppID); 
+
+                if( LocalDrivingLicenseApplication != null )
+                {
+                    if(LocalDrivingLicenseApplication.LdlDelete())
+                    {
+                        MessageBox.Show("Application has been deleted successfully", "Cancelled", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        FillDataGrid();
+                    }
+                    else
+                        MessageBox.Show("this person has Appointments you can't delete it ", "warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                    MessageBox.Show(" something went wrong with ID passed ", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                MessageBox.Show("You have to select a person before setting an appointment", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void cancelApplicationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Status = enStatus.Cancelled;
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+
+                int LdlAppID = (int)dataGridView1.SelectedRows[0].Cells[0].Value;
+
+                LdlApplication LocalDrivingLicenseApplication = LdlApplication.FindByLocalDrivingAppLicenseID(LdlAppID);
+
+                if (LocalDrivingLicenseApplication != null)
+                {
+                    if (LocalDrivingLicenseApplication.Cancel())
+                    {
+                        MessageBox.Show("Application has been Cancelled successfully", "Cancelled", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        FillDataGrid();
+                    }
+                    else
+                        MessageBox.Show("Cancelled Operation failed!!", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                    MessageBox.Show("something went wrong with ID passed", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+            else
+            {
+                MessageBox.Show("You have to select a person before setting an appointment", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         private void scheduleVisionTestToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -224,7 +373,6 @@ namespace DvldProject
 
         }
 
-
         private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {
             if (dataGridView1.SelectedRows.Count > 0)
@@ -303,87 +451,11 @@ namespace DvldProject
             }
         }
 
-        private void cancelApplicationToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Status = enStatus.Cancelled;
-            if (dataGridView1.SelectedRows.Count > 0)
-            {
 
-                int LdlAppID = (int)dataGridView1.SelectedRows[0].Cells[0].Value;
-                int AppID = application.getAppIdByLDLid(LdlAppID);
 
-                application App = new application(AppID);
 
-                if (App.Save((int)Status))
-                {
-                    MessageBox.Show("Application has been cancelled successfully", "Cancelled", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    FillDataGrid();
-                }
-                else
-                    MessageBox.Show("Cancelled Operation failed!!", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+ 
 
-            }
-            else
-            {
-                MessageBox.Show("You have to select a person before setting an appointment", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
 
-        private void deleteApplicationToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (dataGridView1.SelectedRows.Count > 0)
-            {
-                int LdlAppID = (int)dataGridView1.SelectedRows[0].Cells[0].Value;
-
-                if (application.DeleteLdlApp(LdlAppID))
-                {
-                    MessageBox.Show("Application has been deleted successfully", "Cancelled", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    FillDataGrid();
-                }
-                else
-                {
-                    MessageBox.Show("this person has Appointments you can't delete it ", "warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                }
-
-            }
-            else
-            {
-                MessageBox.Show("You have to select a person before setting an appointment", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void showApplicationDetailsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (dataGridView1.SelectedRows.Count > 0)
-            {
-                int LdlAppID = (int)dataGridView1.SelectedRows[0].Cells[0].Value;
-                string NationalNo = dataGridView1.SelectedRows[0].Cells["NationalNo"].Value.ToString();
-                int appID = application.getAppIdByLDLid(LdlAppID);
-                int PersonID = people.getPersonIDbyNationalNo(NationalNo);
-                ShowAppDetails fm = new ShowAppDetails(appID , PersonID);
-                fm.ShowDialog(); 
-
-            }
-            else
-            {
-                MessageBox.Show("You have to select a person before setting an appointment", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void editApplicationToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (dataGridView1.SelectedRows.Count > 0)
-            {
-                int LdlAppID = (int)dataGridView1.SelectedRows[0].Cells[0].Value;
-                int appID = application.getAppIdByLDLid(LdlAppID);
-                UpdateApplication fm = new UpdateApplication(appID);
-                fm.ShowDialog(); 
-            }
-            else
-            {
-                MessageBox.Show("You have to select a person before setting an appointment", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
     }
 }

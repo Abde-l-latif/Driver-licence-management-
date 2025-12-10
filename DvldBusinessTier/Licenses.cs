@@ -43,6 +43,11 @@ namespace DvldBusinessTier
             this.CreatedByUserID = CreatedByUserID;
         }
 
+        static public bool IsLicenseExistByPersonID(int personID , int licenseClassID)
+        {
+            return (dataLicense.GetActiveLicenseIDByPersonID(personID, licenseClassID) != -1);
+        }
+
         public void FillExpirationDateOfLicense()
         {
             DateTime Date = IssueDate;

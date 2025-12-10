@@ -14,25 +14,27 @@ namespace DvldBusinessTier
 
         public enum enAppStatus { New = 1, Cancelled = 2, Completed = 3 }
 
-        enum enMode { addMode , updateMode }
+        public enum enMode { addMode , updateMode }
+
 
         /* ================== */
 
-        public enAppTypes ApplicationType;
 
-        public enAppStatus Status; 
-
-        private enMode Mode;
+        public enMode Mode;
 
         public int ApplicationID { get; set; }
 
         public int ApplicantPersonID { get; set; }
 
+        public people Person;
+
         public DateTime ApplicationDate { get; set; }
 
-        public int ApplicationTypeID { get; set; }
+        public enAppTypes ApplicationTypeID { get; set; }
 
-        public int ApplicationStatus { get; set; }
+        public ApplicationType AppType; 
+
+        public enAppStatus ApplicationStatus { get; set; }
 
         public DateTime LastStatusDate { get; set; }
 
@@ -40,40 +42,151 @@ namespace DvldBusinessTier
 
         public int CreatedByUserID {get ; set; }
 
+        public Users user;
+
         public application()
         {
             Mode = enMode.addMode;
             ApplicationID = -1;
             ApplicantPersonID = -1;
             ApplicationDate = DateTime.Now;
-            ApplicationTypeID = -1;
-            ApplicationStatus = -1;
+            ApplicationTypeID = enAppTypes.newLocalLicense;
+            ApplicationStatus = enAppStatus.New;
             LastStatusDate = DateTime.Now;
             PaidFees = 0;
             CreatedByUserID = -1;
         }
 
-        public application(int AppID)
+        public application(int AppID, int personID , DateTime AppDate , enAppTypes AppType , enAppStatus AppStatus , DateTime LastStatusDate , Decimal fees , int CreatedByUser)
         {
             Mode = enMode.updateMode;
             ApplicationID = AppID;
+            ApplicantPersonID = personID;
+            Person = people.Find(personID);
+            ApplicationDate = AppDate;
+            ApplicationTypeID = AppType;
+            this.AppType = ApplicationType.Find((int)AppType);
+            ApplicationStatus = AppStatus;
+            this.LastStatusDate = LastStatusDate;
+            PaidFees = fees;
+            this.CreatedByUserID = CreatedByUser;
+            user = Users.getUserByUserID(CreatedByUser);
         }
 
-        public decimal getApplicationFee()
+        private bool AddApplication()
         {
-            int id = Convert.ToInt32(ApplicationType);
-            PaidFees = dataApplication.getApplicationFee(id);
-            return PaidFees;
-        }
-        static public DataTable getAll_LDL_ApplicationPeople()
-        {
-            return dataApplication.getAll_LDL_ApplicationPeople();
+            this.ApplicationID = dataApplication.insertApplication(this.ApplicantPersonID , this.ApplicationDate , (int)this.ApplicationTypeID , (byte)this.ApplicationStatus
+                , this.LastStatusDate , this.PaidFees , this.CreatedByUserID);
+            return (this.ApplicationID != -1);
         }
 
-        static public DataTable getFiltred_LDL_ApplicationPeople(string text, string Filter)
+        private bool updateApplicationInfo()
         {
-            return dataApplication.getFiltred_LDL_ApplicationPeople(text, Filter);
+            return dataApplication.updateApplication(this.ApplicationID, this.ApplicationDate , (int)this.ApplicationTypeID, (byte)this.ApplicationStatus
+                , this.LastStatusDate, this.PaidFees, this.CreatedByUserID); 
         }
+
+        public bool Save(int applicationStatus = 1)
+        {
+
+            if(Mode == enMode.addMode)
+            {
+                return AddApplication(); 
+            } else if (Mode == enMode.updateMode)
+            {
+                return updateApplicationInfo(); 
+            }
+            return false; 
+        }
+
+        public static application FindBaseApplication(int ApplicationID)
+        {
+            int ApplicantPersonID = -1;
+            DateTime ApplicationDate = DateTime.Now; int ApplicationTypeID = -1;
+            byte ApplicationStatus = 1; DateTime LastStatusDate = DateTime.Now;
+            decimal PaidFees = 0; int CreatedByUserID = -1;
+
+            bool IsFound = dataApplication.GetApplicationInfoByID
+                                (
+                                    ApplicationID, ref ApplicantPersonID,
+                                    ref ApplicationDate, ref ApplicationTypeID,
+                                    ref ApplicationStatus, ref LastStatusDate,
+                                    ref PaidFees, ref CreatedByUserID
+                                );
+
+            if (IsFound)
+                return new application(ApplicationID, ApplicantPersonID,
+                                     ApplicationDate, (enAppTypes)ApplicationTypeID,
+                                    (enAppStatus)ApplicationStatus, LastStatusDate,
+                                     PaidFees, CreatedByUserID);
+            else
+                return null;
+        }
+
+        public bool Cancel()
+        {
+            return dataApplication.UpdateStatus(ApplicationID, (int)enAppStatus.Cancelled);
+        }
+
+        public bool SetComplete()
+
+        {
+            return dataApplication.UpdateStatus(ApplicationID, (int)enAppStatus.Completed);
+        }
+
+        public bool Delete()
+        {
+            return dataApplication.DeleteApplication(this.ApplicationID);
+        }
+
+        public static bool IsApplicationExist(int ApplicationID)
+        {
+            return dataApplication.IsApplicationExist(ApplicationID);
+        }
+
+        public static bool DoesPersonHaveActiveApplication(int PersonID, int ApplicationTypeID)
+        {
+            return dataApplication.DoesPersonHaveActiveApplication(PersonID, ApplicationTypeID);
+        }
+
+        public bool DoesPersonHaveActiveApplication(int ApplicationTypeID)
+        {
+            return DoesPersonHaveActiveApplication(this.ApplicantPersonID, ApplicationTypeID);
+        }
+
+        public static int GetActiveApplicationID(int PersonID, enAppTypes ApplicationTypeID)
+        {
+            return dataApplication.GetActiveApplicationID(PersonID, (int)ApplicationTypeID);
+        }
+
+        public int GetActiveApplicationID(enAppTypes ApplicationTypeID)
+        {
+            return GetActiveApplicationID(this.ApplicantPersonID, ApplicationTypeID);
+        }
+
+        public static int GetActiveApplicationIDForLicenseClass(int PersonID, enAppTypes ApplicationTypeID, int LicenseClassID)
+        {
+            return dataApplication.GetActiveApplicationIDForLicenseClass(PersonID, (int)ApplicationTypeID, LicenseClassID);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         static public DataTable getAllLicenseClasses()
         {
@@ -85,22 +198,9 @@ namespace DvldBusinessTier
             return dataApplication.getApplicationFee(id);
         }
 
-        private bool AddApplication()
-        {
-            this.ApplicationID = dataApplication.insertApplication(this.ApplicantPersonID , this.ApplicationDate , this.ApplicationTypeID , this.ApplicationStatus
-                , this.LastStatusDate , this.PaidFees , this.CreatedByUserID);
-            return (this.ApplicationID != -1);
-        }
 
-        private void updateApplication()
-        {
-            dataApplication.updateApplicationStatus(this.ApplicationID, this.ApplicationStatus); 
-        }
 
-        static public void GetLDLpersonDetails(int id, ref string AppliedLicense, ref int passedTest)
-        {
-             dataApplication.GetLDLpersonDetails(id, ref AppliedLicense, ref passedTest);
-        }
+
 
         static public int getAppIdByLDLid(int LDLid)
         {
@@ -114,25 +214,14 @@ namespace DvldBusinessTier
                 ref fees, ref date, ref statusDate); 
         }
 
-        static public bool insert_LDL_Application(int applicationID, int licenseClassID , ref int L_D_Lid)
-        {
-            return dataApplication.insert_LDL_Application(applicationID , licenseClassID, ref L_D_Lid);
-        }
+
 
         static public bool isPersonAppalreadyExists(string ClassName, string NationalNo)
         {
             return dataApplication.isPersonAppalreadyExists(ClassName, NationalNo);
         }
 
-        static public bool DeleteLdlApp(int id)
-        {
-            return dataApplication.Delete_LDL_App(id);
-        }
 
-        static public bool UpdateApplicationDate(int id , DateTime ApplicationDate)
-        {
-            return dataApplication.updateApplicationDate(id , ApplicationDate) > 0 ? true : false;
-        }
 
         static public DataTable getAll_InterDL_ApplicationPeople()
         {
@@ -149,20 +238,6 @@ namespace DvldBusinessTier
             return dataApplication.getPersonIDByAppID(AppID);
         }
 
-        public bool Save(int applicationStatus = 1)
-        {
-
-            if(Mode == enMode.addMode)
-            {
-                return AddApplication(); 
-            } else if (Mode == enMode.updateMode)
-            {
-                this.ApplicationStatus = applicationStatus; 
-                updateApplication(); 
-                return true;
-            }
-            return false; 
-        }
 
     }
 }

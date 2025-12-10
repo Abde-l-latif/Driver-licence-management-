@@ -46,10 +46,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppDetails.cs">
+    <Compile Include="ApplicationsFolder\AppDetails.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="AppDetails.Designer.cs">
+    <Compile Include="ApplicationsFolder\AppDetails.Designer.cs">
       <DependentUpon>AppDetails.cs</DependentUpon>
     </Compile>
     <Compile Include="DetainLicenseForm.cs">
@@ -88,7 +88,7 @@
     <Compile Include="LoginFolder\Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
-    <Compile Include="ApplicationTypeFolder\ManageAppTypeForm.Designer.cs">
+    <Compile Include="ApplicationsFolder\ApplicationTypeFolder\ManageAppTypeForm.Designer.cs">
       <DependentUpon>ManageAppTypeForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ManageDetainLicenses.cs">
@@ -151,10 +151,10 @@
     <Compile Include="UpdateApplication.Designer.cs">
       <DependentUpon>UpdateApplication.cs</DependentUpon>
     </Compile>
-    <Compile Include="ApplicationTypeFolder\UpdateAppTypeForm.cs">
+    <Compile Include="ApplicationsFolder\ApplicationTypeFolder\UpdateAppTypeForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ApplicationTypeFolder\UpdateAppTypeForm.Designer.cs">
+    <Compile Include="ApplicationsFolder\ApplicationTypeFolder\UpdateAppTypeForm.Designer.cs">
       <DependentUpon>UpdateAppTypeForm.cs</DependentUpon>
     </Compile>
     <Compile Include="TestsFolder\TestTypeFolder\ManageTestType.cs">
@@ -163,11 +163,11 @@
     <Compile Include="TestsFolder\TestTypeFolder\ManageTestType.Designer.cs">
       <DependentUpon>ManageTestType.cs</DependentUpon>
     </Compile>
-    <Compile Include="ShowAppDetails.cs">
+    <Compile Include="ApplicationsFolder\LocalDrivingLicenseApplication\ShowLdlAppDetails.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ShowAppDetails.Designer.cs">
-      <DependentUpon>ShowAppDetails.cs</DependentUpon>
+    <Compile Include="ApplicationsFolder\LocalDrivingLicenseApplication\ShowLdlAppDetails.Designer.cs">
+      <DependentUpon>ShowLdlAppDetails.cs</DependentUpon>
     </Compile>
     <Compile Include="TestsFolder\TestTypeFolder\UpdateTestTypeForm.cs">
       <SubType>Form</SubType>
@@ -187,17 +187,17 @@
     <Compile Include="LicenseHistory.Designer.cs">
       <DependentUpon>LicenseHistory.cs</DependentUpon>
     </Compile>
-    <Compile Include="localDrivingLicenseApp.cs">
+    <Compile Include="ApplicationsFolder\LocalDrivingLicenseApplication\localDrivingLicenseApp.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="localDrivingLicenseApp.Designer.cs">
+    <Compile Include="ApplicationsFolder\LocalDrivingLicenseApplication\localDrivingLicenseApp.Designer.cs">
       <DependentUpon>localDrivingLicenseApp.cs</DependentUpon>
     </Compile>
-    <Compile Include="NewLdlApp.cs">
+    <Compile Include="ApplicationsFolder\LocalDrivingLicenseApplication\AddUpdateLdlApp.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="NewLdlApp.Designer.cs">
-      <DependentUpon>NewLdlApp.cs</DependentUpon>
+    <Compile Include="ApplicationsFolder\LocalDrivingLicenseApplication\AddUpdateLdlApp.Designer.cs">
+      <DependentUpon>AddUpdateLdlApp.cs</DependentUpon>
     </Compile>
     <Compile Include="AppointmentTests.cs">
       <SubType>Form</SubType>
@@ -272,10 +272,10 @@
       <DependentUpon>UserDetailsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Global.cs" />
-    <Compile Include="LDLapplicationInfo.cs">
+    <Compile Include="ApplicationsFolder\LocalDrivingLicenseApplication\controls\LDLapplicationInfo.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="LDLapplicationInfo.Designer.cs">
+    <Compile Include="ApplicationsFolder\LocalDrivingLicenseApplication\controls\LDLapplicationInfo.Designer.cs">
       <DependentUpon>LDLapplicationInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -286,7 +286,7 @@
     <Compile Include="UserFolder\Controls\userInfo.Designer.cs">
       <DependentUpon>userInfo.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="AppDetails.resx">
+    <EmbeddedResource Include="ApplicationsFolder\AppDetails.resx">
       <DependentUpon>AppDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DetainLicenseForm.resx">
@@ -307,7 +307,7 @@
     <EmbeddedResource Include="LoginFolder\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ApplicationTypeFolder\ManageAppTypeForm.resx">
+    <EmbeddedResource Include="ApplicationsFolder\ApplicationTypeFolder\ManageAppTypeForm.resx">
       <DependentUpon>ManageAppTypeForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ManageDetainLicenses.resx">
@@ -340,14 +340,14 @@
     <EmbeddedResource Include="UpdateApplication.resx">
       <DependentUpon>UpdateApplication.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ApplicationTypeFolder\UpdateAppTypeForm.resx">
+    <EmbeddedResource Include="ApplicationsFolder\ApplicationTypeFolder\UpdateAppTypeForm.resx">
       <DependentUpon>UpdateAppTypeForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TestsFolder\TestTypeFolder\ManageTestType.resx">
       <DependentUpon>ManageTestType.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ShowAppDetails.resx">
-      <DependentUpon>ShowAppDetails.cs</DependentUpon>
+    <EmbeddedResource Include="ApplicationsFolder\LocalDrivingLicenseApplication\ShowLdlAppDetails.resx">
+      <DependentUpon>ShowLdlAppDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TestsFolder\TestTypeFolder\UpdateTestTypeForm.resx">
       <DependentUpon>UpdateTestTypeForm.cs</DependentUpon>
@@ -358,11 +358,11 @@
     <EmbeddedResource Include="LicenseHistory.resx">
       <DependentUpon>LicenseHistory.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="localDrivingLicenseApp.resx">
+    <EmbeddedResource Include="ApplicationsFolder\LocalDrivingLicenseApplication\localDrivingLicenseApp.resx">
       <DependentUpon>localDrivingLicenseApp.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NewLdlApp.resx">
-      <DependentUpon>NewLdlApp.cs</DependentUpon>
+    <EmbeddedResource Include="ApplicationsFolder\LocalDrivingLicenseApplication\AddUpdateLdlApp.resx">
+      <DependentUpon>AddUpdateLdlApp.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AppointmentTests.resx">
       <DependentUpon>AppointmentTests.cs</DependentUpon>
@@ -400,7 +400,7 @@
     <EmbeddedResource Include="UserFolder\UserDetailsForm.resx">
       <DependentUpon>UserDetailsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LDLapplicationInfo.resx">
+    <EmbeddedResource Include="ApplicationsFolder\LocalDrivingLicenseApplication\controls\LDLapplicationInfo.resx">
       <DependentUpon>LDLapplicationInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -411,7 +411,7 @@
     <EmbeddedResource Include="UserFolder\Controls\userInfo.resx">
       <DependentUpon>userInfo.cs</DependentUpon>
     </EmbeddedResource>
-    <Compile Include="ApplicationTypeFolder\ManageAppTypeForm.cs">
+    <Compile Include="ApplicationsFolder\ApplicationTypeFolder\ManageAppTypeForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <None Include="Properties\Settings.settings">

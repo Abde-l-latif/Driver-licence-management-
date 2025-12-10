@@ -16,15 +16,15 @@ namespace DvldProject
             InitializeComponent();
             StartPosition = FormStartPosition.CenterScreen;
             InitializeUi();
-            App.ApplicationType = application.enAppTypes.releaseAndDetainedLicense;
-            App.Status = application.enAppStatus.Completed; 
+            //App.ApplicationType = application.enAppTypes.releaseAndDetainedLicense;
+            //App.Status = application.enAppStatus.Completed; 
         }
         public ReleaseDetainForm(int LicenseID)
         {
             InitializeComponent();
             StartPosition = FormStartPosition.CenterScreen;
-            App.ApplicationType = application.enAppTypes.releaseAndDetainedLicense;
-            App.Status = application.enAppStatus.Completed;
+            //App.ApplicationType = application.enAppTypes.releaseAndDetainedLicense;
+            //App.Status = application.enAppStatus.Completed;
             this.LicenseID = LicenseID; 
             txtLicenseID.Text = LicenseID.ToString();
             LicenseInfo.Enabled = false;
@@ -74,8 +74,8 @@ namespace DvldProject
         {
             App.ApplicantPersonID = PersonID;
             App.ApplicationDate = DateTime.Now;
-            App.ApplicationTypeID = (int)App.ApplicationType;
-            App.ApplicationStatus = (int)App.Status; 
+            //App.ApplicationTypeID = (int)App.ApplicationType;
+            //App.ApplicationStatus = (int)App.Status; 
             App.LastStatusDate = DateTime.Now;
             App.CreatedByUserID = Global.USER.UserID; 
         }
@@ -121,7 +121,7 @@ namespace DvldProject
             PersonID = application.getPersonIDByAppID(ApplicationID);
             fillDriverLicenseInfo(ApplicationID);
             LBLicenseID.Text = LicenseID.ToString();
-            LbAppFees.Text = App.getApplicationFee().ToString("0.00");
+            //LbAppFees.Text = App.getApplicationFee().ToString("0.00");
             LbTotalFees.Text = (Convert.ToDecimal(LbAppFees.Text) + Convert.ToDecimal(lbFineFees.Text)).ToString("0.00");
         }
 

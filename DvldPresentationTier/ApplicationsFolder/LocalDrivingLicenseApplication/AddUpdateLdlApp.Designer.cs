@@ -1,6 +1,6 @@
 ﻿namespace DvldProject
 {
-    partial class NewLdlApp
+    partial class AddUpdateLdlApp
     {
         /// <summary>
         /// Required designer variable.
@@ -31,12 +31,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.personDetailsFilter1 = new DvldProject.PeopleFolder.Controls.PersonDetailsFilter();
             this.BTNNext = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.BTNAddPerson = new System.Windows.Forms.Button();
-            this.BTNfilterSearch = new System.Windows.Forms.Button();
-            this.filterPeople1 = new DvldProject.filterPeople();
-            this.personDetails1 = new DvldProject.PersonDetails();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
@@ -56,7 +52,6 @@
             this.BTNclose = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -88,9 +83,8 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.personDetailsFilter1);
             this.tabPage1.Controls.Add(this.BTNNext);
-            this.tabPage1.Controls.Add(this.groupBox1);
-            this.tabPage1.Controls.Add(this.personDetails1);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -98,6 +92,16 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Personel Info";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // personDetailsFilter1
+            // 
+            this.personDetailsFilter1.FilterPerson = true;
+            this.personDetailsFilter1.Location = new System.Drawing.Point(22, 6);
+            this.personDetailsFilter1.Name = "personDetailsFilter1";
+            this.personDetailsFilter1.ShowAddPerson = true;
+            this.personDetailsFilter1.Size = new System.Drawing.Size(653, 307);
+            this.personDetailsFilter1.TabIndex = 19;
+            this.personDetailsFilter1.OnPersonSelected += new System.Action<int>(this.personDetailsFilter1_OnPersonSelected);
             // 
             // BTNNext
             // 
@@ -116,61 +120,6 @@
             this.BTNNext.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.BTNNext.UseVisualStyleBackColor = true;
             this.BTNNext.Click += new System.EventHandler(this.BTNNext_Click);
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.BTNAddPerson);
-            this.groupBox1.Controls.Add(this.BTNfilterSearch);
-            this.groupBox1.Controls.Add(this.filterPeople1);
-            this.groupBox1.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.groupBox1.Location = new System.Drawing.Point(34, 21);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(610, 53);
-            this.groupBox1.TabIndex = 2;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Filter";
-            // 
-            // BTNAddPerson
-            // 
-            this.BTNAddPerson.BackColor = System.Drawing.Color.LightGray;
-            this.BTNAddPerson.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BTNAddPerson.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BTNAddPerson.Image = global::DvldProject.Properties.Resources.user__1_1;
-            this.BTNAddPerson.Location = new System.Drawing.Point(563, 14);
-            this.BTNAddPerson.Name = "BTNAddPerson";
-            this.BTNAddPerson.Size = new System.Drawing.Size(36, 32);
-            this.BTNAddPerson.TabIndex = 4;
-            this.BTNAddPerson.UseVisualStyleBackColor = false;
-            this.BTNAddPerson.Click += new System.EventHandler(this.BTNAddPerson_Click);
-            // 
-            // BTNfilterSearch
-            // 
-            this.BTNfilterSearch.BackColor = System.Drawing.Color.LightGray;
-            this.BTNfilterSearch.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BTNfilterSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BTNfilterSearch.Image = global::DvldProject.Properties.Resources.user__2_;
-            this.BTNfilterSearch.Location = new System.Drawing.Point(514, 14);
-            this.BTNfilterSearch.Name = "BTNfilterSearch";
-            this.BTNfilterSearch.Size = new System.Drawing.Size(36, 32);
-            this.BTNfilterSearch.TabIndex = 3;
-            this.BTNfilterSearch.UseVisualStyleBackColor = false;
-            //this.BTNfilterSearch.Click += new System.EventHandler(this.BTNfilterSearch_Click);
-            // 
-            // filterPeople1
-            // 
-            this.filterPeople1.Location = new System.Drawing.Point(7, 14);
-            this.filterPeople1.Margin = new System.Windows.Forms.Padding(4);
-            this.filterPeople1.Name = "filterPeople1";
-            this.filterPeople1.Size = new System.Drawing.Size(596, 32);
-            this.filterPeople1.TabIndex = 1;
-            // 
-            // personDetails1
-            // 
-            this.personDetails1.Location = new System.Drawing.Point(22, 74);
-            this.personDetails1.Name = "personDetails1";
-            this.personDetails1.Size = new System.Drawing.Size(634, 250);
-            this.personDetails1.TabIndex = 0;
             // 
             // tabPage2
             // 
@@ -370,7 +319,7 @@
             this.BTNclose.UseVisualStyleBackColor = true;
             this.BTNclose.Click += new System.EventHandler(this.BTNclose_Click);
             // 
-            // Form15
+            // NewLdlApp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -380,11 +329,11 @@
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
-            this.Name = "Form15";
+            this.Name = "NewLdlApp";
             this.Text = "New local Driving License Application";
+            this.Load += new System.EventHandler(this.NewLdlApp_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
@@ -401,15 +350,10 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private filterPeople filterPeople1;
-        private PersonDetails personDetails1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Button BTNNext;
         private System.Windows.Forms.Button BTNsave;
         private System.Windows.Forms.Button BTNclose;
-        private System.Windows.Forms.Button BTNAddPerson;
-        private System.Windows.Forms.Button BTNfilterSearch;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
@@ -424,5 +368,6 @@
         private System.Windows.Forms.Label LBCreatedBy;
         private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.ComboBox comboBox1;
+        private PeopleFolder.Controls.PersonDetailsFilter personDetailsFilter1;
     }
 }

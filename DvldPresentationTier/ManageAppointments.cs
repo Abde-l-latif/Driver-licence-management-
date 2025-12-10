@@ -65,8 +65,8 @@ namespace DvldProject
             app = new application();
             app.ApplicantPersonID = this.PersonID;
             app.CreatedByUserID = Global.USER.UserID;
-            app.ApplicationStatus = 1;
-            app.ApplicationTypeID = 7;
+            //app.ApplicationStatus = 1;
+            //app.ApplicationTypeID = 7;
             app.PaidFees = application.getApplicationFee(7);
         }
         private void initializeUI()

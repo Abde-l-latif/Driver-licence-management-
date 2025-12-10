@@ -64,11 +64,11 @@ namespace DvldProject
                 }
 
                 application interApplication = new application();
-                interApplication.ApplicationStatus = 3;
+                //interApplication.ApplicationStatus = 3;
                 interApplication.ApplicantPersonID = PersonID;
                 interApplication.ApplicationDate = DateTime.Now;
                 interApplication.LastStatusDate = DateTime.Now;
-                interApplication.ApplicationTypeID = 6;
+                //interApplication.ApplicationTypeID = 6;
                 interApplication.CreatedByUserID = Global.USER.UserID;
                 interApplication.PaidFees = Convert.ToDecimal(labelFees.Text);
                 if(interApplication.Save())

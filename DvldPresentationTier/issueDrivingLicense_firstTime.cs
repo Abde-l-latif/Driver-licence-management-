@@ -28,15 +28,15 @@ namespace DvldProject
             this.NationalNo = NationalNo;
             this.appID = application.getAppIdByLDLid(LDLid);
             this.personID = people.getPersonIDbyNationalNo(this.NationalNo);
-            ldLapplicationInfo1.setDldId(this.LDLid);
-            appDetails1.setAppID(this.appID);
-            appDetails1.setPersonID(this.personID);
+            //ldLapplicationInfo1.setDldId(this.LDLid);
+            //appDetails1.setAppID(this.appID);
+            //appDetails1.setPersonID(this.personID);
         }
 
         private void issueDrivingLicense_firstTime_Load(object sender, EventArgs e)
         {
-            ldLapplicationInfo1.reload(); 
-            appDetails1.reload();
+            //ldLapplicationInfo1.reload(); 
+            //appDetails1.reload();
         }
 
         private void BTNclose_Click(object sender, EventArgs e)
@@ -75,13 +75,13 @@ namespace DvldProject
 
             if (license.AddFirstTimeLicense())
             {
-                application app = new application(appID);
-                if(app.Save(3))
-                {
-                    MessageBox.Show("License issued successfully with LicenseID = " + license.LicenseID, "succeeded", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    BTNsave.Enabled = false;
-                    reloadForms(); 
-                }
+                //application app = new application(appID);
+                //if(app.Save(3))
+                //{
+                //    MessageBox.Show("License issued successfully with LicenseID = " + license.LicenseID, "succeeded", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //    BTNsave.Enabled = false;
+                //    reloadForms(); 
+                //}
 
             }
             else
