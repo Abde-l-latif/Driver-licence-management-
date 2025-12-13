@@ -12,9 +12,7 @@ namespace DvldProject
             visionTest = 1, writtenTest = 2 , carTest = 3
         }
 
-        private int LDLid ;
-        private int AppId ;
-        private int personID;
+        LdlApplication LocalDrivingLicenseApplication; 
         private int TestType;
 
         private void initializeDataGrid()
@@ -59,7 +57,7 @@ namespace DvldProject
 
         private void getAllAppointments()
         {
-            dataGridView1.DataSource = TestAppointment.getTestAppointments(LDLid , TestType);
+            dataGridView1.DataSource = TestAppointment.getTestAppointments(LocalDrivingLicenseApplication.LocalDrivingLicenseApplicationID, TestType);
         }
 
         public void reloadDataGrid()
@@ -69,51 +67,44 @@ namespace DvldProject
             labelRecord.Text = dataGridView1.Rows.Count.ToString() + " Records";
         }
 
-        public AppointmentTests(int lDLid , string NationalNo , int testType)
+        public AppointmentTests(int lDLid , int testType)
         {
             InitializeComponent();
             StartPosition = FormStartPosition.CenterParent;
 
-            /* Initialize Variables */
-            this.LDLid = lDLid;
-            TestType = testType; 
-            personID = people.getPersonIDbyNationalNo(NationalNo); 
-            AppId = application.getAppIdByLDLid(LDLid);
+            this.TestType = testType;
 
-            //ldLapplicationInfo1.setDldId(this.LDLid);
-            //appDetails1.setAppID(AppId);
-            //appDetails1.setPersonID(personID);
+            LocalDrivingLicenseApplication = LdlApplication.FindByLocalDrivingAppLicenseID(lDLid);
+            ldLapplicationInfo1.LoadDataByLdlApplication(LocalDrivingLicenseApplication.LocalDrivingLicenseApplicationID);
+            appDetails1.LoadApplicationById(LocalDrivingLicenseApplication.ApplicationID);
+
             reloadDataGrid(); 
-        }
-
-        public void reloadLDLapplication()
-        {
-            //ldLapplicationInfo1.reload(); 
         }
 
         private void BTNclose_Click(object sender, EventArgs e)
         {
             this.Close(); 
         }
-
  
         private void pictureAddPerson_Click(object sender, EventArgs e)
         {
-            if(Tests.isTestPassedExists(LDLid, TestType))
+
+            if(Tests.isTestPassedExists(LocalDrivingLicenseApplication.LocalDrivingLicenseApplicationID, TestType))
             {
                 MessageBox.Show("this person Already passed the test", "Not Allowed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
 
-            if(TestAppointment.isAppointmentExists(LDLid, TestType))
+            if(TestAppointment.isAppointmentExists(LocalDrivingLicenseApplication.LocalDrivingLicenseApplicationID, TestType))
             {
                 MessageBox.Show("this person Already has an appointment", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            ManageAppointments fm = new ManageAppointments(LDLid , TestType , personID);
-            fm.ShowDialog(); 
+            ManageAppointments fm = new ManageAppointments(LocalDrivingLicenseApplication.LocalDrivingLicenseApplicationID, TestType);
+            fm.ShowDialog();
+            getAllAppointments();
         }
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
@@ -121,16 +112,21 @@ namespace DvldProject
             if(dataGridView1.SelectedRows.Count > 0)
             {
                 int AppointmentID = (int)dataGridView1.SelectedRows[0].Cells[0].Value;
-                bool isLocked = Convert.ToBoolean(dataGridView1.SelectedRows[0].Cells[3].Value);
-                DateTime Date = Convert.ToDateTime(dataGridView1.SelectedRows[0].Cells[1].Value);
-                ManageAppointments fm = new ManageAppointments(LDLid, TestType , AppointmentID , Date ,  isLocked);
+
+                ManageAppointments fm = new ManageAppointments(AppointmentID);
                 fm.ShowDialog();
+                getAllAppointments();
             }
             else
             {
                 MessageBox.Show("You have to select an appointment", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); 
             }
         }
+
+
+
+
+
 
         private void takeTestToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -142,7 +138,7 @@ namespace DvldProject
                     int AppointmentID = (int)dataGridView1.SelectedRows[0].Cells[0].Value;
                     string Date = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
                     string fees = dataGridView1.SelectedRows[0].Cells[2].Value.ToString();
-                    TakeTestForm fm = new TakeTestForm(LDLid, TestType, AppointmentID, Date, fees);
+                    TakeTestForm fm = new TakeTestForm(LocalDrivingLicenseApplication.LocalDrivingLicenseApplicationID, TestType, AppointmentID, Date, fees);
                     fm.ShowDialog();
                 }
                 else
@@ -156,6 +152,9 @@ namespace DvldProject
                 MessageBox.Show("You have to select an appointment", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
+
 
         private void Form16_Load(object sender, EventArgs e)
         {

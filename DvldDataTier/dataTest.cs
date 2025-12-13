@@ -62,122 +62,6 @@ namespace DvldDataTier
 
         }
 
-        static public int insertTestAppointments(int TestTypeID, int LocalDrivingLicenseApplicationID, DateTime AppointmentDate, Decimal PaidFees,
-         int CreatedByUserID , bool isLocked)
-        {
-            int @ID = -1;
-
-            SqlConnection connection = new SqlConnection(dataSettings.ConnectionString);
-
-            string query = @"insert into TestAppointments (TestTypeID, LocalDrivingLicenseApplicationID, AppointmentDate, PaidFees,
-            CreatedByUserID , isLocked) values(@TestTypeID, @LocalDrivingLicenseApplicationID, @AppointmentDate, @PaidFees,
-            @CreatedByUserID , @isLocked);
-            select SCOPE_IDENTITY()";
-
-            SqlCommand command = new SqlCommand(query, connection);
-
-            command.Parameters.AddWithValue("@TestTypeID", TestTypeID);
-            command.Parameters.AddWithValue("@LocalDrivingLicenseApplicationID", LocalDrivingLicenseApplicationID);
-            command.Parameters.AddWithValue("@AppointmentDate", AppointmentDate);
-            command.Parameters.AddWithValue("@PaidFees", PaidFees);
-            command.Parameters.AddWithValue("@CreatedByUserID", CreatedByUserID);
-            command.Parameters.AddWithValue("@isLocked", isLocked);
-
-            try
-            {
-                connection.Open();
-                object result = command.ExecuteScalar();
-
-
-                if (result != null)
-                {
-                    @ID = Convert.ToInt32(result);
-                }
-
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine($"error detected : {e}");
-            }
-            finally
-            {
-                connection.Close();
-            }
-
-            return @ID;
-        }
-
-        static public DataTable getTestAppointments(int id , int TestType)
-        {
-            DataTable dt = new DataTable();
-
-            SqlConnection Connection = new SqlConnection(dataSettings.ConnectionString);
-
-            string Query = @"select TestAppointmentID as AppointmentID , AppointmentDate , PaidFees , IsLocked 
-            from TestAppointments where LocalDrivingLicenseApplicationID = @id and TestTypeID = @TestType;";
-
-            SqlCommand Command = new SqlCommand(Query, Connection);
-
-            Command.Parameters.AddWithValue("@id", id);
-            Command.Parameters.AddWithValue("@TestType", TestType);
-
-            try
-            {
-                Connection.Open();
-                SqlDataReader reader = Command.ExecuteReader();
-
-                if (reader.HasRows)
-                {
-                    dt.Load(reader);
-                }
-
-
-                reader.Close();
-
-            }
-            catch (Exception E)
-            {
-                Console.WriteLine(E.Message);
-            }
-            finally
-            {
-                Connection.Close();
-            }
-
-            return dt;
-        }
-
-        static public bool updateAppointmentDate(int id , DateTime date)
-        {
-            int effectedRows = 0;
-
-            SqlConnection Connection = new SqlConnection(dataSettings.ConnectionString);
-
-            string Query = "update TestAppointments set AppointmentDate = @date where TestAppointmentID = @id ;";
-
-            SqlCommand Command = new SqlCommand(Query, Connection);
-
-            Command.Parameters.AddWithValue("@date", date);
-            Command.Parameters.AddWithValue("@id", id);
-
-            try
-            {
-                Connection.Open();
-                effectedRows = Command.ExecuteNonQuery();
-            }
-            catch (Exception E)
-            {
-                Console.WriteLine(E.Message);
-            }
-            finally
-            {
-                Connection.Close();
-            }
-
-            return effectedRows > 0;
-
-        }
-
         static public bool updateIsLocked(int id)
         {
             int effectedRows = 0;
@@ -207,42 +91,6 @@ namespace DvldDataTier
 
             return effectedRows > 0;
 
-        }
-
-        static public bool isAppointmentExists(int id , int testType)
-        {
-            bool isExists = false;
-
-            SqlConnection connection = new SqlConnection(dataSettings.ConnectionString);
-
-            string query = @"select found = 1 from TestAppointments 
-            where TestTypeID = @testType and LocalDrivingLicenseApplicationID = @id and IsLocked = 0";
-
-            SqlCommand command = new SqlCommand(query, connection);
-
-            command.Parameters.AddWithValue("@testType", testType);
-            command.Parameters.AddWithValue("@id", id);
-
-            try
-            {
-                connection.Open();
-                object result = command.ExecuteScalar();
-
-                if (result != null && int.TryParse(result.ToString(), out int number))
-                {
-                    isExists = true;
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine($"error detected : {e}");
-            }
-            finally
-            {
-                connection.Close();
-            }
-
-            return isExists;
         }
 
         static public Decimal getTestFee(int id)
@@ -327,7 +175,7 @@ namespace DvldDataTier
             bool exists = false; 
             string query = @"select count(TestAppointments.TestTypeID) from Tests
             inner join TestAppointments on TestAppointments.TestAppointmentID = Tests.TestAppointmentID
-            where TestAppointments.LocalDrivingLicenseApplicationID = @LdlID and TestAppointments.TestTypeID = @TestType and Tests.TestResult = 0;";
+            where TestAppointments.LocalDrivingLicenseApplicationID = @LdlID and TestAppointments.TestTypeID = @TestType and Tests.TestResult = 0 ;";
 
             SqlConnection Connection = new SqlConnection(dataSettings.ConnectionString);
 
@@ -395,6 +243,48 @@ namespace DvldDataTier
 
             return exists;
         }
+
+        static public int getPassedTests(int LocalDrivingLicenseApplicationID)
+        {
+            int passedTests = 0;
+
+            SqlConnection Connection = new SqlConnection(dataSettings.ConnectionString);
+
+            string Query = @"select count(TestResult) as passedTest from Tests
+            inner join TestAppointments on TestAppointments.TestAppointmentID = Tests.TestAppointmentID
+            where LocalDrivingLicenseApplicationID = @LocalDrivingLicenseApplicationID and TestResult = 1";
+
+            SqlCommand Command = new SqlCommand(Query, Connection);
+
+            Command.Parameters.AddWithValue("@LocalDrivingLicenseApplicationID", LocalDrivingLicenseApplicationID);
+
+            try
+            {
+
+                Connection.Open();
+
+                object result = Command.ExecuteScalar();
+
+                if (result != null)
+                {
+                    passedTests = Convert.ToInt32(result);
+                }
+
+            }
+            catch (Exception E)
+            {
+
+                Console.WriteLine(E.Message);
+
+            }
+            finally
+            {
+                Connection.Close();
+            }
+
+            return passedTests;
+        }
+     
 
 
     }

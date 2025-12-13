@@ -12,34 +12,49 @@ namespace DvldProject
 
 
         enMode Mode;
-        private int DL_AppID = -1;
-        private int TestType = -1;
-        private int AppointmentID = -1;
-        private bool isLocked = false; 
+
+
+        private int DL_AppID = -1; 
         private TestAppointment appointment;
-        private int PersonID;
+        private int TestType;
         application app;
 
 
-        public ManageAppointments(int id , int TestType , int personID)
+        public ManageAppointments(int id , int TestType)
         {
+
             InitializeComponent();
+
+            appointment = new TestAppointment();
+
             DL_AppID = id;
+
+            appointment.LocalDrivingLicenseApplication = LdlApplication.FindByLocalDrivingAppLicenseID(DL_AppID);
+
             this.TestType = TestType;
-            this.PersonID = personID;
+
             StartPosition = FormStartPosition.CenterParent;
+
             Mode = enMode.addMode; 
+
         }
 
-        public ManageAppointments(int id, int TestType , int AppointmentID , DateTime Date, bool isLocked)
+        public ManageAppointments(int appointmentID)
         {
             InitializeComponent();
-            DL_AppID = id;
-            this.TestType = TestType;
-            this.AppointmentID = AppointmentID;
+    
             StartPosition = FormStartPosition.CenterParent;
-            disenableEditingIfLocked(isLocked, Date);
-            this.isLocked = isLocked; 
+
+            appointment = TestAppointment.Find(appointmentID);
+
+            DL_AppID = appointment.LocalDrivingLicenseApplication.LocalDrivingLicenseApplicationID;
+
+            TestType = appointment.testTypeID;
+
+            labelRAppID.Text = appointment.retakeTestId == -1 ? "" : appointment.retakeTestId.ToString(); 
+
+            disenableEditingIfLocked(appointment.isLocked, appointment.appointmentDate);
+
             Mode = enMode.upDateMode; 
         }
 
@@ -48,32 +63,46 @@ namespace DvldProject
             if (isLocked)
             {
                 labelDate.Text = Date.ToString();
+
                 dateTimePicker1.Enabled = false;
+
                 dateTimePicker1.Visible = false;
+
                 BTNsave.Enabled = false;
             }
             else
             {
+
                 dateTimePicker1.Focus();
+
                 dateTimePicker1.Value = Date; 
+
                 dateTimePicker1.MinDate = Date;
+
             }
         }
 
         private void FillApp()
         {
             app = new application();
-            app.ApplicantPersonID = this.PersonID;
+
+            app.ApplicantPersonID = appointment.LocalDrivingLicenseApplication.ApplicantPersonID;
+
             app.CreatedByUserID = Global.USER.UserID;
-            //app.ApplicationStatus = 1;
-            //app.ApplicationTypeID = 7;
+
+            app.ApplicationStatus = application.enAppStatus.New;
+
+            app.ApplicationTypeID = application.enAppTypes.renewLicense;
+
             app.PaidFees = application.getApplicationFee(7);
+
         }
+
         private void initializeUI()
         {
             groupBox2.Enabled = false;
 
-            if (isLocked == true && Mode == enMode.upDateMode)
+            if (appointment.isLocked == true && Mode == enMode.upDateMode)
             {
                 labelTitle.Text = "Schedule Retake Test";
                 labelMsg.Visible = true;
@@ -85,10 +114,6 @@ namespace DvldProject
                 groupBox2.Enabled = true; 
                 FillApp();
                 labelRetakeFees.Text = app.PaidFees.ToString();
-                if (!app.Save())
-                {
-                    MessageBox.Show("Operation Failed!!", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
             }
 
             if (TestType == 1)
@@ -115,7 +140,7 @@ namespace DvldProject
         {
             string className = "", FullName = "";
             decimal fees = 0;
-            int trials = -1;
+            int trials = 0;
             Tests.GetScheduleTestInfo(DL_AppID, this.TestType, ref className, ref FullName, ref fees, ref trials);
             labelClass.Text = className;
             labelFees.Text = fees.ToString("0.00");
@@ -144,46 +169,27 @@ namespace DvldProject
             appointment.LDL_ID = this.DL_AppID;
             appointment.CreateByUserID = Global.USER.UserID;
             appointment.isLocked = false;
-        }
 
-        private void reloadDataGrid()
-        {
-            foreach(Form fm in Application.OpenForms)
-            {
-                if (fm is AppointmentTests schedule)
-                    schedule.reloadDataGrid(); 
-            }
-        }
-
-        private void fillRetakeID()
-        {
-
-            if (labelTitle.Text == "Schedule Retake Test")
-                labelRAppID.Text = appointment.appointmentID.ToString();
         }
 
         private void BTNsave_Click(object sender, EventArgs e)
         {
-
-
-            if (Mode == enMode.addMode)
+            if (labelTitle.Text == "Schedule Retake Test")
             {
-                appointment = new TestAppointment();
-                FillAppointment(appointment);
-
-            } 
-            else if(Mode == enMode.upDateMode)
-            {
-                appointment = new TestAppointment(AppointmentID, dateTimePicker1.Value);
+                if (!app.Save())
+                {
+                    MessageBox.Show("Operation Failed!!", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                labelRAppID.Text = app.ApplicationID.ToString();
+                appointment.retakeTestId = app.ApplicationID;
             }
+
+            FillAppointment(appointment);
+
 
             if (appointment.Save())
             {
                 MessageBox.Show("Operation Done Successfully", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                fillRetakeID();
-
-                reloadDataGrid();
                 BTNsave.Enabled = false;
             }
             else

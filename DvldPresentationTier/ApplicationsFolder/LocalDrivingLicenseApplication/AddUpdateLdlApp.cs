@@ -158,6 +158,7 @@ namespace DvldProject
                 return;
             }
 
+            LocalDrivingLicenseApplication.ApplicantPersonID = _selectedPersonID;
             LocalDrivingLicenseApplication.ApplicationTypeID = application.enAppTypes.newLocalLicense;
             LocalDrivingLicenseApplication.ApplicationStatus = application.enAppStatus.New;
             LocalDrivingLicenseApplication.LastStatusDate = DateTime.Now;

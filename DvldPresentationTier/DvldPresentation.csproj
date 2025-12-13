@@ -199,16 +199,16 @@
     <Compile Include="ApplicationsFolder\LocalDrivingLicenseApplication\AddUpdateLdlApp.Designer.cs">
       <DependentUpon>AddUpdateLdlApp.cs</DependentUpon>
     </Compile>
-    <Compile Include="AppointmentTests.cs">
+    <Compile Include="TestsFolder\TestAppointmentFolder\AppointmentTests.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AppointmentTests.Designer.cs">
+    <Compile Include="TestsFolder\TestAppointmentFolder\AppointmentTests.Designer.cs">
       <DependentUpon>AppointmentTests.cs</DependentUpon>
     </Compile>
-    <Compile Include="ManageAppointments.cs">
+    <Compile Include="TestsFolder\TestAppointmentFolder\ManageAppointments.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ManageAppointments.Designer.cs">
+    <Compile Include="TestsFolder\TestAppointmentFolder\ManageAppointments.Designer.cs">
       <DependentUpon>ManageAppointments.cs</DependentUpon>
     </Compile>
     <Compile Include="ShowLicenseInfo.cs">
@@ -364,10 +364,10 @@
     <EmbeddedResource Include="ApplicationsFolder\LocalDrivingLicenseApplication\AddUpdateLdlApp.resx">
       <DependentUpon>AddUpdateLdlApp.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AppointmentTests.resx">
+    <EmbeddedResource Include="TestsFolder\TestAppointmentFolder\AppointmentTests.resx">
       <DependentUpon>AppointmentTests.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ManageAppointments.resx">
+    <EmbeddedResource Include="TestsFolder\TestAppointmentFolder\ManageAppointments.resx">
       <DependentUpon>ManageAppointments.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ShowLicenseInfo.resx">

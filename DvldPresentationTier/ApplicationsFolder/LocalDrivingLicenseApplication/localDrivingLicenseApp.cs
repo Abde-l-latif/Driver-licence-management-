@@ -21,18 +21,13 @@ namespace DvldProject
             visionTest = 1, writtenTest = 2, carTest = 3
         }
 
-        enum enStatus
-        {
-            New = 1, Cancelled, Completed
-        }
+
 
         enum enReason { FirstTime = 1, Renew, Replacement, Damaged, ReplacementForLost }
 
         enReason reason;
 
         enTest TestType;
-
-        enStatus Status;
 
         string FilterWith = ""; 
 
@@ -219,7 +214,6 @@ namespace DvldProject
 
         private void cancelApplicationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Status = enStatus.Cancelled;
             if (dataGridView1.SelectedRows.Count > 0)
             {
 
@@ -247,41 +241,15 @@ namespace DvldProject
             }
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         private void scheduleVisionTestToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count > 0)
             {
                 TestType = enTest.visionTest;
                 int LDLid = (int)dataGridView1.SelectedRows[0].Cells[0].Value;
-                string NationalNo = dataGridView1.SelectedRows[0].Cells["NationalNo"].Value.ToString();
-                AppointmentTests fm = new AppointmentTests(LDLid, NationalNo, (int)TestType);
+                AppointmentTests fm = new AppointmentTests(LDLid, (int)TestType);
                 fm.ShowDialog();
+                FillDataGrid();
             }
             else
             {
@@ -289,16 +257,31 @@ namespace DvldProject
             }
         }
 
-
         private void scheduleWrittenTestToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count > 0)
             {
                 TestType = enTest.writtenTest;
                 int LDLid = (int)dataGridView1.SelectedRows[0].Cells[0].Value;
-                string NationalNo = dataGridView1.SelectedRows[0].Cells["NationalNo"].Value.ToString();
-                AppointmentTests fm = new AppointmentTests(LDLid, NationalNo, (int)TestType);
+                AppointmentTests fm = new AppointmentTests(LDLid, (int)TestType);
                 fm.ShowDialog();
+                FillDataGrid();
+            }
+            else
+            {
+                MessageBox.Show("You have to select a person before setting an appointment", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void scheduleStreetTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                TestType = enTest.carTest;
+                int LDLid = (int)dataGridView1.SelectedRows[0].Cells[0].Value;
+                AppointmentTests fm = new AppointmentTests(LDLid, (int)TestType);
+                fm.ShowDialog();
+                FillDataGrid();
             }
             else
             {
@@ -388,21 +371,9 @@ namespace DvldProject
             }
         }
 
-        private void scheduleStreetTestToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (dataGridView1.SelectedRows.Count > 0)
-            {
-                TestType = enTest.carTest;
-                int LDLid = (int)dataGridView1.SelectedRows[0].Cells[0].Value;
-                string NationalNo = dataGridView1.SelectedRows[0].Cells["NationalNo"].Value.ToString();
-                AppointmentTests fm = new AppointmentTests(LDLid, NationalNo, (int)TestType);
-                fm.ShowDialog();
-            }
-            else
-            {
-                MessageBox.Show("You have to select a person before setting an appointment", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+
+
+
 
         private void issueDrivingLicenseFirstTimeToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -450,12 +421,6 @@ namespace DvldProject
                 MessageBox.Show("You have to select a person before setting an appointment", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-
-
-
- 
-
 
     }
 }

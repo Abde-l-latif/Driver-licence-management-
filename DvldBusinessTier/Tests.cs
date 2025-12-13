@@ -40,6 +40,11 @@ namespace DvldBusinessTier
             return dataTest.isTestPassedExists(LdlID, TestType);
         }
 
+        static public int getPassedTests(int LocalDrivingLicenseApplicationID)
+        {
+            return dataTest.getPassedTests(LocalDrivingLicenseApplicationID);
+        }
+
 
     }
 }

@@ -51,6 +51,7 @@
     <Compile Include="dataPeople.cs" />
     <Compile Include="dataSettings.cs" />
     <Compile Include="dataTest.cs" />
+    <Compile Include="dataTestAppointments.cs" />
     <Compile Include="dataTestType.cs" />
     <Compile Include="dataUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -79,7 +79,6 @@ namespace DvldProject
                 if (fm is AppointmentTests schedule)
                 {
                     schedule.reloadDataGrid();
-                    schedule.reloadLDLapplication();
                 }
 
                 if (fm is localDrivingLicenseApp ldlapp)

@@ -169,6 +169,11 @@ namespace DvldBusinessTier
             return dataApplication.GetActiveApplicationIDForLicenseClass(PersonID, (int)ApplicationTypeID, LicenseClassID);
         }
 
+        static public decimal getApplicationFee(int id)
+        {
+            return dataApplication.getApplicationFee(id);
+        }
+
 
 
 
@@ -192,13 +197,6 @@ namespace DvldBusinessTier
         {
             return dataApplication.getAllLicenseClasses();
         }
-
-        static public decimal getApplicationFee(int id)
-        {
-            return dataApplication.getApplicationFee(id);
-        }
-
-
 
 
 
