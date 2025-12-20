@@ -41,8 +41,8 @@ namespace DvldProject
 
         private void fillDriverLicenseInfo(int AppID)
         {
-            licenseDetailsControle1.SetApplicationID(AppID);
-            licenseDetailsControle1.Reload();
+            //licenseDetailsControle1.SetApplicationID(AppID);
+            //licenseDetailsControle1.Reload();
         }
 
         private void setDetainInformation()
@@ -118,7 +118,7 @@ namespace DvldProject
         {
             setDetainInformation();
             int ApplicationID = Licenses.getAppIDByLicenseID(LicenseID);
-            PersonID = application.getPersonIDByAppID(ApplicationID);
+            //PersonID = application.getPersonIDByAppID(ApplicationID);
             fillDriverLicenseInfo(ApplicationID);
             LBLicenseID.Text = LicenseID.ToString();
             //LbAppFees.Text = App.getApplicationFee().ToString("0.00");

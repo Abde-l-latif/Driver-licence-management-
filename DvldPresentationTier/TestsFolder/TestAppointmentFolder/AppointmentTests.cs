@@ -123,11 +123,6 @@ namespace DvldProject
             }
         }
 
-
-
-
-
-
         private void takeTestToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count > 0)
@@ -140,6 +135,7 @@ namespace DvldProject
                     string fees = dataGridView1.SelectedRows[0].Cells[2].Value.ToString();
                     TakeTestForm fm = new TakeTestForm(LocalDrivingLicenseApplication.LocalDrivingLicenseApplicationID, TestType, AppointmentID, Date, fees);
                     fm.ShowDialog();
+                    reloadDataGrid(); 
                 }
                 else
                 {
@@ -152,10 +148,6 @@ namespace DvldProject
                 MessageBox.Show("You have to select an appointment", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-
-
-
         private void Form16_Load(object sender, EventArgs e)
         {
             initializeUI();

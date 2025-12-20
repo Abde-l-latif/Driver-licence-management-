@@ -90,8 +90,8 @@ namespace DvldProject
             if(dataGridView1.SelectedRows.Count > 0)
             {
                 int AppId = (int)dataGridView1.SelectedRows[0].Cells[1].Value;
-                PersonDetailsForm fm = new PersonDetailsForm(application.getPersonIDByAppID(AppId));
-                fm.ShowDialog(); 
+                //PersonDetailsForm fm = new PersonDetailsForm(application.getPersonIDByAppID(AppId));
+                //fm.ShowDialog(); 
             }
             else
             {
@@ -105,14 +105,14 @@ namespace DvldProject
             int AppId = (int)dataGridView1.SelectedRows[0].Cells[1].Value;
             int DriverID = (int)dataGridView1.SelectedRows[0].Cells[2].Value;
             int LicenseID = (int)dataGridView1.SelectedRows[0].Cells[3].Value;
-            int PersonID = application.getPersonIDByAppID(AppId);
+            //int PersonID = application.getPersonIDByAppID(AppId);
             string issueDate = dataGridView1.SelectedRows[0].Cells[4].Value.ToString();
             string ExpirationDate = dataGridView1.SelectedRows[0].Cells[5].Value.ToString();
             bool isActive = (bool)dataGridView1.SelectedRows[0].Cells[6].Value;
             if (dataGridView1.SelectedRows.Count > 0)
             {
-                interLicenseDetails fm = new interLicenseDetails(interLicenseID, AppId, PersonID, LicenseID, issueDate, ExpirationDate, isActive , DriverID);
-                fm.ShowDialog();
+                //interLicenseDetails fm = new interLicenseDetails(interLicenseID, AppId, PersonID, LicenseID, issueDate, ExpirationDate, isActive , DriverID);
+                //fm.ShowDialog();
             }
             else
             {
@@ -125,8 +125,8 @@ namespace DvldProject
             if (dataGridView1.SelectedRows.Count > 0)
             {
                 int AppId = (int)dataGridView1.SelectedRows[0].Cells[1].Value;
-                LicenseHistory fm = new LicenseHistory(application.getPersonIDByAppID(AppId));
-                fm.ShowDialog();
+                //LicenseHistory fm = new LicenseHistory(application.getPersonIDByAppID(AppId));
+                //fm.ShowDialog();
             }
             else
             {

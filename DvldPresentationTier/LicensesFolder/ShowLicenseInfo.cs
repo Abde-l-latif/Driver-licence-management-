@@ -15,12 +15,11 @@ namespace DvldProject
 {
     public partial class ShowLicenseInfo : Form
     {
-        public int ApplicationID;
-        public ShowLicenseInfo(int AppID)
+        public ShowLicenseInfo(int LicenseID)
         {
             StartPosition = FormStartPosition.CenterParent;
             InitializeComponent();
-            ApplicationID = AppID; 
+            licenseDetailsControle1.LoadLicenseInfoByLicenseID(LicenseID);
         }
 
         private void BTNclose_Click(object sender, EventArgs e)
@@ -28,10 +27,5 @@ namespace DvldProject
             this.Close();
         }
 
-        private void ShowLicenseInfo_Load(object sender, EventArgs e)
-        {
-            licenseDetailsControle1.SetApplicationID(ApplicationID);
-            licenseDetailsControle1.Reload();
-        }
     }
 }

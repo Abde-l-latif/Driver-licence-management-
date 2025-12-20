@@ -11,6 +11,7 @@ namespace DvldBusinessTier
     public class LicenseClass
     {
         public enum enMode { AddNew = 0, Update = 1 };
+
         public enMode Mode = enMode.AddNew;
 
         public int LicenseClassID { set; get; }

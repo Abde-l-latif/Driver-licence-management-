@@ -75,10 +75,13 @@ namespace DvldProject
 
                 dateTimePicker1.Focus();
 
+                if(DateTime.Compare(DateTime.Now, Date) > 0)
+                    dateTimePicker1.MinDate = Date;
+                else
+                    dateTimePicker1.MinDate = DateTime.Now;
+
+
                 dateTimePicker1.Value = Date; 
-
-                dateTimePicker1.MinDate = Date;
-
             }
         }
 

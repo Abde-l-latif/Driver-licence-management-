@@ -96,7 +96,6 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ShowLicenseInfo";
             this.Text = "ShowLicenseInfo";
-            this.Load += new System.EventHandler(this.ShowLicenseInfo_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

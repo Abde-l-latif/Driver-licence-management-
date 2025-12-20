@@ -92,7 +92,7 @@ namespace DvldProject
 
         private void replacmentToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            replacementLicenseForm fm = new replacementLicenseForm();
+            replacementDamagedLostLicenseForm fm = new replacementDamagedLostLicenseForm();
             fm.ShowDialog();
         }
 

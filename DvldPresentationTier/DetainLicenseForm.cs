@@ -32,8 +32,8 @@ namespace DvldProject
 
         private void fillDriverLicenseInfo(int AppID)
         {
-            licenseDetailsControle1.SetApplicationID(AppID);
-            licenseDetailsControle1.Reload();
+            //licenseDetailsControle1.SetApplicationID(AppID);
+            //licenseDetailsControle1.Reload();
         }
 
         private void pictureAddInterLicense_Click(object sender, System.EventArgs e)
@@ -53,7 +53,7 @@ namespace DvldProject
             }
 
             int ApplicationID = Licenses.getAppIDByLicenseID(LicenseID);
-            PersonID = application.getPersonIDByAppID(ApplicationID);
+            //PersonID = application.getPersonIDByAppID(ApplicationID);
             fillDriverLicenseInfo(ApplicationID);
             LBLicenseID.Text = LicenseID.ToString();
             LicenseHistory.Enabled = true;

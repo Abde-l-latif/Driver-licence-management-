@@ -44,10 +44,6 @@ namespace DvldBusinessTier
             return dataDriver.getAllDrivers();
         }
 
-        static public DataTable getFiltredDrivers(string Text, string Filter)
-        {
-            return dataDriver.getFiltredDrivers(Text, Filter);
-        }
     }
             
 }

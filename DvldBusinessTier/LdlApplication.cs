@@ -49,6 +49,33 @@ namespace DvldBusinessTier
 
         }
 
+        public int IssueDrivingLicenseFirstTime(string Note, int userID)
+        {
+            if(!Driver.isDriverExists(ApplicantPersonID))
+            {
+                Driver DRIVER = new Driver(ApplicantPersonID, userID);
+                DRIVER.addDriver(); 
+            }
+
+            Licenses License = new Licenses();
+            License.ApplicationID = this.ApplicationID;
+            License.DriverID = dataDriver.getDriverIdByPersonID(this.ApplicantPersonID);
+            License.Licenseclass = this.LicenseClassID;
+            License.IssueDate = DateTime.Now;
+            License.Notes = Note;
+            License.IsActive = true;
+            License.IssueReason = (int)application.enAppTypes.newLocalLicense;         
+            License.CreatedByUserID = userID;
+
+            if (License.AddFirstTimeLicense())
+            {
+                this.SetComplete();
+                return License.LicenseID;
+            }
+            else
+                return -1;
+        }
+
         private bool _AddNewLocalDrivingLicenseApplication()
         {
 

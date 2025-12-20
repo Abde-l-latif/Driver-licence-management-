@@ -39,7 +39,7 @@ namespace DvldProject
             DateTime date = DateTime.Now;
             labelIssueDate.Text = date.ToShortDateString();
             labelExpirationDate.Text = date.Day + "/" + date.Month + "/" + (date.Year + 1).ToString();
-            labelLocalLicenseID.Text = licenseDetailsControle1.getLicenseID().ToString();
+            //labelLocalLicenseID.Text = licenseDetailsControle1.getLicenseID().ToString();
             createdBy.Text = Global.USER.UserName.ToString();
             labelFees.Text = application.getApplicationFee(6).ToString("0.00");
         }
@@ -128,11 +128,11 @@ namespace DvldProject
 
 
             AppID = Licenses.getAppIDByLicenseID(Convert.ToInt32(txtLicenseID.Text));
-            PersonID = application.getPersonIDByAppID(AppID);
+            //PersonID = application.getPersonIDByAppID(AppID);
             if (AppID != -1)
             {
-                licenseDetailsControle1.SetApplicationID(AppID);
-                licenseDetailsControle1.Reload();
+                //licenseDetailsControle1.SetApplicationID(AppID);
+                //licenseDetailsControle1.Reload();
                 fillPrimaryData();
                 issueBTN.Enabled = true;
                 LicenseHistory.Enabled = true;

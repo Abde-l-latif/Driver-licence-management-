@@ -184,7 +184,6 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "LDLapplicationInfo";
             this.Size = new System.Drawing.Size(633, 101);
-            this.Load += new System.EventHandler(this.LDLapplicationInfo_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();

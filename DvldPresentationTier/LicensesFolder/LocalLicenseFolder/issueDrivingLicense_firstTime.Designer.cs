@@ -28,57 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.appDetails1 = new DvldProject.AppDetails();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.ldLapplicationInfo1 = new DvldProject.LDLapplicationInfo();
             this.textNote = new System.Windows.Forms.TextBox();
             this.pictureBox9 = new System.Windows.Forms.PictureBox();
             this.label11 = new System.Windows.Forms.Label();
             this.BTNclose = new System.Windows.Forms.Button();
             this.BTNsave = new System.Windows.Forms.Button();
-            this.groupBox2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.ldLapplicationInfo1 = new DvldProject.LDLapplicationInfo();
+            this.appDetails1 = new DvldProject.AppDetails();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.appDetails1);
-            this.groupBox2.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.groupBox2.Location = new System.Drawing.Point(34, 157);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(677, 205);
-            this.groupBox2.TabIndex = 23;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Application basic information";
-            // 
-            // appDetails1
-            // 
-            this.appDetails1.Location = new System.Drawing.Point(9, 21);
-            this.appDetails1.Margin = new System.Windows.Forms.Padding(4);
-            this.appDetails1.Name = "appDetails1";
-            this.appDetails1.Size = new System.Drawing.Size(661, 173);
-            this.appDetails1.TabIndex = 0;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.ldLapplicationInfo1);
-            this.groupBox1.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.groupBox1.Location = new System.Drawing.Point(36, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(675, 138);
-            this.groupBox1.TabIndex = 22;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Driving License Application Information";
-            // 
-            // ldLapplicationInfo1
-            // 
-            this.ldLapplicationInfo1.Location = new System.Drawing.Point(16, 20);
-            this.ldLapplicationInfo1.Margin = new System.Windows.Forms.Padding(4);
-            this.ldLapplicationInfo1.Name = "ldLapplicationInfo1";
-            this.ldLapplicationInfo1.Size = new System.Drawing.Size(642, 109);
-            this.ldLapplicationInfo1.TabIndex = 0;
             // 
             // textNote
             // 
@@ -144,42 +104,66 @@
             this.BTNsave.UseVisualStyleBackColor = true;
             this.BTNsave.Click += new System.EventHandler(this.BTNsave_Click);
             // 
+            // ldLapplicationInfo1
+            // 
+            this.ldLapplicationInfo1.Location = new System.Drawing.Point(3, 13);
+            this.ldLapplicationInfo1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ldLapplicationInfo1.Name = "ldLapplicationInfo1";
+            this.ldLapplicationInfo1.Size = new System.Drawing.Size(743, 129);
+            this.ldLapplicationInfo1.TabIndex = 38;
+            // 
+            // appDetails1
+            // 
+            this.appDetails1.Location = new System.Drawing.Point(20, 20);
+            this.appDetails1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.appDetails1.Name = "appDetails1";
+            this.appDetails1.Size = new System.Drawing.Size(688, 175);
+            this.appDetails1.TabIndex = 39;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.appDetails1);
+            this.groupBox1.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.groupBox1.Location = new System.Drawing.Point(8, 148);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(730, 204);
+            this.groupBox1.TabIndex = 40;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Application information";
+            // 
             // issueDrivingLicense_firstTime
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(745, 532);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.ldLapplicationInfo1);
             this.Controls.Add(this.BTNclose);
             this.Controls.Add(this.BTNsave);
             this.Controls.Add(this.textNote);
             this.Controls.Add(this.pictureBox9);
             this.Controls.Add(this.label11);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "issueDrivingLicense_firstTime";
             this.Text = "issue Driving License firstTime";
             this.Load += new System.EventHandler(this.issueDrivingLicense_firstTime_Load);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.GroupBox groupBox2;
-        private AppDetails appDetails1;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private LDLapplicationInfo ldLapplicationInfo1;
         private System.Windows.Forms.TextBox textNote;
         private System.Windows.Forms.PictureBox pictureBox9;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button BTNclose;
         private System.Windows.Forms.Button BTNsave;
+        private LDLapplicationInfo ldLapplicationInfo1;
+        private AppDetails appDetails1;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }

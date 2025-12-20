@@ -371,10 +371,6 @@ namespace DvldProject
             }
         }
 
-
-
-
-
         private void issueDrivingLicenseFirstTimeToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
@@ -382,10 +378,9 @@ namespace DvldProject
             {
                 reason = enReason.FirstTime;
                 int LDLid = (int)dataGridView1.SelectedRows[0].Cells[0].Value;
-                string NationalNo = dataGridView1.SelectedRows[0].Cells["NationalNo"].Value.ToString();
-                Form fm = new issueDrivingLicense_firstTime(LDLid, NationalNo, (int)reason);
+                Form fm = new issueDrivingLicense_firstTime(LDLid);
                 fm.ShowDialog();
-
+                FillDataGrid();
             }
             else
             {
@@ -398,9 +393,13 @@ namespace DvldProject
             if (dataGridView1.SelectedRows.Count > 0)
             {
                 int LDLid = (int)dataGridView1.SelectedRows[0].Cells[0].Value;
-                int AppID = application.getAppIdByLDLid(LDLid);
-                Form fm = new ShowLicenseInfo(AppID);
-                fm.ShowDialog();
+                int LicenseID = Licenses.getLicenseIDByLdlID(LDLid);
+                if (LicenseID != -1)
+                {
+                    ShowLicenseInfo fm = new ShowLicenseInfo(LicenseID);
+                    fm.ShowDialog();
+                }
+
             }
             else
             {

@@ -72,24 +72,6 @@ namespace DvldProject
             radioPass.Checked = true; 
         }
 
-        private void reloadForms()
-        {
-            foreach (Form fm in Application.OpenForms)
-            {
-                if (fm is AppointmentTests schedule)
-                {
-                    schedule.reloadDataGrid();
-                }
-
-                if (fm is localDrivingLicenseApp ldlapp)
-                {
-                    ldlapp.reload();
-                }
-            }
-        }
-
- 
-
         private void BTNsave_Click(object sender, EventArgs e)
         {
             bool testResult = radioPass.Checked ? true : false;
@@ -100,7 +82,6 @@ namespace DvldProject
                 if(TestAppointment.updateIsLocked(AppointmentID))
                 {
                     MessageBox.Show("Operation Done Successfully", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    reloadForms();
                     BTNsave.Enabled = false;
                 }
                 else

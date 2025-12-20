@@ -30,20 +30,15 @@ namespace DvldProject
                 LBid.Text = LocalDrivingLicenseApplication.LocalDrivingLicenseApplicationID.ToString();
                 LBAppliedL.Text = LocalDrivingLicenseApplication.License_Class.ClassName;
                 LBpassedTest.Text =  Tests.getPassedTests(LocalDrivingLicenseApplication.LocalDrivingLicenseApplicationID).ToString() + "/3";
-                LDLapplicationInfo_Load(null, null);
+                if (LocalDrivingLicenseApplication.ApplicationStatus == application.enAppStatus.Completed)
+                {
+                    linkLabel1.Enabled = true;
+                }
 
             }
             else
                 MessageBox.Show("wrong id try again" , "not Found" , MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-        }
-
-        private void LDLapplicationInfo_Load(object sender, EventArgs e)
-        {
-            if(LBpassedTest.Text == "3/3")
-            {
-                linkLabel1.Enabled = true;
-            }
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

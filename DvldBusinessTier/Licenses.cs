@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static DvldBusinessTier.application;
 
 namespace DvldBusinessTier
 {
@@ -15,32 +16,154 @@ namespace DvldBusinessTier
         public enum enReason {FirstTime = 1, Renew = 2, ReplacementforDamaged = 3, ReplacementforLost = 4}
 
         public enReason Reason;
+
         public int LicenseID { get; set; }
         public int ApplicationID { get; set; }
+
+        public application App;
         public int DriverID {get; set;}
-        public int LicenseClass {get; set;}
+        public int Licenseclass {get; set;}
+
+        public LicenseClass License_class; 
+
         public DateTime IssueDate {get; set;} 
         public DateTime ExpirationDate {get; set;}
         public string Notes {get; set;}
         public decimal PaidFees {get; set;}
         public bool IsActive {get; set;}
-        public int IssueReason {get; set;}
+        public byte IssueReason {get; set;}
         public int CreatedByUserID {get; set;}
 
         public Licenses() { }
 
-        public Licenses(int ApplicationID, int DriverID, int LicenseClass, DateTime IssueDate, string Notes,
-            bool IsActive, int IssueReason, int CreatedByUserID)
+        public Licenses(int LicenseID, int ApplicationID, int DriverID, int Licenseclass, DateTime IssueDate, DateTime ExpirationDate, string Notes, decimal PaidFees,
+            bool IsActive, byte IssueReason, int CreatedByUserID)
         {
-            this.LicenseID = -1; 
+            this.LicenseID = LicenseID; 
+
             this.ApplicationID = ApplicationID;
+            App = application.FindBaseApplication(ApplicationID);
+
             this.DriverID = DriverID;
-            this.LicenseClass = LicenseClass;
+
+            this.Licenseclass = Licenseclass;
+            License_class = LicenseClass.Find(this.Licenseclass);
+
+            this.PaidFees = PaidFees;
+            this.ExpirationDate = ExpirationDate;
             this.IssueDate = IssueDate;
             this.Notes = Notes;
             this.IsActive = IsActive;
             this.IssueReason = IssueReason;
             this.CreatedByUserID = CreatedByUserID;
+        }
+
+        public static Licenses Find(int LicenseID)
+        {
+            int ApplicationID = -1; int DriverID = -1; int LicenseClass = -1;
+            DateTime IssueDate = DateTime.Now; DateTime ExpirationDate = DateTime.Now;
+            string Notes = "";
+            decimal PaidFees = 0; bool IsActive = true; int CreatedByUserID = 1;
+            byte IssueReason = 1;
+
+            if (dataLicense.GetLicenseInfoByID(LicenseID, ref ApplicationID, ref DriverID, ref LicenseClass,
+            ref IssueDate, ref ExpirationDate, ref Notes,
+            ref PaidFees, ref IsActive, ref IssueReason, ref CreatedByUserID))
+
+                return new Licenses(LicenseID, ApplicationID, DriverID, LicenseClass,
+                                     IssueDate, ExpirationDate, Notes,
+                                     PaidFees, IsActive, IssueReason, CreatedByUserID);
+            else
+                return null;
+
+        }
+
+        static public int getLicenseIDByLdlID(int LdlId)
+        {
+            return dataLicense.getLicenseIDByLdlID(LdlId);
+        }
+
+
+        public bool isExpired()
+        {
+            return (ExpirationDate <  DateTime.Now);
+        }
+
+        public Licenses renewLicense(string Note, int userID)
+        {
+            application app = new application();
+            app.ApplicantPersonID = App.Person.PersonID;
+            app.ApplicationTypeID = application.enAppTypes.renewLicense;
+            app.CreatedByUserID = userID;
+            app.PaidFees = ApplicationType.Find((int)enReason.Renew).ApplicationFees;
+
+            if (!app.Save())
+                return null;
+
+            Licenses license = new Licenses();
+
+            license.Notes = Note;
+            license.CreatedByUserID = userID;
+            license.ApplicationID = app.ApplicationID;
+            license.App = application.FindBaseApplication(license.ApplicationID);
+            license.DriverID = this.DriverID;
+            license.Licenseclass = this.Licenseclass;
+            license.License_class = LicenseClass.Find(license.Licenseclass);
+            license.IsActive = true; 
+            license.IssueReason = (byte)enReason.Renew;
+            license.IssueDate = DateTime.Now;
+            license.ExpirationDate = DateTime.Now.AddYears(license.License_class.DefaultValidityLength);
+            license.PaidFees = this.PaidFees;
+
+            unActiveLicense(this.LicenseID);
+
+            if (!license.AddLicense())
+                return null;
+
+
+
+            return license;
+        }
+
+        public Licenses ReplaceLicense(enReason issueReason ,  int userID)
+        {
+            application app = new application();
+
+            if (issueReason == enReason.ReplacementforLost)
+                app.ApplicationTypeID = application.enAppTypes.replaceLostLicense;
+            else if (issueReason == enReason.ReplacementforDamaged)
+                app.ApplicationTypeID = application.enAppTypes.replaceDamagedLicense;
+
+            app.ApplicantPersonID = App.Person.PersonID;
+            app.CreatedByUserID = userID;
+            app.PaidFees = ApplicationType.Find((int)enReason.Renew).ApplicationFees;
+
+            if (!app.Save())
+                return null;
+
+            Licenses license = new Licenses();
+
+            license.Notes = this.Notes;
+            license.CreatedByUserID = userID;
+            license.ApplicationID = app.ApplicationID;
+            license.App = application.FindBaseApplication(license.ApplicationID);
+            license.DriverID = this.DriverID;
+            license.Licenseclass = this.Licenseclass;
+            license.License_class = LicenseClass.Find(license.Licenseclass);
+            license.IsActive = true;
+            license.IssueReason = (byte)issueReason;
+            license.IssueDate = DateTime.Now;
+            license.ExpirationDate = DateTime.Now.AddYears(license.License_class.DefaultValidityLength);
+            license.PaidFees = this.PaidFees;
+
+            unActiveLicense(this.LicenseID);
+
+            if (!license.AddLicense())
+                return null;
+
+
+
+            return license;
         }
 
         static public bool IsLicenseExistByPersonID(int personID , int licenseClassID)
@@ -51,9 +174,12 @@ namespace DvldBusinessTier
         public void FillExpirationDateOfLicense()
         {
             DateTime Date = IssueDate;
-            byte Years = dataLicense.getValiditylengthOfLicenseClass(this.LicenseClass);
+            byte Years = dataLicense.getValiditylengthOfLicenseClass(this.Licenseclass);
             this.ExpirationDate = Date.AddYears(Years);
         }
+
+
+
 
         static public decimal getLicenseFees(int LicenseID)
         {
@@ -97,11 +223,6 @@ namespace DvldBusinessTier
             this.PaidFees = dataLicense.getLicenseFees(this.ApplicationID);
         }
 
-        static public int getLicenseClassIdByLdlID(int LdlID)
-        {
-            return dataLicense.getLicenseClassIdByLdlID(LdlID);
-        }
-
         private void fillExpirationDate()
         {
             int Years = dataLicense.getLicenseYears(this.ApplicationID);
@@ -109,33 +230,20 @@ namespace DvldBusinessTier
             this.ExpirationDate = Date; 
         }
 
-        static public byte getValiditylengthOfLicense(int LicenseID)
-        {
-            return dataLicense.getValiditylengthOfLicense(LicenseID);
-        }
-
         public bool AddFirstTimeLicense()
         {
             fillExpirationDate();
             FillPaidFees();
-            this.LicenseID = dataLicense.insertLicense(ApplicationID, DriverID, LicenseClass, IssueDate, ExpirationDate, Notes, PaidFees, IsActive, IssueReason, CreatedByUserID);
+            this.LicenseID = dataLicense.insertLicense(ApplicationID, DriverID, this.Licenseclass, IssueDate, ExpirationDate, Notes, PaidFees, IsActive, IssueReason, CreatedByUserID);
             return (LicenseID != -1);
         }
 
         public bool AddLicense()
         {
-            this.LicenseID = dataLicense.insertLicense(ApplicationID, DriverID, LicenseClass, IssueDate, ExpirationDate, Notes, PaidFees, IsActive, IssueReason, CreatedByUserID);
+            this.LicenseID = dataLicense.insertLicense(ApplicationID, DriverID, this.Licenseclass, IssueDate, ExpirationDate, Notes, PaidFees, IsActive, IssueReason, CreatedByUserID);
             return (LicenseID != -1);
         }
 
-        static public void LicenseDetails(int ApplicationID, ref int LicenseID, ref int DriverID, ref DateTime IssueDate, ref DateTime ExpirationDate,
-           ref string Notes, ref byte IssueReason, ref bool IsActive, ref string ClassName, ref string FullName, ref string NationalNo, ref byte Gender,
-           ref DateTime BirthDate, ref string ImagePath)
-        {
-            dataLicense.GetLicenseDetails(ApplicationID, ref LicenseID, ref DriverID, ref IssueDate, ref ExpirationDate,
-           ref Notes, ref IssueReason, ref IsActive, ref ClassName, ref FullName, ref NationalNo, ref Gender,
-           ref BirthDate, ref ImagePath);
-        }
 
 
         static public DataTable getLocalLicenseHistory(int PersonID)

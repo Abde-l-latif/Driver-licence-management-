@@ -186,41 +186,6 @@ namespace DvldBusinessTier
 
 
 
-
-
-
-
-
-
-
-        static public DataTable getAllLicenseClasses()
-        {
-            return dataApplication.getAllLicenseClasses();
-        }
-
-
-
-        static public int getAppIdByLDLid(int LDLid)
-        {
-            return dataApplication.getAppIdByLDLid(LDLid); 
-        }
-
-        static public void getApplicationDetails(int ApplicationID , ref string status , ref string type , ref string applicant , ref string createdBy,
-                ref decimal fees , ref DateTime date , ref DateTime statusDate)
-        {
-            dataApplication.getApplicationDetails(ApplicationID, ref status, ref type, ref applicant, ref createdBy,
-                ref fees, ref date, ref statusDate); 
-        }
-
-
-
-        static public bool isPersonAppalreadyExists(string ClassName, string NationalNo)
-        {
-            return dataApplication.isPersonAppalreadyExists(ClassName, NationalNo);
-        }
-
-
-
         static public DataTable getAll_InterDL_ApplicationPeople()
         {
             return dataApplication.getAll_InterDL_ApplicationPeople();
@@ -230,12 +195,6 @@ namespace DvldBusinessTier
         {
             return dataApplication.getFiltredInterDLapp(text , Filter); 
         }
-
-        static public int getPersonIDByAppID(int AppID)
-        {
-            return dataApplication.getPersonIDByAppID(AppID);
-        }
-
 
     }
 }

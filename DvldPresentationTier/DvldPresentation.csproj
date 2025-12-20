@@ -58,11 +58,17 @@
     <Compile Include="DetainLicenseForm.Designer.cs">
       <DependentUpon>DetainLicenseForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="DriverForm.cs">
+    <Compile Include="DriversFolder\DriverForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DriverForm.Designer.cs">
+    <Compile Include="DriversFolder\DriverForm.Designer.cs">
       <DependentUpon>DriverForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LicensesFolder\Controles\LicenseDetailsFilter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LicensesFolder\Controles\LicenseDetailsFilter.Designer.cs">
+      <DependentUpon>LicenseDetailsFilter.cs</DependentUpon>
     </Compile>
     <Compile Include="PeopleFolder\controls\filterPeople.cs">
       <SubType>UserControl</SubType>
@@ -76,10 +82,10 @@
     <Compile Include="interLicenseDetails.Designer.cs">
       <DependentUpon>interLicenseDetails.cs</DependentUpon>
     </Compile>
-    <Compile Include="LicenseDetailsControle.cs">
+    <Compile Include="LicensesFolder\Controles\LicenseDetailsControle.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="LicenseDetailsControle.Designer.cs">
+    <Compile Include="LicensesFolder\Controles\LicenseDetailsControle.Designer.cs">
       <DependentUpon>LicenseDetailsControle.cs</DependentUpon>
     </Compile>
     <Compile Include="LoginFolder\Login.cs">
@@ -133,23 +139,17 @@
     <Compile Include="ReleaseDetainForm.Designer.cs">
       <DependentUpon>ReleaseDetainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="RenewDrivingLicense.cs">
+    <Compile Include="ApplicationsFolder\RenewLicenseFolder\RenewDrivingLicense.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="RenewDrivingLicense.Designer.cs">
+    <Compile Include="ApplicationsFolder\RenewLicenseFolder\RenewDrivingLicense.Designer.cs">
       <DependentUpon>RenewDrivingLicense.cs</DependentUpon>
     </Compile>
-    <Compile Include="replacementLicenseForm.cs">
+    <Compile Include="ApplicationsFolder\ReplacementDamagedLostLicenseFolder\replacementDamagedLostLicenseForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="replacementLicenseForm.Designer.cs">
-      <DependentUpon>replacementLicenseForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UpdateApplication.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UpdateApplication.Designer.cs">
-      <DependentUpon>UpdateApplication.cs</DependentUpon>
+    <Compile Include="ApplicationsFolder\ReplacementDamagedLostLicenseFolder\replacementDamagedLostLicenseForm.Designer.cs">
+      <DependentUpon>replacementDamagedLostLicenseForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ApplicationsFolder\ApplicationTypeFolder\UpdateAppTypeForm.cs">
       <SubType>Form</SubType>
@@ -175,16 +175,16 @@
     <Compile Include="TestsFolder\TestTypeFolder\UpdateTestTypeForm.Designer.cs">
       <DependentUpon>UpdateTestTypeForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="issueDrivingLicense_firstTime.cs">
+    <Compile Include="LicensesFolder\LocalLicenseFolder\issueDrivingLicense_firstTime.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="issueDrivingLicense_firstTime.Designer.cs">
+    <Compile Include="LicensesFolder\LocalLicenseFolder\issueDrivingLicense_firstTime.Designer.cs">
       <DependentUpon>issueDrivingLicense_firstTime.cs</DependentUpon>
     </Compile>
-    <Compile Include="LicenseHistory.cs">
+    <Compile Include="LicensesFolder\LicenseHistory.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LicenseHistory.Designer.cs">
+    <Compile Include="LicensesFolder\LicenseHistory.Designer.cs">
       <DependentUpon>LicenseHistory.cs</DependentUpon>
     </Compile>
     <Compile Include="ApplicationsFolder\LocalDrivingLicenseApplication\localDrivingLicenseApp.cs">
@@ -211,16 +211,16 @@
     <Compile Include="TestsFolder\TestAppointmentFolder\ManageAppointments.Designer.cs">
       <DependentUpon>ManageAppointments.cs</DependentUpon>
     </Compile>
-    <Compile Include="ShowLicenseInfo.cs">
+    <Compile Include="LicensesFolder\ShowLicenseInfo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ShowLicenseInfo.Designer.cs">
+    <Compile Include="LicensesFolder\ShowLicenseInfo.Designer.cs">
       <DependentUpon>ShowLicenseInfo.cs</DependentUpon>
     </Compile>
-    <Compile Include="TakeTestForm.cs">
+    <Compile Include="TestsFolder\TestAppointmentFolder\TakeTestForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TakeTestForm.Designer.cs">
+    <Compile Include="TestsFolder\TestAppointmentFolder\TakeTestForm.Designer.cs">
       <DependentUpon>TakeTestForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
@@ -292,8 +292,11 @@
     <EmbeddedResource Include="DetainLicenseForm.resx">
       <DependentUpon>DetainLicenseForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DriverForm.resx">
+    <EmbeddedResource Include="DriversFolder\DriverForm.resx">
       <DependentUpon>DriverForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LicensesFolder\Controles\LicenseDetailsFilter.resx">
+      <DependentUpon>LicenseDetailsFilter.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PeopleFolder\controls\filterPeople.resx">
       <DependentUpon>filterPeople.cs</DependentUpon>
@@ -301,7 +304,7 @@
     <EmbeddedResource Include="interLicenseDetails.resx">
       <DependentUpon>interLicenseDetails.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LicenseDetailsControle.resx">
+    <EmbeddedResource Include="LicensesFolder\Controles\LicenseDetailsControle.resx">
       <DependentUpon>LicenseDetailsControle.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginFolder\Login.resx">
@@ -331,14 +334,11 @@
     <EmbeddedResource Include="ReleaseDetainForm.resx">
       <DependentUpon>ReleaseDetainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="RenewDrivingLicense.resx">
+    <EmbeddedResource Include="ApplicationsFolder\RenewLicenseFolder\RenewDrivingLicense.resx">
       <DependentUpon>RenewDrivingLicense.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="replacementLicenseForm.resx">
-      <DependentUpon>replacementLicenseForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UpdateApplication.resx">
-      <DependentUpon>UpdateApplication.cs</DependentUpon>
+    <EmbeddedResource Include="ApplicationsFolder\ReplacementDamagedLostLicenseFolder\replacementDamagedLostLicenseForm.resx">
+      <DependentUpon>replacementDamagedLostLicenseForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ApplicationsFolder\ApplicationTypeFolder\UpdateAppTypeForm.resx">
       <DependentUpon>UpdateAppTypeForm.cs</DependentUpon>
@@ -352,10 +352,10 @@
     <EmbeddedResource Include="TestsFolder\TestTypeFolder\UpdateTestTypeForm.resx">
       <DependentUpon>UpdateTestTypeForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="issueDrivingLicense_firstTime.resx">
+    <EmbeddedResource Include="LicensesFolder\LocalLicenseFolder\issueDrivingLicense_firstTime.resx">
       <DependentUpon>issueDrivingLicense_firstTime.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LicenseHistory.resx">
+    <EmbeddedResource Include="LicensesFolder\LicenseHistory.resx">
       <DependentUpon>LicenseHistory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ApplicationsFolder\LocalDrivingLicenseApplication\localDrivingLicenseApp.resx">
@@ -370,10 +370,10 @@
     <EmbeddedResource Include="TestsFolder\TestAppointmentFolder\ManageAppointments.resx">
       <DependentUpon>ManageAppointments.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ShowLicenseInfo.resx">
+    <EmbeddedResource Include="LicensesFolder\ShowLicenseInfo.resx">
       <DependentUpon>ShowLicenseInfo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TakeTestForm.resx">
+    <EmbeddedResource Include="TestsFolder\TestAppointmentFolder\TakeTestForm.resx">
       <DependentUpon>TakeTestForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">

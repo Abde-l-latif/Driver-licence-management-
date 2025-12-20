@@ -62,6 +62,111 @@ namespace DvldDataTier
             return LicenseID;
         }
 
+
+        public static bool GetLicenseInfoByID(int LicenseID, ref int ApplicationID, ref int DriverID, ref int LicenseClass,
+           ref DateTime IssueDate, ref DateTime ExpirationDate, ref string Notes,
+           ref decimal PaidFees, ref bool IsActive, ref byte IssueReason, ref int CreatedByUserID)
+        {
+            bool isFound = false;
+
+            SqlConnection connection = new SqlConnection(dataSettings.ConnectionString);
+
+            string query = "SELECT * FROM Licenses WHERE LicenseID = @LicenseID";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@LicenseID", LicenseID);
+
+            try
+            {
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read())
+                {
+
+                    // The record was found
+                    isFound = true;
+                    ApplicationID = (int)reader["ApplicationID"];
+                    DriverID = (int)reader["DriverID"];
+                    LicenseClass = (int)reader["LicenseClass"];
+                    IssueDate = (DateTime)reader["IssueDate"];
+                    ExpirationDate = (DateTime)reader["ExpirationDate"];
+
+                    if (reader["Notes"] == DBNull.Value)
+                        Notes = "";
+                    else
+                        Notes = (string)reader["Notes"];
+
+                    PaidFees = Convert.ToDecimal(reader["PaidFees"]);
+                    IsActive = (bool)reader["IsActive"];
+                    IssueReason = (byte)reader["IssueReason"];
+                    CreatedByUserID = (int)reader["DriverID"];
+
+
+                }
+                else
+                {
+                    // The record was not found
+                    isFound = false;
+                }
+
+                reader.Close();
+
+
+            }
+            catch (Exception ex)
+            {
+                //Console.WriteLine("Error: " + ex.Message);
+                isFound = false;
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return isFound;
+        }
+
+
+        static public int getLicenseIDByLdlID(int LdlId)
+        {
+            int LicenseID = -1;
+
+            string query = @"select top 1 LicenseID from Licenses where
+                            ApplicationID = (select top 1 ApplicationID from LocalDrivingLicenseApplications where LocalDrivingLicenseApplicationID = @id);";
+
+            SqlConnection connection = new SqlConnection(dataSettings.ConnectionString);
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@id", LdlId);
+
+            try
+            {
+                connection.Open();
+                object result = command.ExecuteScalar();
+
+
+                if (result != null)
+                {
+                    LicenseID = Convert.ToInt32(result);
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"error detected : {e}");
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return LicenseID;
+        }
+
+
         static public int insertLicense(int ApplicationID , int DriverID , int LicenseClass, DateTime IssueDate , DateTime ExpirationDate , string Notes ,
             decimal PaidFees , bool IsActive , int IssueReason , int CreatedByUserID)
         {
@@ -306,75 +411,6 @@ namespace DvldDataTier
 
         }
 
-        static public void GetLicenseDetails(int ApplicationID , ref int LicenseID , ref int DriverID , ref DateTime IssueDate , ref DateTime ExpirationDate ,
-            ref string Notes , ref byte IssueReason , ref bool IsActive , ref string ClassName , ref string FullName , ref string NationalNo , ref byte Gender,
-            ref DateTime BirthDate , ref string ImagePath)
-        {
-            string query = @"select 
-            LicenseID , DriverID , IssueDate , ExpirationDate , Notes , IssueReason , IsActive , LicenseClasses.ClassName as ClassName ,
-            (
-            select FirstName + ' ' +
-            case when SecondName is null then '' else SecondName end + ' ' +
-            case when ThirdName is null then '' else ThirdName end + ' ' +
-            LastName from People where PersonID = Applications.ApplicantPersonID 
-            ) as FullName  ,
-            (select NationalNo from People where PersonID = Applications.ApplicantPersonID) as NationalNo,
-            (select Gendor from People where PersonID = Applications.ApplicantPersonID) as Gender,
-            (select DateOfBirth from People where PersonID = Applications.ApplicantPersonID) as BirthDate,
-            (select ImagePath from People where PersonID = Applications.ApplicantPersonID) as ImagePath
-            from Licenses
-            inner join LicenseClasses on LicenseClasses.LicenseClassID = Licenses.LicenseClass
-            inner join Applications on Applications.ApplicationID = Licenses.ApplicationID
-            where Applications.ApplicationID = @ApplicationID;";
-
-            SqlConnection connection = new SqlConnection(dataSettings.ConnectionString);
-
-            SqlCommand command = new SqlCommand(query, connection);
-
-            command.Parameters.AddWithValue("@ApplicationID", ApplicationID);
-
-            try
-            {
-                connection.Open();
-                SqlDataReader Reader = command.ExecuteReader();
-                if (Reader.Read())
-                {
-                    LicenseID = (int)Reader["LicenseID"];
-                    DriverID = (int)Reader["DriverID"];
-                    IssueReason = (byte)Reader["IssueReason"];
-                    IssueDate = (DateTime)Reader["IssueDate"];
-                    ExpirationDate = (DateTime)Reader["ExpirationDate"];
-                    BirthDate = (DateTime)Reader["BirthDate"];
-                    Gender = (byte)Reader["Gender"];
-                    ClassName = Reader["ClassName"].ToString();
-                    FullName = Reader["FullName"].ToString();
-                    NationalNo = Reader["NationalNo"].ToString();
-                    IsActive = (bool)Reader["IsActive"];
-
-                    if (String.IsNullOrEmpty(Reader["Notes"].ToString()))
-                        Notes = "";
-                    else
-                        Notes = Reader["Notes"].ToString();
-
-                    if (String.IsNullOrEmpty(Reader["ImagePath"].ToString()))
-                        ImagePath = "";
-                    else
-                        ImagePath = Reader["ImagePath"].ToString();
-                }
-
-                Reader.Close(); 
-
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine($"error detected : {e}");
-            }
-            finally
-            {
-                connection.Close();
-            }
-
-        }
 
         static public DataTable getLocalLicenseHistory(int personID)
         {
