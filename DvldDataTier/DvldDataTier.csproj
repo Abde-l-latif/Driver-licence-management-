@@ -44,7 +44,9 @@
     <Compile Include="dataApplication.cs" />
     <Compile Include="dataApplicationType.cs" />
     <Compile Include="dataCountry.cs" />
+    <Compile Include="dataDetainLicense.cs" />
     <Compile Include="dataDriver.cs" />
+    <Compile Include="dataInternationalLicense.cs" />
     <Compile Include="dataLdlApplication.cs" />
     <Compile Include="dataLicense.cs" />
     <Compile Include="dataLicenseClass.cs" />

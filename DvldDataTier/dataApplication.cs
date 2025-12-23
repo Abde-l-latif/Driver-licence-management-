@@ -15,86 +15,6 @@ namespace DvldDataTier
     public class dataApplication
     {
 
-
-        static public DataTable getAll_InterDL_ApplicationPeople()
-        {
-            DataTable dt = new DataTable();
-
-            SqlConnection Connection = new SqlConnection(dataSettings.ConnectionString);
-
-            string Query = @"select InternationalLicenseID as IntLicense , ApplicationID , DriverID , IssuedUsingLocalLicenseID as LocalLicenseID , 
-            IssueDate, ExpirationDate , IsActive from InternationalLicenses;";
-
-            SqlCommand Command = new SqlCommand(Query, Connection);
-
-            try
-            {
-                Connection.Open();
-                SqlDataReader reader = Command.ExecuteReader();
-
-                if (reader.HasRows)
-                {
-                    dt.Load(reader);
-                }
-
-                reader.Close();
-
-            }
-            catch (Exception E)
-            {
-                Console.WriteLine(E.Message);
-            }
-            finally
-            {
-                Connection.Close();
-            }
-
-            return dt;
-
-        }
-
-        static public DataTable getFiltredInterDLapp(string text, string Filter)
-        {
-            DataTable dt = new DataTable();
-
-            SqlConnection Connection = new SqlConnection(dataSettings.ConnectionString);
-
-            string Query = @" select InternationalLicenseID as IntLicense , ApplicationID , DriverID , IssuedUsingLocalLicenseID as LocalLicenseID , 
-            IssueDate, ExpirationDate , IsActive from InternationalLicenses
-            where " + (Filter == "IntLicense" ? "InternationalLicenseID" : Filter == "ApplicationID" ? "ApplicationID" : Filter == "DriverID" ? "DriverID" : Filter == "LocalLicenseID" ?
-            "IssuedUsingLocalLicenseID" : "") + " like @text ;";
-
-            SqlCommand Command = new SqlCommand(Query, Connection);
-
-            Command.Parameters.AddWithValue("@text", text + "%");
-
-
-            try
-            {
-                Connection.Open();
-                SqlDataReader reader = Command.ExecuteReader();
-
-                if (reader.HasRows)
-                {
-                    dt.Load(reader);
-                }
-
-                reader.Close();
-
-            }
-            catch (Exception E)
-            {
-                Console.WriteLine(E.Message);
-            }
-            finally
-            {
-                Connection.Close();
-            }
-
-            return dt;
-        }
-
-  
         static public decimal getApplicationFee(int id)
         {
             decimal fee = 0; 
@@ -320,39 +240,6 @@ namespace DvldDataTier
 
         }
 
-        public static bool IsApplicationExist(int ApplicationID)
-        {
-            bool isFound = false;
-
-            SqlConnection connection = new SqlConnection(dataSettings.ConnectionString);
-
-            string query = "SELECT Found=1 FROM Applications WHERE ApplicationID = @ApplicationID";
-
-            SqlCommand command = new SqlCommand(query, connection);
-
-            command.Parameters.AddWithValue("@ApplicationID", ApplicationID);
-
-            try
-            {
-                connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
-
-                isFound = reader.HasRows;
-
-                reader.Close();
-            }
-            catch (Exception ex)
-            {
-                //Console.WriteLine("Error: " + ex.Message);
-                isFound = false;
-            }
-            finally
-            {
-                connection.Close();
-            }
-
-            return isFound;
-        }
 
         public static bool DoesPersonHaveActiveApplication(int PersonID, int ApplicationTypeID)
         {

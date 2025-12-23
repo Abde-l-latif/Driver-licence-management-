@@ -139,10 +139,6 @@ namespace DvldBusinessTier
             return dataApplication.DeleteApplication(this.ApplicationID);
         }
 
-        public static bool IsApplicationExist(int ApplicationID)
-        {
-            return dataApplication.IsApplicationExist(ApplicationID);
-        }
 
         public static bool DoesPersonHaveActiveApplication(int PersonID, int ApplicationTypeID)
         {
@@ -172,28 +168,6 @@ namespace DvldBusinessTier
         static public decimal getApplicationFee(int id)
         {
             return dataApplication.getApplicationFee(id);
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-        static public DataTable getAll_InterDL_ApplicationPeople()
-        {
-            return dataApplication.getAll_InterDL_ApplicationPeople();
-        }
-
-        static public DataTable getFiltredInterDlApp(string text , string Filter)
-        {
-            return dataApplication.getFiltredInterDLapp(text , Filter); 
         }
 
     }

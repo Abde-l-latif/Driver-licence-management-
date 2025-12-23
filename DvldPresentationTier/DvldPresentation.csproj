@@ -52,10 +52,10 @@
     <Compile Include="ApplicationsFolder\AppDetails.Designer.cs">
       <DependentUpon>AppDetails.cs</DependentUpon>
     </Compile>
-    <Compile Include="DetainLicenseForm.cs">
+    <Compile Include="LicensesFolder\DetainLicenseFolder\DetainLicenseForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DetainLicenseForm.Designer.cs">
+    <Compile Include="LicensesFolder\DetainLicenseFolder\DetainLicenseForm.Designer.cs">
       <DependentUpon>DetainLicenseForm.cs</DependentUpon>
     </Compile>
     <Compile Include="DriversFolder\DriverForm.cs">
@@ -76,10 +76,10 @@
     <Compile Include="PeopleFolder\controls\filterPeople.Designer.cs">
       <DependentUpon>filterPeople.cs</DependentUpon>
     </Compile>
-    <Compile Include="interLicenseDetails.cs">
+    <Compile Include="LicensesFolder\InternationalLicenseFolder\interLicenseDetails.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="interLicenseDetails.Designer.cs">
+    <Compile Include="LicensesFolder\InternationalLicenseFolder\interLicenseDetails.Designer.cs">
       <DependentUpon>interLicenseDetails.cs</DependentUpon>
     </Compile>
     <Compile Include="LicensesFolder\Controles\LicenseDetailsControle.cs">
@@ -97,22 +97,22 @@
     <Compile Include="ApplicationsFolder\ApplicationTypeFolder\ManageAppTypeForm.Designer.cs">
       <DependentUpon>ManageAppTypeForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ManageDetainLicenses.cs">
+    <Compile Include="LicensesFolder\DetainLicenseFolder\ManageDetainLicenses.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ManageDetainLicenses.Designer.cs">
+    <Compile Include="LicensesFolder\DetainLicenseFolder\ManageDetainLicenses.Designer.cs">
       <DependentUpon>ManageDetainLicenses.cs</DependentUpon>
     </Compile>
-    <Compile Include="ManageInternationalDrivingLicense.cs">
+    <Compile Include="LicensesFolder\InternationalLicenseFolder\ManageInternationalDrivingLicense.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ManageInternationalDrivingLicense.Designer.cs">
+    <Compile Include="LicensesFolder\InternationalLicenseFolder\ManageInternationalDrivingLicense.Designer.cs">
       <DependentUpon>ManageInternationalDrivingLicense.cs</DependentUpon>
     </Compile>
-    <Compile Include="NewInternationalDrivingLicenseApp.cs">
+    <Compile Include="LicensesFolder\InternationalLicenseFolder\NewInternationalDrivingLicenseApp.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="NewInternationalDrivingLicenseApp.Designer.cs">
+    <Compile Include="LicensesFolder\InternationalLicenseFolder\NewInternationalDrivingLicenseApp.Designer.cs">
       <DependentUpon>NewInternationalDrivingLicenseApp.cs</DependentUpon>
     </Compile>
     <Compile Include="PeopleFolder\controls\PersonDetails.cs">
@@ -133,10 +133,10 @@
     <Compile Include="PeopleFolder\FindPerson.Designer.cs">
       <DependentUpon>FindPerson.cs</DependentUpon>
     </Compile>
-    <Compile Include="ReleaseDetainForm.cs">
+    <Compile Include="LicensesFolder\DetainLicenseFolder\ReleaseDetainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ReleaseDetainForm.Designer.cs">
+    <Compile Include="LicensesFolder\DetainLicenseFolder\ReleaseDetainForm.Designer.cs">
       <DependentUpon>ReleaseDetainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ApplicationsFolder\RenewLicenseFolder\RenewDrivingLicense.cs">
@@ -289,7 +289,7 @@
     <EmbeddedResource Include="ApplicationsFolder\AppDetails.resx">
       <DependentUpon>AppDetails.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DetainLicenseForm.resx">
+    <EmbeddedResource Include="LicensesFolder\DetainLicenseFolder\DetainLicenseForm.resx">
       <DependentUpon>DetainLicenseForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DriversFolder\DriverForm.resx">
@@ -301,7 +301,7 @@
     <EmbeddedResource Include="PeopleFolder\controls\filterPeople.resx">
       <DependentUpon>filterPeople.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="interLicenseDetails.resx">
+    <EmbeddedResource Include="LicensesFolder\InternationalLicenseFolder\interLicenseDetails.resx">
       <DependentUpon>interLicenseDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LicensesFolder\Controles\LicenseDetailsControle.resx">
@@ -313,13 +313,13 @@
     <EmbeddedResource Include="ApplicationsFolder\ApplicationTypeFolder\ManageAppTypeForm.resx">
       <DependentUpon>ManageAppTypeForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ManageDetainLicenses.resx">
+    <EmbeddedResource Include="LicensesFolder\DetainLicenseFolder\ManageDetainLicenses.resx">
       <DependentUpon>ManageDetainLicenses.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ManageInternationalDrivingLicense.resx">
+    <EmbeddedResource Include="LicensesFolder\InternationalLicenseFolder\ManageInternationalDrivingLicense.resx">
       <DependentUpon>ManageInternationalDrivingLicense.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NewInternationalDrivingLicenseApp.resx">
+    <EmbeddedResource Include="LicensesFolder\InternationalLicenseFolder\NewInternationalDrivingLicenseApp.resx">
       <DependentUpon>NewInternationalDrivingLicenseApp.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PeopleFolder\controls\PersonDetails.resx">
@@ -331,7 +331,7 @@
     <EmbeddedResource Include="PeopleFolder\FindPerson.resx">
       <DependentUpon>FindPerson.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ReleaseDetainForm.resx">
+    <EmbeddedResource Include="LicensesFolder\DetainLicenseFolder\ReleaseDetainForm.resx">
       <DependentUpon>ReleaseDetainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ApplicationsFolder\RenewLicenseFolder\RenewDrivingLicense.resx">

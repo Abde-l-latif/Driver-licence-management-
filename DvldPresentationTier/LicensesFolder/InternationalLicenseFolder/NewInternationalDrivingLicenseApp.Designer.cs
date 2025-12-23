@@ -29,10 +29,6 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.pictureAddInterLicense = new System.Windows.Forms.PictureBox();
-            this.txtLicenseID = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.BTNclose = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.createdBy = new System.Windows.Forms.Label();
@@ -62,9 +58,7 @@
             this.issueBTN = new System.Windows.Forms.Button();
             this.LicenseHistory = new System.Windows.Forms.LinkLabel();
             this.LicenseInfo = new System.Windows.Forms.LinkLabel();
-            this.licenseDetailsControle1 = new DvldProject.LicenseDetailsControle();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureAddInterLicense)).BeginInit();
+            this.licenseDetailsFilter1 = new DvldProject.LicensesFolder.Controles.LicenseDetailsFilter();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
@@ -87,48 +81,6 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "International License Application";
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.pictureAddInterLicense);
-            this.groupBox1.Controls.Add(this.txtLicenseID);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Location = new System.Drawing.Point(10, 29);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(478, 57);
-            this.groupBox1.TabIndex = 3;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Filter";
-            // 
-            // pictureAddInterLicense
-            // 
-            this.pictureAddInterLicense.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureAddInterLicense.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureAddInterLicense.Image = global::DvldProject.Properties.Resources.id_check__1_;
-            this.pictureAddInterLicense.Location = new System.Drawing.Point(427, 15);
-            this.pictureAddInterLicense.Name = "pictureAddInterLicense";
-            this.pictureAddInterLicense.Size = new System.Drawing.Size(40, 35);
-            this.pictureAddInterLicense.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pictureAddInterLicense.TabIndex = 28;
-            this.pictureAddInterLicense.TabStop = false;
-            this.pictureAddInterLicense.Click += new System.EventHandler(this.pictureAddInterLicense_Click);
-            // 
-            // txtLicenseID
-            // 
-            this.txtLicenseID.Location = new System.Drawing.Point(102, 21);
-            this.txtLicenseID.Name = "txtLicenseID";
-            this.txtLicenseID.Size = new System.Drawing.Size(207, 23);
-            this.txtLicenseID.TabIndex = 1;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(20, 24);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(76, 17);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "License Id :";
-            // 
             // BTNclose
             // 
             this.BTNclose.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -138,7 +90,7 @@
             this.BTNclose.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.BTNclose.Image = global::DvldProject.Properties.Resources.close2;
             this.BTNclose.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BTNclose.Location = new System.Drawing.Point(554, 641);
+            this.BTNclose.Location = new System.Drawing.Point(554, 652);
             this.BTNclose.Name = "BTNclose";
             this.BTNclose.Size = new System.Drawing.Size(81, 38);
             this.BTNclose.TabIndex = 22;
@@ -173,9 +125,9 @@
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.pictureBox4);
             this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Location = new System.Drawing.Point(10, 488);
+            this.groupBox2.Location = new System.Drawing.Point(9, 498);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(776, 149);
+            this.groupBox2.Size = new System.Drawing.Size(784, 145);
             this.groupBox2.TabIndex = 23;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Application info";
@@ -429,7 +381,7 @@
             this.issueBTN.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.issueBTN.Image = global::DvldProject.Properties.Resources.world;
             this.issueBTN.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.issueBTN.Location = new System.Drawing.Point(705, 641);
+            this.issueBTN.Location = new System.Drawing.Point(705, 652);
             this.issueBTN.Name = "issueBTN";
             this.issueBTN.Size = new System.Drawing.Size(81, 38);
             this.issueBTN.TabIndex = 24;
@@ -441,7 +393,7 @@
             // LicenseHistory
             // 
             this.LicenseHistory.AutoSize = true;
-            this.LicenseHistory.Location = new System.Drawing.Point(7, 643);
+            this.LicenseHistory.Location = new System.Drawing.Point(7, 654);
             this.LicenseHistory.Name = "LicenseHistory";
             this.LicenseHistory.Size = new System.Drawing.Size(130, 17);
             this.LicenseHistory.TabIndex = 25;
@@ -452,7 +404,7 @@
             // LicenseInfo
             // 
             this.LicenseInfo.AutoSize = true;
-            this.LicenseInfo.Location = new System.Drawing.Point(175, 643);
+            this.LicenseInfo.Location = new System.Drawing.Point(175, 654);
             this.LicenseInfo.Name = "LicenseInfo";
             this.LicenseInfo.Size = new System.Drawing.Size(112, 17);
             this.LicenseInfo.TabIndex = 26;
@@ -460,35 +412,33 @@
             this.LicenseInfo.Text = "Show License Info";
             this.LicenseInfo.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LicenseInfo_LinkClicked);
             // 
-            // licenseDetailsControle1
+            // licenseDetailsFilter1
             // 
-            this.licenseDetailsControle1.Location = new System.Drawing.Point(5, 86);
-            this.licenseDetailsControle1.Margin = new System.Windows.Forms.Padding(4);
-            this.licenseDetailsControle1.Name = "licenseDetailsControle1";
-            this.licenseDetailsControle1.Size = new System.Drawing.Size(788, 403);
-            this.licenseDetailsControle1.TabIndex = 2;
+            this.licenseDetailsFilter1.FilterLicense = true;
+            this.licenseDetailsFilter1.Location = new System.Drawing.Point(4, 31);
+            this.licenseDetailsFilter1.Margin = new System.Windows.Forms.Padding(4);
+            this.licenseDetailsFilter1.Name = "licenseDetailsFilter1";
+            this.licenseDetailsFilter1.Size = new System.Drawing.Size(796, 469);
+            this.licenseDetailsFilter1.TabIndex = 27;
+            this.licenseDetailsFilter1.onSelectedLicenseID += new System.Action<int>(this.licenseDetailsFilter1_onSelectedLicenseID);
             // 
             // NewInternationalDrivingLicenseApp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(798, 682);
+            this.ClientSize = new System.Drawing.Size(808, 694);
+            this.Controls.Add(this.licenseDetailsFilter1);
             this.Controls.Add(this.LicenseInfo);
             this.Controls.Add(this.LicenseHistory);
             this.Controls.Add(this.issueBTN);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.BTNclose);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.licenseDetailsControle1);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "NewInternationalDrivingLicenseApp";
             this.Text = "NewInternationalDrivingLicenseApp";
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureAddInterLicense)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
@@ -507,11 +457,6 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private LicenseDetailsControle licenseDetailsControle1;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox txtLicenseID;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.PictureBox pictureAddInterLicense;
         private System.Windows.Forms.Button BTNclose;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button issueBTN;
@@ -541,5 +486,6 @@
         private System.Windows.Forms.Label labelIssueDate;
         private System.Windows.Forms.Label labelFees;
         private System.Windows.Forms.Label labelInterAppID;
+        private LicensesFolder.Controles.LicenseDetailsFilter licenseDetailsFilter1;
     }
 }

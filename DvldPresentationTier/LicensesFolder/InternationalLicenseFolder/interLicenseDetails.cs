@@ -14,47 +14,35 @@ namespace DvldProject
 {
     public partial class interLicenseDetails : Form
     {
-        int interLicenseID;
-        int AppID;
-        int PersonID;
-        int LicenseID;
-        string issueDate;
-        string ExpirationDate;
-        bool isActive;
-        int DriverID;
+
+        InternationalLicense InterLicense;
+
         people person;
-        public interLicenseDetails(int interID , int AppID , int PersonID , int LicenseID , string issueDate , string ExpirationDate , bool isActive , int DriverID)
+
+        public interLicenseDetails(int interID)
         {
             InitializeComponent();
-            StartPosition = FormStartPosition.CenterParent; 
-            this.interLicenseID = interID;
-            this.AppID = AppID;
-            this.PersonID = PersonID;
-            this.LicenseID = LicenseID;
-            this.issueDate = issueDate;
-            this.ExpirationDate = ExpirationDate;
-            this.isActive = isActive;
-            this.DriverID = DriverID;
-            FillPrimaryData(); 
+            StartPosition = FormStartPosition.CenterParent;
+            InterLicense = InternationalLicense.Find(interID);
+            person = InterLicense.DriverInfo.Person;
         }
-
 
         private void FillPrimaryData()
         {
-            labelAppID.Text = AppID.ToString(); 
-            LbInterLicenseID.Text = interLicenseID.ToString();
-            LbLicenseID.Text = LicenseID.ToString();
-            person = people.Find(PersonID); 
+            labelAppID.Text = InterLicense.ApplicationID.ToString(); 
+            LbInterLicenseID.Text = InterLicense.InternationalLicenseID.ToString();
+            LbLicenseID.Text = InterLicense.IssuedUsingLocalLicenseID.ToString();
+    
             if(person != null)
             {
                 lbName.Text = person.FirstName + " " + person.SecondName + " " + person.ThirdName + " " + person.LastName;
                 LbNational.Text = person.NationalNo;
                 LbBirth.Text = Convert.ToString(person.DateOfBirth);
                 LbGender.Text = person.Gender;
-                LbIssueDate.Text = issueDate;
-                LbExpirationDate.Text = ExpirationDate;
-                LbDriverID.Text = DriverID.ToString();
-                if (isActive)
+                LbIssueDate.Text = InterLicense.IssueDate.ToShortDateString();
+                LbExpirationDate.Text = InterLicense.ExpirationDate.ToShortDateString();
+                LbDriverID.Text = InterLicense.DriverID.ToString();
+                if (InterLicense.IsActive)
                     LbIsActive.Text = "yes";
                 else
                     LbIsActive.Text = "No";
@@ -102,5 +90,12 @@ namespace DvldProject
         {
             this.Close();
         }
+
+        private void interLicenseDetails_Load(object sender, EventArgs e)
+        {
+        
+            FillPrimaryData();
+        }
+
     }
 }

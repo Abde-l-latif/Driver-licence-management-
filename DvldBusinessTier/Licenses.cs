@@ -34,6 +34,8 @@ namespace DvldBusinessTier
         public byte IssueReason {get; set;}
         public int CreatedByUserID {get; set;}
 
+        public DetainLicense DetainInfo; 
+
         public Licenses() { }
 
         public Licenses(int LicenseID, int ApplicationID, int DriverID, int Licenseclass, DateTime IssueDate, DateTime ExpirationDate, string Notes, decimal PaidFees,
@@ -56,6 +58,7 @@ namespace DvldBusinessTier
             this.IsActive = IsActive;
             this.IssueReason = IssueReason;
             this.CreatedByUserID = CreatedByUserID;
+            DetainInfo = DetainLicense.FindByLicenseID(this.LicenseID);
         }
 
         public static Licenses Find(int LicenseID)
@@ -95,7 +98,7 @@ namespace DvldBusinessTier
             app.ApplicantPersonID = App.Person.PersonID;
             app.ApplicationTypeID = application.enAppTypes.renewLicense;
             app.CreatedByUserID = userID;
-            app.PaidFees = ApplicationType.Find((int)enReason.Renew).ApplicationFees;
+            app.PaidFees = ApplicationType.Find((int)enAppTypes.renewLicense).ApplicationFees;
 
             if (!app.Save())
                 return null;
@@ -136,7 +139,7 @@ namespace DvldBusinessTier
 
             app.ApplicantPersonID = App.Person.PersonID;
             app.CreatedByUserID = userID;
-            app.PaidFees = ApplicationType.Find((int)enReason.Renew).ApplicationFees;
+            app.PaidFees = ApplicationType.Find((int)app.ApplicationTypeID).ApplicationFees;
 
             if (!app.Save())
                 return null;
@@ -166,25 +169,43 @@ namespace DvldBusinessTier
             return license;
         }
 
+        public DetainLicense DetainCurrentLicense(int userID , float FineFees)
+        {
+            DetainLicense detain = new DetainLicense();
+            detain.LicenseID = this.LicenseID;
+            detain.DetainDate = DateTime.Now;
+            detain.FineFees = FineFees;
+            detain.CreatedByUserID = userID;
+
+            if(detain.Save())
+                return detain;
+
+            return null;
+        }
+
+        public bool releaseLicense(int ReleasedByUserID , ref int appID )
+        {
+            application app = new application();
+            app.ApplicantPersonID = App.Person.PersonID;
+            app.ApplicationTypeID = application.enAppTypes.releaseAndDetainedLicense;
+            app.CreatedByUserID = ReleasedByUserID;
+            app.PaidFees = ApplicationType.Find((int)application.enAppTypes.releaseAndDetainedLicense).ApplicationFees;
+
+            if (!app.Save())
+                return false;
+
+            appID = app.ApplicationID;
+
+            return dataDetainLicense.ReleaseDetainedLicense(this.DetainInfo.DetainID, ReleasedByUserID, app.ApplicationID);
+        }
+
+
         static public bool IsLicenseExistByPersonID(int personID , int licenseClassID)
         {
             return (dataLicense.GetActiveLicenseIDByPersonID(personID, licenseClassID) != -1);
         }
 
-        public void FillExpirationDateOfLicense()
-        {
-            DateTime Date = IssueDate;
-            byte Years = dataLicense.getValiditylengthOfLicenseClass(this.Licenseclass);
-            this.ExpirationDate = Date.AddYears(Years);
-        }
 
-
-
-
-        static public decimal getLicenseFees(int LicenseID)
-        {
-            return dataLicense.getLicenseClassFees(LicenseID);
-        }
 
         static public bool unActiveLicense(int LicenseID)
         {
@@ -194,30 +215,6 @@ namespace DvldBusinessTier
             return false;
         }
 
-        static public bool isLicenseDetained(int LicenseID)
-        {
-            return dataLicense.isLicenseDetained(LicenseID);
-        }
-
-        static public bool getDetainDetails(int LicenseID, ref int DetainID, ref DateTime DetainDate, ref Decimal FineFees)
-        {
-            dataLicense.getDetainDetails(LicenseID, ref DetainID, ref DetainDate, ref FineFees);
-            if (DetainID != -1)
-                return true;
-            return false; 
-        }
-
-        static public DataTable getListDetainedLicenses()
-        {
-            return dataLicense.getListDetainedLicenses(); 
-        }
-
-
-        static public DataTable FillWithFiltredData(string text , string ComboText)
-        {
-            text = text == "yes" ? "1" : text == "no" ? "0" : text;
-            return dataLicense.getFiltredData(text, ComboText);
-        }
         private void FillPaidFees()
         {
             this.PaidFees = dataLicense.getLicenseFees(this.ApplicationID);
@@ -243,7 +240,6 @@ namespace DvldBusinessTier
             this.LicenseID = dataLicense.insertLicense(ApplicationID, DriverID, this.Licenseclass, IssueDate, ExpirationDate, Notes, PaidFees, IsActive, IssueReason, CreatedByUserID);
             return (LicenseID != -1);
         }
-
 
 
         static public DataTable getLocalLicenseHistory(int PersonID)
@@ -296,33 +292,6 @@ namespace DvldBusinessTier
             return dataLicense.getLicenseClassByLicenseID(LicenseID);
         }
 
-        static public bool updateIsActiveOfLicense(int LicenseID, bool value)
-        {
-            if(isLicenseActive(LicenseID))
-            {
-                return dataLicense.updateIsActiveOfLicense(LicenseID, value);  
-            }
-            return true;
-        }
 
-        static public bool DetainLicense(ref int detainID, int LicenseID, string DetainDate, string FineFees, int CreatedByUserID)
-        {
-            bool IsReleased = false;
-            decimal Fees = Convert.ToDecimal(FineFees);
-            DateTime Date = Convert.ToDateTime(DetainDate);
-            detainID = dataLicense.DetainLicense(LicenseID, Date, Fees, CreatedByUserID, IsReleased);
-            if (detainID != -1)
-                return true;
-            return false; 
-        }
-
-        static public bool ReleaseDetainedLicense(int LicenseID ,DateTime ReleaseDate ,  int UserID , int AppID)
-        {
-            bool IsReleased = true;
-            int Effected = dataLicense.ReleaseDetainedLicense(LicenseID, IsReleased, ReleaseDate, UserID, AppID); 
-            if(Effected > 0)
-                return true;
-            return false;
-        }
     }
 }

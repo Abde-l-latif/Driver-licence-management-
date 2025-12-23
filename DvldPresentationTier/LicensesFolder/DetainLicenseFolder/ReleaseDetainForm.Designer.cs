@@ -28,10 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.pictureShowLicense = new System.Windows.Forms.PictureBox();
-            this.txtLicenseID = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.LicenseInfo = new System.Windows.Forms.LinkLabel();
             this.LicenseHistory = new System.Windows.Forms.LinkLabel();
@@ -62,9 +58,7 @@
             this.detainID = new System.Windows.Forms.Label();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.licenseDetailsControle1 = new DvldProject.LicenseDetailsControle();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureShowLicense)).BeginInit();
+            this.licenseDetailsFilter1 = new DvldProject.LicensesFolder.Controles.LicenseDetailsFilter();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -75,48 +69,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.SuspendLayout();
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.pictureShowLicense);
-            this.groupBox1.Controls.Add(this.txtLicenseID);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Location = new System.Drawing.Point(8, 39);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(478, 45);
-            this.groupBox1.TabIndex = 10;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Filter";
-            // 
-            // pictureShowLicense
-            // 
-            this.pictureShowLicense.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureShowLicense.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureShowLicense.Image = global::DvldProject.Properties.Resources.id_check__1_;
-            this.pictureShowLicense.Location = new System.Drawing.Point(439, 11);
-            this.pictureShowLicense.Name = "pictureShowLicense";
-            this.pictureShowLicense.Size = new System.Drawing.Size(33, 29);
-            this.pictureShowLicense.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pictureShowLicense.TabIndex = 28;
-            this.pictureShowLicense.TabStop = false;
-            this.pictureShowLicense.Click += new System.EventHandler(this.pictureShowLicense_Click);
-            // 
-            // txtLicenseID
-            // 
-            this.txtLicenseID.Location = new System.Drawing.Point(102, 14);
-            this.txtLicenseID.Name = "txtLicenseID";
-            this.txtLicenseID.Size = new System.Drawing.Size(207, 23);
-            this.txtLicenseID.TabIndex = 1;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(20, 17);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(76, 17);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "License Id :";
             // 
             // label1
             // 
@@ -132,7 +84,7 @@
             // LicenseInfo
             // 
             this.LicenseInfo.AutoSize = true;
-            this.LicenseInfo.Location = new System.Drawing.Point(172, 623);
+            this.LicenseInfo.Location = new System.Drawing.Point(178, 650);
             this.LicenseInfo.Name = "LicenseInfo";
             this.LicenseInfo.Size = new System.Drawing.Size(139, 17);
             this.LicenseInfo.TabIndex = 43;
@@ -143,7 +95,7 @@
             // LicenseHistory
             // 
             this.LicenseHistory.AutoSize = true;
-            this.LicenseHistory.Location = new System.Drawing.Point(9, 623);
+            this.LicenseHistory.Location = new System.Drawing.Point(15, 650);
             this.LicenseHistory.Name = "LicenseHistory";
             this.LicenseHistory.Size = new System.Drawing.Size(130, 17);
             this.LicenseHistory.TabIndex = 42;
@@ -160,7 +112,7 @@
             this.ReleaseBTN.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.ReleaseBTN.Image = global::DvldProject.Properties.Resources.hand;
             this.ReleaseBTN.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.ReleaseBTN.Location = new System.Drawing.Point(690, 626);
+            this.ReleaseBTN.Location = new System.Drawing.Point(696, 653);
             this.ReleaseBTN.Name = "ReleaseBTN";
             this.ReleaseBTN.Size = new System.Drawing.Size(93, 30);
             this.ReleaseBTN.TabIndex = 41;
@@ -178,7 +130,7 @@
             this.BTNclose.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.BTNclose.Image = global::DvldProject.Properties.Resources.close2;
             this.BTNclose.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BTNclose.Location = new System.Drawing.Point(583, 626);
+            this.BTNclose.Location = new System.Drawing.Point(589, 653);
             this.BTNclose.Name = "BTNclose";
             this.BTNclose.Size = new System.Drawing.Size(81, 30);
             this.BTNclose.TabIndex = 40;
@@ -213,7 +165,7 @@
             this.groupBox3.Controls.Add(this.detainID);
             this.groupBox3.Controls.Add(this.pictureBox3);
             this.groupBox3.Controls.Add(this.label4);
-            this.groupBox3.Location = new System.Drawing.Point(8, 487);
+            this.groupBox3.Location = new System.Drawing.Point(9, 501);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(777, 133);
             this.groupBox3.TabIndex = 39;
@@ -452,36 +404,33 @@
             this.label4.TabIndex = 44;
             this.label4.Text = "Detain ID :";
             // 
-            // licenseDetailsControle1
+            // licenseDetailsFilter1
             // 
-            this.licenseDetailsControle1.Location = new System.Drawing.Point(3, 85);
-            this.licenseDetailsControle1.Margin = new System.Windows.Forms.Padding(5);
-            this.licenseDetailsControle1.Name = "licenseDetailsControle1";
-            this.licenseDetailsControle1.Size = new System.Drawing.Size(784, 534);
-            this.licenseDetailsControle1.TabIndex = 8;
+            this.licenseDetailsFilter1.FilterLicense = true;
+            this.licenseDetailsFilter1.Location = new System.Drawing.Point(1, 34);
+            this.licenseDetailsFilter1.Margin = new System.Windows.Forms.Padding(4);
+            this.licenseDetailsFilter1.Name = "licenseDetailsFilter1";
+            this.licenseDetailsFilter1.Size = new System.Drawing.Size(794, 468);
+            this.licenseDetailsFilter1.TabIndex = 44;
+            this.licenseDetailsFilter1.onSelectedLicenseID += new System.Action<int>(this.licenseDetailsFilter1_onSelectedLicenseID);
             // 
             // ReleaseDetainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(796, 667);
+            this.ClientSize = new System.Drawing.Size(796, 687);
+            this.Controls.Add(this.licenseDetailsFilter1);
             this.Controls.Add(this.LicenseInfo);
             this.Controls.Add(this.LicenseHistory);
             this.Controls.Add(this.ReleaseBTN);
             this.Controls.Add(this.BTNclose);
             this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.licenseDetailsControle1);
             this.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ReleaseDetainForm";
             this.Text = "ReleaseDetainForm";
-            this.Load += new System.EventHandler(this.ReleaseDetainForm_Load);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureShowLicense)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
@@ -498,13 +447,7 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.PictureBox pictureShowLicense;
-        private System.Windows.Forms.TextBox txtLicenseID;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private LicenseDetailsControle licenseDetailsControle1;
         private System.Windows.Forms.LinkLabel LicenseInfo;
         private System.Windows.Forms.LinkLabel LicenseHistory;
         private System.Windows.Forms.Button ReleaseBTN;
@@ -534,5 +477,6 @@
         private System.Windows.Forms.Label lbFineFees;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label3;
+        private LicensesFolder.Controles.LicenseDetailsFilter licenseDetailsFilter1;
     }
 }

@@ -1,11 +1,18 @@
 ﻿using DvldBusinessTier;
 using System;
+using System.Data;
+using System.Security.Policy;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace DvldProject
 {
     public partial class ManageInternationalDrivingLicense : Form
     {
+
+        DataTable dt;
+
+        string FilterText = ""; 
         public ManageInternationalDrivingLicense()
         {
             InitializeComponent();
@@ -29,14 +36,15 @@ namespace DvldProject
 
         private void FillDataGrid()
         {
-            dataGridView1.DataSource = application.getAll_InterDL_ApplicationPeople();
+            dt = InternationalLicense.getAll_InterDL_ApplicationPeople();
+            dataGridView1.DataSource = dt;
             LBrecord.Text = dataGridView1.Rows.Count.ToString() + " Record(s)";
         }
 
         public void reload()
         {
-            FillDataGrid();
             initializeDataGrid();
+            FillDataGrid();
         }
 
         private void ManageInternationalDrivingLicense_Load(object sender, EventArgs e)
@@ -56,6 +64,33 @@ namespace DvldProject
                 e.Handled = true;
         }
 
+        private void InitializeFilterText(string comboText)
+        {
+            switch(comboText)
+            {
+                case "IntLicense":
+                    {
+                        FilterText = "IntLicense";
+                        break;
+                    }
+                case "ApplicationID":
+                    {
+                        FilterText = "ApplicationID";
+                        break;
+                    }
+                case "DriverID":
+                    {
+                        FilterText = "DriverID";
+                        break;
+                    }
+                case "LocalLicenseID":
+                    {
+                        FilterText = "LocalLicenseID";
+                        break;
+                    }
+            }
+        }
+
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if(comboBox1.SelectedItem.ToString() != "none")
@@ -69,29 +104,38 @@ namespace DvldProject
                 textBox1.Text = "";
                 textBox1.Enabled = false;
                 textBox1.Visible = false;
-                FillDataGrid(); 
+                FillDataGrid();
+                return; 
             }
+
+            InitializeFilterText(comboBox1.SelectedItem.ToString());
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            dataGridView1.DataSource = application.getFiltredInterDlApp(textBox1.Text, comboBox1.SelectedItem.ToString());
-            LBrecord.Text = dataGridView1.Rows.Count.ToString() + " Record(s)";
-        }
+            if(String.IsNullOrEmpty(textBox1.Text))
+            {
+                dt.DefaultView.RowFilter = "";
+                LBrecord.Text = dataGridView1.Rows.Count.ToString() + " Record(s)";
+                return;
+            }
 
-        private void pictureAddPerson_Click(object sender, EventArgs e)
-        {
-            NewInternationalDrivingLicenseApp fm = new NewInternationalDrivingLicenseApp();
-            fm.ShowDialog(); 
+            dt.DefaultView.RowFilter = String.Format("[{0}] = {1}" , FilterText , Convert.ToInt32(textBox1.Text));
+            LBrecord.Text = dataGridView1.Rows.Count.ToString() + " Record(s)";
+
         }
 
         private void showPersonDetailsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if(dataGridView1.SelectedRows.Count > 0)
             {
-                int AppId = (int)dataGridView1.SelectedRows[0].Cells[1].Value;
-                //PersonDetailsForm fm = new PersonDetailsForm(application.getPersonIDByAppID(AppId));
-                //fm.ShowDialog(); 
+                int InterId = (int)dataGridView1.SelectedRows[0].Cells[0].Value;
+                InternationalLicense InterObject = InternationalLicense.Find(InterId);
+                if(InterObject != null)
+                {
+                    PersonDetailsForm fm = new PersonDetailsForm(InterObject.DriverInfo.personID);
+                    fm.ShowDialog();
+                }
             }
             else
             {
@@ -99,20 +143,19 @@ namespace DvldProject
             }
         }
 
-        private void showLicenseDetailsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void showPersonLicenseHistoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int interLicenseID = (int)dataGridView1.SelectedRows[0].Cells[0].Value;
-            int AppId = (int)dataGridView1.SelectedRows[0].Cells[1].Value;
-            int DriverID = (int)dataGridView1.SelectedRows[0].Cells[2].Value;
-            int LicenseID = (int)dataGridView1.SelectedRows[0].Cells[3].Value;
-            //int PersonID = application.getPersonIDByAppID(AppId);
-            string issueDate = dataGridView1.SelectedRows[0].Cells[4].Value.ToString();
-            string ExpirationDate = dataGridView1.SelectedRows[0].Cells[5].Value.ToString();
-            bool isActive = (bool)dataGridView1.SelectedRows[0].Cells[6].Value;
             if (dataGridView1.SelectedRows.Count > 0)
             {
-                //interLicenseDetails fm = new interLicenseDetails(interLicenseID, AppId, PersonID, LicenseID, issueDate, ExpirationDate, isActive , DriverID);
-                //fm.ShowDialog();
+                int InterId = (int)dataGridView1.SelectedRows[0].Cells[0].Value;
+                InternationalLicense InterObject = InternationalLicense.Find(InterId);
+
+                if (InterObject != null)
+                {
+                    LicenseHistory fm = new LicenseHistory(InterObject.DriverInfo.personID);
+                    fm.ShowDialog();
+                }
+  
             }
             else
             {
@@ -120,18 +163,26 @@ namespace DvldProject
             }
         }
 
-        private void showPersonLicenseHistoryToolStripMenuItem_Click(object sender, EventArgs e)
+        private void showLicenseDetailsToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            int interLicenseID = (int)dataGridView1.SelectedRows[0].Cells[0].Value;
+   
             if (dataGridView1.SelectedRows.Count > 0)
             {
-                int AppId = (int)dataGridView1.SelectedRows[0].Cells[1].Value;
-                //LicenseHistory fm = new LicenseHistory(application.getPersonIDByAppID(AppId));
-                //fm.ShowDialog();
+                interLicenseDetails fm = new interLicenseDetails(interLicenseID);
+                fm.ShowDialog();
             }
             else
             {
                 MessageBox.Show("You have to select License First !!", "Selection", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void pictureAddPerson_Click(object sender, EventArgs e)
+        {
+            NewInternationalDrivingLicenseApp fm = new NewInternationalDrivingLicenseApp();
+            fm.ShowDialog();
+            reload();
         }
     }
 }

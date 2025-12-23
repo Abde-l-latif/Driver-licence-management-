@@ -66,7 +66,7 @@ namespace DvldProject
             LbIsActive.Text = _LicenseInfo.IsActive ? "Yes" : "No";
             LbGender.Text = _LicenseInfo.App.Person.Gender;
             LbIssueReason.Text = ((Licenses.enReason)_LicenseInfo.IssueReason).ToString();
-            LbIsDetained.Text = Licenses.isLicenseDetained(_LicenseInfo.LicenseID) ? "Yes" : "No"; 
+            LbIsDetained.Text = DetainLicense.IsLicenseDetained(_LicenseInfo.LicenseID) ? "Yes" : "No"; 
         }
 
         private void initializeGenderPec()

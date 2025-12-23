@@ -13,6 +13,8 @@ namespace DvldBusinessTier
 
         public int DriverID { get; set; }
         public int personID { get; set; }
+
+        public people Person;
         public int CreatedByUserID { get; set; }
         public DateTime CreatedDate { get; set; }
 
@@ -20,7 +22,30 @@ namespace DvldBusinessTier
         public Driver(int personID, int CreatedByUserID)
         {
             this.personID = personID;
+            Person = people.Find(this.personID);
             this.CreatedByUserID = CreatedByUserID;
+        }
+
+        public Driver(int driverID , int personID, int CreatedByUserID , DateTime CreateDate)
+        {
+            this.DriverID = driverID;
+            this.personID = personID;
+            Person = people.Find(this.personID);
+            this.CreatedByUserID = CreatedByUserID;
+            this.CreatedDate = CreateDate;
+        }
+
+        public static Driver FindByDriverID(int DriverID)
+        {
+
+            int PersonID = -1; int CreatedByUserID = -1; DateTime CreatedDate = DateTime.Now;
+
+            if (dataDriver.GetDriverInfoByDriverID(DriverID, ref PersonID, ref CreatedByUserID, ref CreatedDate))
+
+                return new Driver(DriverID, PersonID, CreatedByUserID, CreatedDate);
+            else
+                return null;
+
         }
 
         public void addDriver()

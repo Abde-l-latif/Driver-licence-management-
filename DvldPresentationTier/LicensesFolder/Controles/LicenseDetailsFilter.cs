@@ -42,6 +42,7 @@ namespace DvldProject.LicensesFolder.Controles
 
         public void LoadLicenseDetailsFilter(int LicenseID)
         {
+            txtLicenseID.Text = LicenseID.ToString();
             licenseDetailsControle1.LoadLicenseInfoByLicenseID(LicenseID);
             SelectedLicense(LicenseID);
         }
@@ -70,6 +71,11 @@ namespace DvldProject.LicensesFolder.Controles
             {
                 e.Handled = true;
             }
+        }
+
+        public void FocusText()
+        {
+            txtLicenseID.Focus();
         }
     }
 }

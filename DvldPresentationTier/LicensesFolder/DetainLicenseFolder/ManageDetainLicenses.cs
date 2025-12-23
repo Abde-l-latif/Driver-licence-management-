@@ -1,4 +1,5 @@
 ﻿using DvldBusinessTier;
+using Microsoft.SqlServer.Server;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -6,17 +7,20 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.Remoting.Lifetime;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace DvldProject
 {
     public partial class ManageDetainLicenses : Form
     {
+        DataTable dt;
 
         string ComboText = "";
-        string text = "";
+        string FilterText = ""; 
         public ManageDetainLicenses()
         {
             InitializeComponent();
@@ -40,19 +44,21 @@ namespace DvldProject
 
         private void FillDataGrid()
         {
-            dataGridView1.DataSource = Licenses.getListDetainedLicenses(); 
+            dt = DetainLicense.GetAllDetainedLicenses();
+            dataGridView1.DataSource = dt;
             LbRecords.Text = dataGridView1.Rows.Count.ToString() + " Record(s)";
         }
 
         public void reload()
         {
-            FillDataGrid();
             initializeDataGrid();
+            FillDataGrid();
         }
 
         private void ManageDetainLicenses_Load(object sender, EventArgs e)
         {
             reload();
+            comboBox2.SelectedIndex = 0;
         }
 
         private void pictureRelease_Click(object sender, EventArgs e)
@@ -65,6 +71,7 @@ namespace DvldProject
         {
             DetainLicenseForm Fm = new DetainLicenseForm();
             Fm.ShowDialog();
+            reload();
         }
 
         private void releaseDetainedLicenseToolStripMenuItem_Click(object sender, EventArgs e)
@@ -74,6 +81,7 @@ namespace DvldProject
                 int LicenseID = (int)dataGridView1.SelectedRows[0].Cells[1].Value;
                 ReleaseDetainForm Fm = new ReleaseDetainForm(LicenseID);
                 Fm.ShowDialog();
+                reload();
             }
             else
             {
@@ -100,7 +108,7 @@ namespace DvldProject
             if (dataGridView1.SelectedRows.Count > 0)
             {
                 int LicenseID = (int)dataGridView1.SelectedRows[0].Cells[1].Value;
-                ShowLicenseInfo fm = new ShowLicenseInfo(Licenses.getAppIDByLicenseID(LicenseID));
+                ShowLicenseInfo fm = new ShowLicenseInfo(LicenseID);
                 fm.ShowDialog();
             }
             else
@@ -144,33 +152,38 @@ namespace DvldProject
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             ComboText = comboBox1.SelectedItem.ToString();
+
+            initializeFilter(); 
+
             textBox1.KeyPress -= textBox1_KeyPress;
 
             textBox1.Text = "";
             textBox1.Enabled = false;
             textBox1.Visible = false;
+
             comboBox2.Enabled = false;
             comboBox2.Visible = false;
 
             if (comboBox1.SelectedItem.ToString() == "none")
             {
                 FillDataGrid();
-                return; 
+                return;
             }
 
             if (comboBox1.SelectedItem.ToString() == "Is Released")
             {
                 comboBox2.Enabled = true;
-                comboBox2.Visible = true; 
+                comboBox2.Visible = true;
                 return;
             }
 
-            if(comboBox1.SelectedItem.ToString() == "Detain ID" || comboBox1.SelectedItem.ToString() == "Release Application ID")
+            if (comboBox1.SelectedItem.ToString() == "Detain ID" || comboBox1.SelectedItem.ToString() == "Release Application ID")
                 textBox1.KeyPress += textBox1_KeyPress;
+
 
             if (comboBox1.SelectedItem.ToString() != "none")
             {
-                textBox1.Text = ""; 
+                textBox1.Text = "";
                 textBox1.Enabled = true;
                 textBox1.Visible = true;
                 return;
@@ -178,22 +191,77 @@ namespace DvldProject
 
         }
 
-        private void FillFilterdDataGrid()
+        private void initializeFilter()
         {
-            dataGridView1.DataSource = Licenses.FillWithFiltredData(text , ComboText);
-            LbRecords.Text = dataGridView1.Rows.Count.ToString() + " Record(s)";
+            switch(ComboText)
+            {
+                case "Detain ID" :
+                    {
+                        FilterText = "DetainID";
+                        break;
+                    }
+                case "Is Released":
+                    {
+                        FilterText = "IsReleased";
+                        break;
+                    }
+                case "National No":
+                    {
+                        FilterText = "NationalNo";
+                        break;
+                    }
+                case "Full Name":
+                    {
+                        FilterText = "FullName";
+                        break;
+                    }
+                case "Release Application ID":
+                    {
+                        FilterText = "ReleaseAppID";
+                        break;
+                    }
+            }
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            text = textBox1.Text;
-            FillFilterdDataGrid();
+            if(textBox1.Text == "")
+            {
+                dt.DefaultView.RowFilter = "";
+                return;
+            }
+
+            if (comboBox1.SelectedItem.ToString() != "Detain ID" && comboBox1.SelectedItem.ToString() != "Release Application ID")
+            {
+                dt.DefaultView.RowFilter = String.Format("[{0}] like '{1}%'", FilterText, textBox1.Text);
+            }
+            else
+                dt.DefaultView.RowFilter = String.Format("[{0}] = {1}", FilterText, Convert.ToInt32(textBox1.Text));
+
+            LbRecords.Text = dt.Rows.Count.ToString() + " Record(s)";
+
         }
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            text = comboBox2.SelectedItem.ToString();
-            FillFilterdDataGrid();
+            FilterText = "IsReleased";
+
+            switch (comboBox2.SelectedItem.ToString())
+            {
+                case "yes":
+                    {
+                        dt.DefaultView.RowFilter = String.Format("[{0}] = {1}", FilterText, 1);
+                        break;
+                    }
+                case "no":
+                    {
+                        dt.DefaultView.RowFilter = String.Format("[{0}] = {1}", FilterText, 0);
+                        break;
+                    }
+            }
+
+            LbRecords.Text = dt.Rows.Count.ToString() + " Record(s)";
+
         }
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)

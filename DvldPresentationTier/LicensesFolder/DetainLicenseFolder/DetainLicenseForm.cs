@@ -6,14 +6,13 @@ namespace DvldProject
 {
     public partial class DetainLicenseForm : Form
     {
-
-        int LicenseID;
-        int PersonID;
+        Licenses License;
         public DetainLicenseForm()
         {
             InitializeComponent();
             StartPosition = FormStartPosition.CenterScreen;
             InitializeUi();
+
         }
 
         private void InitializeUi()
@@ -30,39 +29,9 @@ namespace DvldProject
             this.Close(); 
         }
 
-        private void fillDriverLicenseInfo(int AppID)
-        {
-            //licenseDetailsControle1.SetApplicationID(AppID);
-            //licenseDetailsControle1.Reload();
-        }
-
-        private void pictureAddInterLicense_Click(object sender, System.EventArgs e)
-        {
-            LicenseID = Convert.ToInt32(txtLicenseID.Text);
-
-            if (!Licenses.isLicenseExists(LicenseID))
-            {
-                MessageBox.Show("this License Doesn't Exists !!", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            if (!Licenses.isLicenseActive(LicenseID))
-            {
-                MessageBox.Show("this License is not active !!", "Not Allowed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            int ApplicationID = Licenses.getAppIDByLicenseID(LicenseID);
-            //PersonID = application.getPersonIDByAppID(ApplicationID);
-            fillDriverLicenseInfo(ApplicationID);
-            LBLicenseID.Text = LicenseID.ToString();
-            LicenseHistory.Enabled = true;
-            DetainBTN.Enabled = true; 
-        }
-
         private void LicenseHistory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            LicenseHistory fm = new LicenseHistory(PersonID);
+            LicenseHistory fm = new LicenseHistory(License.App.Person.PersonID);
             fm.ShowDialog(); 
         }
 
@@ -91,45 +60,62 @@ namespace DvldProject
                 e.Handled = true; 
         }
 
-        private void ReloadDataGrid()
-        {
-            foreach (Form fm in Application.OpenForms)
-            {
-                if (fm is ManageDetainLicenses manageDetain)
-                    manageDetain.reload();
-            }
-        }
 
         private void DetainBTN_Click(object sender, EventArgs e)
         {
-            if(Licenses.isLicenseDetained(LicenseID))
+            if (!this.ValidateChildren())
+            {
+                MessageBox.Show("You need to fill all information !!", "NOT ALLOWED", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (DetainLicense.IsLicenseDetained(License.LicenseID))
             {
                 MessageBox.Show("this License Already Detained !!", "Detained", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return; 
+                return;
             }
 
-            int DetaineID = -1;
+            DetainLicense Detain = License.DetainCurrentLicense(Global.USER.UserID, Convert.ToSingle(textFineFees.Text));
 
-            if(!Licenses.DetainLicense(ref DetaineID, LicenseID, DetainDate.Text , textFineFees.Text , Global.USER.UserID))
+            if (Detain == null)
             {
                 MessageBox.Show("Failed To Detaine License !!", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            MessageBox.Show($"License with id = {LicenseID} has been detained Successfully ", "Succeeded", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show($"License with id = {License.LicenseID} has been detained Successfully ", "Succeeded", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            detainID.Text = DetaineID.ToString(); 
-
+            detainID.Text = Detain.DetainID.ToString();
             DetainBTN.Enabled = false;
-            groupBox1.Enabled = false;
             LicenseInfo.Enabled = true;
-            ReloadDataGrid();
+
         }
 
         private void LicenseInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            ShowLicenseInfo fm = new ShowLicenseInfo(Licenses.getAppIDByLicenseID(LicenseID));
-            fm.ShowDialog(); 
+            ShowLicenseInfo fm = new ShowLicenseInfo(License.LicenseID);
+            fm.ShowDialog();
+        }
+
+        private void licenseDetailsFilter1_onSelectedLicenseID(int obj)
+        {
+
+            License = Licenses.Find(obj);
+
+            if (License == null)
+            {
+                MessageBox.Show("License Not Found !!", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return; 
+            }
+
+            DetainBTN.Enabled = true;
+            LicenseHistory.Enabled = true;
+            LBLicenseID.Text = License.LicenseID.ToString();
+
+        }
+
+        private void DetainLicenseForm_Shown(object sender, EventArgs e)
+        {
+            licenseDetailsFilter1.FocusText();
         }
     }
 }
