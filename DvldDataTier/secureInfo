@@ -1,0 +1,44 @@
+namespace DvldDataTier
+{
+    internal class secureInfo
+    {
+
+        static private string _server = "fill...";
+        static private string _database = "fill...";
+        static private string _username = "fill...";
+        static private string _password = "fill...";
+
+
+        static public string server
+        {
+            get
+            {
+                return _server;
+            }
+        }
+
+        static public string database
+        {
+            get
+            {
+                return _database;
+            }
+        }
+
+        static public string username
+        {
+            get
+            {
+                return _username;
+            }
+        }
+
+        static public string password
+        {
+            get
+            {
+                return _password;
+            }
+        }
+    }
+}
