@@ -48,6 +48,11 @@ namespace DvldProject.LicensesFolder.Controles
         }
         private void pictureAddInterLicense_Click(object sender, EventArgs e)
         {
+            if (String.IsNullOrEmpty(txtLicenseID.Text))
+            {
+                MessageBox.Show("fill license ID first", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return; 
+            }
             licenseDetailsControle1.LoadLicenseInfoByLicenseID(Convert.ToInt32(txtLicenseID.Text));
             SelectedLicense(Convert.ToInt32(txtLicenseID.Text));
         }
